@@ -1,9 +1,16 @@
-<form ng-submit="storageSettingsModal.ok(storageSettingsModal.warnVal)">
+<form ng-submit="storageSettingsModal.ok(storageSettingsModal.warnVal, storageSettingsModal.fBaseDB)">
     <div class="modal-body modal-body-saved-search">
         <h2>Other Settings</h2>
-        <label for="warnActive">Warn me before permanently removing items:</label>
-        <input name="warnActive" ng-model="storageSettingsModal.warnVal" type="checkbox">
-        <p>You will be notified before removing ALL videos or searches either way.</p>
+        <section>
+            <p>This app utilizes Google Firebase, and by default, you'd be using the developer's own personal database.</p>
+            <label>Use my own database:</label>
+            <input type="text" class="form-control text-settings-modal" placeholder="weeping-willow-456">
+        </section>
+        <section>
+            <label for="warnActive">Warn me before permanently removing items:</label>
+            <input name="warnActive" ng-model="storageSettingsModal.warnVal" type="checkbox" class="checkbox-settings-modal">
+            <p>You will be notified before removing ALL videos or searches either way.</p>
+        </section>
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="submit">Save Changes</button>

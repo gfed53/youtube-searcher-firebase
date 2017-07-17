@@ -57,6 +57,28 @@
 	margin-bottom: 1em;
 }
 
+.modal-body section {
+	margin: 1em;
+}
+
+//Storage Settings Modal
+
+.text-settings-modal {
+	display: inline-block;
+}
+
+// @media screen and ($mobile5){
+// 	.checkbox-settings-modal {
+		
+// 	}
+// }
+
+@media screen and ($tabletfix){
+	.text-settings-modal {
+		width: 50%;
+	}
+}
+
 //Bootstrap tweaks
 
 .panel-default>.panel-heading {

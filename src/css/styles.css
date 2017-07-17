@@ -650,6 +650,16 @@ body #page-header #header-wrapper #credit {
 .modal-body .row {
   margin-bottom: 1em; }
 
+.modal-body section {
+  margin: 1em; }
+
+.text-settings-modal {
+  display: inline-block; }
+
+@media screen and (min-width: 525px) {
+  .text-settings-modal {
+    width: 50%; } }
+
 .panel-default > .panel-heading {
   background-color: #fff; }
 

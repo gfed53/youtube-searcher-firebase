@@ -14,17 +14,12 @@
 		$rootScope.$on('$stateChangeSuccess', () => {
 			window.scrollTo(0,0);
 		});
-		//Check API keys stored in localStorage
-		ytInitAPIs.check()
-		.then(() => {
-			//Connect to Firebase
-			ytFirebase.services.init();
-			// ytFirebase.services.initApp(ytFirebase.services.getCredObj());
-			//Retrieve saved content if fb cluster is set up properly
-			ytVideoItemsFB.services.init();
-			ytSearchHistoryFB.init();
-		});
+		//Connect to Firebase
+		ytFirebase.services.init();
 		
+		//Retrieve saved content if fb cluster is set up properly
+		ytVideoItemsFB.services.init();
+		ytSearchHistoryFB.init();
 	}]);
 })();
 

@@ -22,8 +22,6 @@ i.e. {get: get } can be {get} (I think..)
 	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
 	.factory('ytDateHandler', [ytDateHandler])
 	.factory('ytUtilities', [ytUtilities])
-	// .factory('ytFirebaseReference', [ytFirebaseReference])
-	// .factory('ytFirebase', ['ytModalGenerator', ytFirebase])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
 	.service('ytResults', [ytResults])
@@ -36,7 +34,7 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytPlaylistView', [ytPlaylistView])
 	.service('ytPlaylistSort', ['ytSettings', ytPlaylistSort])
 	.service('ytInitAPIs', ['$q', 'ytModalGenerator', ytInitAPIs])
-	.service('ytSettings', ['$q', 'ytModalGenerator', ytSettings])
+	.service('ytSettings', ['$q', 'ytInitAPIs', 'ytModalGenerator', ytSettings])
 	.service('ytFirebase', ['ytModalGenerator', 'ytInitAPIs', '$q', '$state', '$firebaseArray', '$firebaseObject', ytFirebase]);
 
 	//Used to follow security measures with YouTube video links in particular 
@@ -875,12 +873,6 @@ i.e. {get: get } can be {get} (I think..)
 			if(ytFirebase.services.getCurrent()){
 				var ref = ytFirebase.services.getCurrent();
 				pastSearches = ytFirebase.services.getRefArray('savedSearches');
-				// if(params.after && params.after !== null){
-						// 	params.after = new Date(params.after);
-						// }
-						// if(params.before && params.before !== null){
-						// 	params.before = new Date(params.before);
-						// }
 			}
 		}
 
@@ -898,16 +890,10 @@ i.e. {get: get } can be {get} (I think..)
 					//Aborted
 				} else if(params.name){
 					console.log('params', params);
-					//Have to change any undefined's(pageTokens) to null, then change them back when retrieving??
 					for(var key in params){
 						if(params[key] === undefined){
 							params[key] = null;
 						}
-						//Also stringify date?
-						// if(key === 'after' || key === 'before'){
-						// 	console.log(params[key]);
-						// 	params[key] = params[key].getTime();
-						// }
 					}
 					params.after = (params.after ? params.after.getTime() : null);
 					params.before = (params.before ? params.before.getTime() : null);
@@ -917,8 +903,6 @@ i.e. {get: get } can be {get} (I think..)
 					params.name = params.name+'-uyts';
 					params.date = Date.now();
 					console.log('params are now..', params);
-					// pastSearches.push(params);
-					// localStorage.setItem(params.name, JSON.stringify(params));
 					pastSearches.$add(params)
 					.then((ref)=>{
 						ytFirebase.services.hotSave();
@@ -934,9 +918,6 @@ i.e. {get: get } can be {get} (I think..)
 			let removedTemp = ytModalGenerator().getTemp('itemRemovedTemp');
 
 			function initClear(){
-				// let searchIndex = pastSearches.indexOf(search);
-				// pastSearches.splice(searchIndex, 1);
-				// localStorage.removeItem(search.name);
 				pastSearches.$remove(search)
 				.then((ref) => {
 					console.log('search removed:', ref);
@@ -1096,7 +1077,6 @@ i.e. {get: get } can be {get} (I think..)
 			//Match cb's that will be used in each situation. Navbar will be hidden if user scrolls down OR if page loads in middle of screen.
 			function check(scrollDownCB, scrollUpCB){
 				window.addEventListener('load', ()=>{
-					// let scroll = init(scrollDownCB, scrollUpCB);
 					let scroll = window.scrollY;
 
 					window.addEventListener('scroll', () => {
@@ -1225,7 +1205,6 @@ i.e. {get: get } can be {get} (I think..)
 			let url = 'https://translate.yandex.net/api/v1.5/tr.json/translate',
 			request = {
 				key: apisObj.translateKey,
-				// key: 'trnsl.1.1.20160728T161850Z.60e012cb689f9dfd.6f8cd99e32d858950d047eaffecf930701d73a38',
 				text: text,
 				lang: 'en-'+lang
 			};
@@ -1570,60 +1549,65 @@ i.e. {get: get } can be {get} (I think..)
 
 	function ytInitAPIs($q, ytModalGenerator){
 		let initTemp = ytModalGenerator().getTemp('initTemp'),
-		updateTemp = ytModalGenerator().getTemp('updateTemp');
+		updateTemp = ytModalGenerator().getTemp('updateTemp'),
+		fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX';
 
 		this.apisObj = {
-			id: 'New User'
+			googKey: 'XXXXXX',
+			fBaseDB,
+			translateKey: 'XXXXXX'
 		};
 
-		this.check = check;
-		this.update = update;
+		updateDOM(this.apisObj.googKey);
+
+		// this.check = check;
+		// this.update = update;
 		this.updateMapsScript = updateMapsScript;
 
-		function check(){
-			let deferred = $q.defer();
-			//Checking localStorage to see if user has an id with saved API keys
-			if(localStorage['uyt-log-info']){
-				let obj = JSON.parse(localStorage['uyt-log-info']);
-				console.log('apis obj is:', obj);
-				this.apisObj = obj;
-				//Updating the DOM (for the Google Maps API)
-				updateDOM(this.apisObj.googKey);
-				deferred.resolve(this.apisObj);
-			} else {
-				ytModalGenerator().openModal(initTemp)
-				.then((result)=>{
-					if(result === 'cancel'){
-						//Do nothing
-					} else {
-						localStorage.setItem('uyt-log-info', JSON.stringify(result));
-						this.apisObj = localStorage['uyt-log-info'];
-						updateDOM(this.apisObj.googKey);
+		// function check(){
+		// 	let deferred = $q.defer();
+		// 	//Checking localStorage to see if user has an id with saved API keys
+		// 	if(localStorage['uyt-log-info']){
+		// 		let obj = JSON.parse(localStorage['uyt-log-info']);
+		// 		console.log('apis obj is:', obj);
+		// 		this.apisObj = obj;
+		// 		//Updating the DOM (for the Google Maps API)
+		// 		updateDOM(this.apisObj.googKey);
+		// 		deferred.resolve(this.apisObj);
+		// 	} else {
+		// 		ytModalGenerator().openModal(initTemp)
+		// 		.then((result)=>{
+		// 			if(result === 'cancel'){
+		// 				//Do nothing
+		// 			} else {
+		// 				localStorage.setItem('uyt-log-info', JSON.stringify(result));
+		// 				this.apisObj = localStorage['uyt-log-info'];
+		// 				updateDOM(this.apisObj.googKey);
 
-						//Refresh page to enable g maps to work
-						//If I add a separate success modal, we will move this to that callback.
-						location.reload();
-					}
-				});
-			}
-			return deferred.promise;
-		}
+		// 				//Refresh page to enable g maps to work
+		// 				//If I add a separate success modal, we will move this to that callback.
+		// 				location.reload();
+		// 			}
+		// 		});
+		// 	}
+		// 	return deferred.promise;
+		// }
 
-		function update(){
-			ytModalGenerator().openModal(updateTemp)
-			.then((result)=>{
-				if(result === 'cancel'){
-					//Do nothing
-				} else {
-					localStorage.setItem('uyt-log-info', JSON.stringify(result));
-					this.apisObj = localStorage['uyt-log-info'];
-					updateDOM(this.apisObj.googKey);
+		// function update(){
+		// 	ytModalGenerator().openModal(updateTemp)
+		// 	.then((result)=>{
+		// 		if(result === 'cancel'){
+		// 			//Do nothing
+		// 		} else {
+		// 			localStorage.setItem('uyt-log-info', JSON.stringify(result));
+		// 			this.apisObj = localStorage['uyt-log-info'];
+		// 			updateDOM(this.apisObj.googKey);
 
-					//Refresh page to enable g maps to work
-					location.reload();
-				}
-			});
-		}
+		// 			//Refresh page to enable g maps to work
+		// 			location.reload();
+		// 		}
+		// 	});
+		// }
 
 		function updateDOM(key){
 			if(key){
@@ -1668,10 +1652,7 @@ i.e. {get: get } can be {get} (I think..)
 	//Firebase services/factories
 
 	function ytFirebaseReference(){
-		// console.log('trying?');
-		// if(firebase){
 			return new firebase.database().ref();
-		// }
 	}
 	
 	//The API key for the Firebase database **itself** will be stored in the user's local storage. 
@@ -1700,18 +1681,6 @@ i.e. {get: get } can be {get} (I think..)
 			canUse = false,
 			loggedIn = false,
 			credObj = null;
-
-		//Immediately check if we have our stored firebase creds
-		// (()=>{
-		// 	console.log('in init:',ytInitAPIs.apisObj);
-		// 	if(ytInitAPIs.apisObj.googKey &&
-		// 	ytInitAPIs.apisObj.fBaseDB &&
-		// 	localStorage['uyt-firebase']){
-		// 		credObj = JSON.parse(localStorage['uyt-firebase']);
-		// 		loggedIn = true;
-		// 	} else {
-		// 	}
-		// })();
 
 		function save(){
 			let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
@@ -1860,7 +1829,6 @@ i.e. {get: get } can be {get} (I think..)
 			var string = JSON.stringify(obj);
 			localStorage.setItem('uyt-firebase', string);
 			location.reload();
-			// init(true, obj);
 		}
 
 		function clearCreds(){
@@ -1872,7 +1840,7 @@ i.e. {get: get } can be {get} (I think..)
 
 	}
 
-	function ytSettings($q, ytModalGenerator){
+	function ytSettings($q, ytInitAPIs, ytModalGenerator){
 
 		let storageSettingsTemp = ytModalGenerator().getTemp('storageSettingsTemp');
 
@@ -1885,6 +1853,8 @@ i.e. {get: get } can be {get} (I think..)
 		this.getWarn = getWarn;
 		this.setWarn = setWarn;
 
+		this.getFBaseDB = getFBaseDB;
+
 		this.getSortOpts = getSortOpts;
 		this.setSortOpts = setSortOpts;
 
@@ -1894,7 +1864,11 @@ i.e. {get: get } can be {get} (I think..)
 			ytModalGenerator().openModal(storageSettingsTemp)
 			.then((res) => {
 				console.log('val in service:',res);
-				setWarn(res);
+				setWarn(res.warnVal);
+				if(res.fBaseDB){
+					setFBaseDB(res.fBaseDB);
+					location.reload();
+				}
 				deferred.resolve(res);
 			},(err)=>{
 				console.log(err);
@@ -1902,6 +1876,14 @@ i.e. {get: get } can be {get} (I think..)
 			});
 
 			return deferred.promise;
+		}
+
+		function getFBaseDB(){
+			if(localStorage['uyt-fBaseDB']){
+				return JSON.parse(localStorage['uyt-fBaseDB']);
+			} else {
+				return 'burning-torch-898';
+			}
 		}
 
 		function getWarn(){
@@ -1915,6 +1897,10 @@ i.e. {get: get } can be {get} (I think..)
 		function setWarn(val){
 			localStorage.setItem('uyt-warn', JSON.stringify(val));
 			this.warnActive = getWarn();
+		}
+
+		function setFBaseDB(val){
+			localStorage.setItem('uyt-fBaseDB', JSON.stringify(val));
 		}
 
 		function getSortOpts(){

@@ -3,9 +3,9 @@
 (function(){
 	angular
 	.module('myApp')
-	.controller('StorageSettingsModalController', ['$uibModalInstance', 'ytFirebase', 'ytSettings', StorageSettingsModalController]);
+	.controller('StorageSettingsModalController', ['$uibModalInstance', 'ytInitAPIs', 'ytFirebase', 'ytSettings', StorageSettingsModalController]);
 
-	function StorageSettingsModalController($uibModalInstance, ytFirebase, ytSettings){
+	function StorageSettingsModalController($uibModalInstance, ytInitAPIs, ytFirebase, ytSettings){
 		// console.log('storange settings ctrl');
 		let vm = this;
 
@@ -17,9 +17,13 @@
 		vm.ok = ok;
 		vm.cancel = cancel;
 
-		function ok(val){
-			console.log(val);
-			$uibModalInstance.close(val);
+		function ok(){
+			let obj = {
+				warnVal: vm.warnVal,
+				fBaseDB: vm.fBaseDB
+			};
+			console.log(obj);
+			$uibModalInstance.close(obj);
 		}
 
 		function cancel(){
