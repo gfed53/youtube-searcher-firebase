@@ -1446,18 +1446,6 @@ i.e. {get: get } can be {get} (I think..)
 				controllerAs: 'dangerModal'
 			};
 
-			let initTemp = {
-				templateUrl: './partials/search/search-partials/modals/init-modal.html',
-				controller: 'InitModalController',
-				controllerAs: 'initModal'
-			};
-
-			let updateTemp = {
-				templateUrl: './partials/search/search-partials/modals/update-modal.html',
-				controller: 'UpdateModalController',
-				controllerAs: 'updateModal'
-			};
-
 			let errorVideoExistsTemp = {
 				templateUrl: './partials/search/search-partials/modals/error-video-exists-modal.html',
 				controller: 'ErrorModalController',
@@ -1485,8 +1473,6 @@ i.e. {get: get } can be {get} (I think..)
 				warnTemp: warnTemp,
 				itemRemovedTemp: itemRemovedTemp,
 				dangerTemp: dangerTemp,
-				initTemp: initTemp,
-				updateTemp: updateTemp,
 				errorVideoExistsTemp: errorVideoExistsTemp,
 				initFirebaseTemp: initFirebaseTemp,
 				storageSettingsTemp: storageSettingsTemp
@@ -1548,9 +1534,11 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	function ytInitAPIs($q, ytModalGenerator){
-		let initTemp = ytModalGenerator().getTemp('initTemp'),
-		updateTemp = ytModalGenerator().getTemp('updateTemp'),
-		fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX  Google Firebase Database handle/codename XXXXXX';
+
+		//Actual ****
+		
+		let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX  Google Firebase Database handle/codename XXXXXX';
+		
 
 		this.apisObj = {
 			googKey: 'XXXXXX  Google API Key XXXXXX',
@@ -1558,8 +1546,22 @@ i.e. {get: get } can be {get} (I think..)
 			translateKey: 'XXXXXX  Yandex Translate API Key XXXXXX'
 		};
 
+		// ****
+
+		//Testing ****
+
+		// let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : '';
+
+		// this.apisObj = {
+		// 	googKey: '',
+		// 	fBaseDB,
+		// 	translateKey: ''
+		// };
+
+		// ****
+
 		updateDOM(this.apisObj.googKey);
-		
+
 		this.updateMapsScript = updateMapsScript;
 
 		function updateDOM(key){

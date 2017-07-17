@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 
 var jshint = require('gulp-jshint');
+var babel = require('gulp-babel');
 var sass = require('gulp-sass');
 var connect = require('gulp-connect');
 var uglify = require('gulp-uglify');
