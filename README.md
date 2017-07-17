@@ -4,6 +4,21 @@
 
 This is the implementation of SaYs that uses Google Firebase instead of the user's localStorage to store saved content. It is still possible to use localStorage instead, as it serves as a fallback if you don't want to provide a database to use.
 
+
+## Build Instructions
+
+After downloading the package and before you start using the app, you will need to supply the app with a few API keys.
+
+1. Navigate to src/components/library.js.
+
+2. Search for 'XXXXXX' using CMD+F or whatever search command accessible to you within that file. You should find the places where the API keys are needed, as well as a Google Firebase database if you choose to utilize one.
+
+3. Your Google API key is required, and it must have YouTube Data and Google Maps enabled for use. The Yandex Translate API key isn't required, however (but don't try altering the translate search options if you don't have the key supplied!).
+
+A demo version is currently being updated and a link will be supplied right here when it's usable.
+
+
+
 The following is taken from the "about" section of the app:
 
 ## Introduction

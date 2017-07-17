@@ -1550,64 +1550,17 @@ i.e. {get: get } can be {get} (I think..)
 	function ytInitAPIs($q, ytModalGenerator){
 		let initTemp = ytModalGenerator().getTemp('initTemp'),
 		updateTemp = ytModalGenerator().getTemp('updateTemp'),
-		fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX';
+		fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX  Google Firebase Database handle/codename XXXXXX';
 
 		this.apisObj = {
-			googKey: 'XXXXXX',
+			googKey: 'XXXXXX  Google API Key XXXXXX',
 			fBaseDB,
-			translateKey: 'XXXXXX'
+			translateKey: 'XXXXXX  Yandex Translate API Key XXXXXX'
 		};
 
 		updateDOM(this.apisObj.googKey);
-
-		// this.check = check;
-		// this.update = update;
+		
 		this.updateMapsScript = updateMapsScript;
-
-		// function check(){
-		// 	let deferred = $q.defer();
-		// 	//Checking localStorage to see if user has an id with saved API keys
-		// 	if(localStorage['uyt-log-info']){
-		// 		let obj = JSON.parse(localStorage['uyt-log-info']);
-		// 		console.log('apis obj is:', obj);
-		// 		this.apisObj = obj;
-		// 		//Updating the DOM (for the Google Maps API)
-		// 		updateDOM(this.apisObj.googKey);
-		// 		deferred.resolve(this.apisObj);
-		// 	} else {
-		// 		ytModalGenerator().openModal(initTemp)
-		// 		.then((result)=>{
-		// 			if(result === 'cancel'){
-		// 				//Do nothing
-		// 			} else {
-		// 				localStorage.setItem('uyt-log-info', JSON.stringify(result));
-		// 				this.apisObj = localStorage['uyt-log-info'];
-		// 				updateDOM(this.apisObj.googKey);
-
-		// 				//Refresh page to enable g maps to work
-		// 				//If I add a separate success modal, we will move this to that callback.
-		// 				location.reload();
-		// 			}
-		// 		});
-		// 	}
-		// 	return deferred.promise;
-		// }
-
-		// function update(){
-		// 	ytModalGenerator().openModal(updateTemp)
-		// 	.then((result)=>{
-		// 		if(result === 'cancel'){
-		// 			//Do nothing
-		// 		} else {
-		// 			localStorage.setItem('uyt-log-info', JSON.stringify(result));
-		// 			this.apisObj = localStorage['uyt-log-info'];
-		// 			updateDOM(this.apisObj.googKey);
-
-		// 			//Refresh page to enable g maps to work
-		// 			location.reload();
-		// 		}
-		// 	});
-		// }
 
 		function updateDOM(key){
 			if(key){
@@ -1717,7 +1670,7 @@ i.e. {get: get } can be {get} (I think..)
 					apiKey: ytInitAPIs.apisObj.googKey,
 					authDomain: ytInitAPIs.apisObj.fBaseDB+'.firebaseapp.com',
 					databaseURL: 'https://'+ytInitAPIs.apisObj.fBaseDB+'.firebaseio.com/',
-					storageBucket: ytInitAPIs.apisObj.fBaseDB+'burning-torch-898.appspot.com'
+					storageBucket: ytInitAPIs.apisObj.fBaseDB+'.appspot.com'
 				};
 				firebase.initializeApp(config);
 
