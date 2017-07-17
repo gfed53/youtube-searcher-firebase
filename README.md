@@ -1,8 +1,10 @@
 # The Swiss Army YouTube Searcher (Google Firebase Version)
 
-## Note
+## Notes
 
 This is the implementation of SaYs that uses Google Firebase instead of the user's localStorage to store saved content. It is still possible to use localStorage instead, as it serves as a fallback if you don't want to provide a database to use.
+
+This is a live demo version, which requires the user to enter certain API keys to use the app. There will be a new demo version soon that will not require these steps.
 
 The following is taken from the "about" section of the app:
 
