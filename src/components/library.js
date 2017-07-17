@@ -1536,14 +1536,14 @@ i.e. {get: get } can be {get} (I think..)
 	function ytInitAPIs($q, ytModalGenerator){
 
 		//Actual ****
-		
-		let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX  Google Firebase Database handle/codename XXXXXX';
+
+		let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX GOOGLE FIREBASE NAME';
 		
 
 		this.apisObj = {
-			googKey: 'XXXXXX  Google API Key XXXXXX',
+			googKey: 'XXXXXX GOOGLE API KEY',
 			fBaseDB,
-			translateKey: 'XXXXXX  Yandex Translate API Key XXXXXX'
+			translateKey: 'XXXXXX YANDEX TRANSLATE API KEY'
 		};
 
 		// ****
