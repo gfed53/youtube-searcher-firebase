@@ -1,9 +1,5 @@
 /*jshint esversion: 6 */
 
-/* TODO for all factories: adjust objects returned that have reptition.
-i.e. {get: get } can be {get} (I think..) 
-*/
-
 (function(){
 	angular
 	.module('myApp')
@@ -330,15 +326,24 @@ i.e. {get: get } can be {get} (I think..)
 			content.name = content.snippet.title;
 			content.codeName = itemName;
 
-			console.log('updated');
+			if(ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName) === -1){
+				items.push(content);
 
-			items.push(content);
+				content = JSON.stringify(content);
 
-			content = JSON.stringify(content);
+				localStorage.setItem(itemName, content);
 
-			localStorage.setItem(itemName, content);
-
-			deferred.resolve(content);
+				deferred.resolve(content);
+			} else{
+				let errorVideoExistsTemp = ytModalGenerator().getTemp('errorVideoExistsTemp');
+				console.log('video already exists!');
+				//Call modal
+				ytModalGenerator().openModal(errorVideoExistsTemp)
+					.then(()=> {
+						deferred.reject();
+					});
+			}
+			
 			return deferred.promise;
 
 		}
@@ -469,8 +474,8 @@ i.e. {get: get } can be {get} (I think..)
 		function setItem(result){
 			let deferred = $q.defer(),
 			dateAdded = Date.now(),
-			content = result,
-			errorVideoExistsTemp = ytModalGenerator().getTemp('errorVideoExistsTemp');
+			content = result;
+			
 			delete content.$$hashKey;
 
 			content.dateAdded = dateAdded;
@@ -486,6 +491,7 @@ i.e. {get: get } can be {get} (I think..)
 						deferred.resolve(content);
 					});
 				} else {
+					let errorVideoExistsTemp = ytModalGenerator().getTemp('errorVideoExistsTemp');
 					console.log('video already exists!');
 					//Call modal
 					ytModalGenerator().openModal(errorVideoExistsTemp)
@@ -565,8 +571,6 @@ i.e. {get: get } can be {get} (I think..)
 
 		//Check url params when loading page in video player state
 		function getVideoId(){
-			// let deferred = $q.defer();
-			
 			return videoIdObj;
 		}
 
@@ -1837,7 +1841,7 @@ i.e. {get: get } can be {get} (I think..)
 			if(localStorage['uyt-fBaseDB']){
 				return JSON.parse(localStorage['uyt-fBaseDB']);
 			} else {
-				return 'burning-torch-898';
+				return 'XXXXXX Firebase DB';
 			}
 		}
 
