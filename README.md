@@ -53,6 +53,8 @@ You can also click the "Save Search" button to save and store the current search
 
 ## Known Bugs/Issues
 
+It is recommended that you Disconnect from Firebase before changing Firebase databases within the code. If for some reason you forget, you should immediately Disconnect from Firebase since it may cause conflicts with the database you end up switching to.
+
 Map sometimes doesn't expand as it should. Simply refreshing the page should solve this.
 
 Sometimes issues occur when fetching saved searches/videos, and you may not see any of your saved content. Simply refreshing the page should solve this.
