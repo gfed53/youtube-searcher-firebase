@@ -17,7 +17,7 @@ This is the implementation of SaYs that uses Google Firebase instead of the user
 
 ..*Your Google API key is required, and it must have YouTube Data and Google Maps enabled for use. The Yandex Translate API key isn't required, however (but don't try altering the translate search options if you don't have the key supplied!).
 
-A demo version is currently being updated and a link will be supplied right here when it's usable.
+A demo version is currently being created - with no API key insertion required - and a link will be supplied right here when it's usable.
 
 
 

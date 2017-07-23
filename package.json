@@ -1,9 +1,8 @@
 {
-  "name": "ui-router-video-practice",
+  "name": "youtube-searcher-firebase",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -32,12 +31,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gfed53/ultimate-youtube-searcher.git"
+    "url": "git+https://github.com/gfed53/youtube-searcher-firebase.git"
   },
   "bugs": {
-    "url": "https://github.com/gfed53/ultimate-youtube-searcher/issues"
+    "url": "https://github.com/gfed53/youtube-searcher-firebase/issues"
   },
-  "homepage": "https://github.com/gfed53/ultimate-youtube-searcher#readme",
+  "homepage": "https://github.com/gfed53/youtube-searcher-firebase#readme",
   "description": "",
   "dependencies": {
     "angular": "^1.5.3",
