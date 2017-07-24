@@ -20,7 +20,6 @@
 		vm.items = videoItemsService.services.getItems();
 		vm.pastSearches = searchHistoryService.get();
 
-		console.log('vm.items: ',vm.items);
 		//Methods
 		vm.setVideoId = setVideoId;
 		vm.grab = grab;
@@ -51,18 +50,12 @@
 
 		vm.isDateTypeComp = ytDateHandler().check();
 		vm.warnActive = ytSettings.warnActive;
-		// vm.updateWarn = updateWarn;
-
-
-		//Will probably add additional options within modal
 
 		vm.fbaseSave = ytFirebase.services.save;
 		vm.segName = ytFirebase.services.getSegName();
-		console.log('vm.segName', vm.segName);
 
 		vm.handleStorageSettings = handleStorageSettings;
 
-		// console.log(vm.items);
 
 		//Sort should default to name for both videos and channels.
 		//When user changes sort, it should be saved to service and localStorage
@@ -166,7 +159,6 @@
 		function handleStorageSettings(){
 			ytSettings.handleStorageSettings()
 			.then((res)=>{
-				console.log('val in ctrl:',res);
 				vm.warnActive = res;
 			});
 		}

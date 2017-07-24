@@ -14,7 +14,6 @@ function MenuCtrl($scope, $rootScope, $timeout, $stateParams, ytVideoItems, ytVi
 
 	vm.videoIdObj = videoItemsService.services.getVideoId();
 
-	console.log('in menu:',vm.videoIdObj.videoId);
 	// vm.videoId = vm.videoIdObj.videoId;
 	vm.showNav = ytCheckScrollDir().checkB();
 	vm.showFixed = false;
@@ -22,8 +21,6 @@ function MenuCtrl($scope, $rootScope, $timeout, $stateParams, ytVideoItems, ytVi
 	vm.updateOnClick = updateOnClick;
 	vm.noScroll = true;
 	vm.collapsed = true;
-
-	// console.log('state params', $stateParams);
 
 	ytCheckScrollY().init(vm.update);
 

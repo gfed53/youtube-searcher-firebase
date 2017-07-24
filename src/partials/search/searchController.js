@@ -191,7 +191,6 @@
 		}
 
 		function saveSearch(params){
-			console.log(params);
 			searchHistoryService.set(params, searchHistoryService);
 		}
 
@@ -199,7 +198,6 @@
 			videoItemsService.services.setItem(result)
 			.then((res)=>{
 				vm.savedVideos.push(result);
-				console.log(vm.savedVideos);
 			});
 		}
 

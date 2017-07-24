@@ -1510,30 +1510,15 @@
 
 	function ytInitAPIs($q, ytModalGenerator){
 
-		//Actual ****
 
-		// let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX GOOGLE FIREBASE NAME';
+		let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX GOOGLE FIREBASE NAME';
 		
 
-		// this.apisObj = {
-		// 	googKey: 'XXXXXX GOOGLE API KEY',
-		// 	fBaseDB,
-		// 	translateKey: 'XXXXXX YANDEX TRANSLATE API KEY'
-		// };
-
-		// ****
-
-		//Testing ****
-
-		let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'second-app-afad9';
-
 		this.apisObj = {
-			googKey: 'AIzaSyDbb-yx8E2gWjYHYhLIesUQ0F9_nL1JuwE',
+			googKey: 'XXXXXX GOOGLE API KEY',
 			fBaseDB,
-			translateKey: 'trnsl.1.1.20170717T153627Z.53fff103e649494c.00c676e59949006369969ef125fe15ed6b849fe3'
+			translateKey: 'XXXXXX YANDEX TRANSLATE API KEY'
 		};
-
-		// ****
 
 		updateDOM(this.apisObj.googKey);
 
@@ -1795,8 +1780,7 @@
 			if(localStorage['uyt-fBaseDB']){
 				return JSON.parse(localStorage['uyt-fBaseDB']);
 			} else {
-				// return 'XXXXXX Firebase DB';
-				return 'second-app-afad9';
+				return 'XXXXXX Firebase DB';
 			}
 		}
 
