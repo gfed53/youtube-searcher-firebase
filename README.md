@@ -11,11 +11,11 @@ This is the implementation of SaYs that uses Google Firebase instead of the user
 
 2. Before you start using the app, you will need to supply the app with a few API keys.
 
-..*Navigate to src/components/library.js.
+  * Navigate to src/components/library.js.
 
-..*Search for 'XXXXXX' using CMD+F (or whatever search command you can use) within that file. You should find the places where the API keys are needed, as well as a Google Firebase database if you choose to utilize one.
+  * Search for 'XXXXXX' using CMD+F (or whatever search command you can use) within that file. You should find the places where the API keys are needed, as well as a Google Firebase database if you choose to utilize one.
 
-..*Your Google API key is required, and it must have YouTube Data and Google Maps enabled for use. The Yandex Translate API key isn't required, however (but don't try altering the translate search options if you don't have the key supplied!).
+  * Your Google API key is required, and it must have YouTube Data and Google Maps enabled for use. The Yandex Translate API key isn't required, however (but don't try altering the translate search options if you don't have the key supplied!).
 
 A demo version is currently being created - with no API key insertion required - and a link will be supplied right here when it's usable.
 
@@ -76,6 +76,4 @@ This app is powered by the [Youtube Data API](https://developers.google.com/maps
 ## Resources
 
 The src directory contains the source code, while the build version is not currently distributed.
-
-You can visit the live demo of this project [here](http://gfed53.github.io/ultimate-youtube-searcher/src/)!
 
