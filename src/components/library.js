@@ -35,7 +35,6 @@
 
 	//Used to follow security measures with YouTube video links in particular 
 	function ytTrustSrc($sce){
-		console.log('ytTrustSrc');
 		return (src) => {
 			return $sce.trustAsResourceUrl(src);
 		};
@@ -43,7 +42,6 @@
 
 	//Searches the API for videos based on search params
 	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator, ytDateHandler, ytInitAPIs) {
-		console.log('ytSearchYouTube');
 		return (params, pageToken, direction) => {
 			
 			// Ensures that we take the previously searched keyword during page navigation.
@@ -147,7 +145,6 @@
 
 	//Searches the API for channels based on search query
 	function ytChanSearch($q, $http, ytModalGenerator, ytInitAPIs){
-		console.log('ytChanSearch');
 		return (channel) => {
 			let url = 'https://www.googleapis.com/youtube/v3/search';
 			let request = {
@@ -205,7 +202,6 @@
 
 	//Used to retrieve necessary data from a particular video (in video player section)
 	function ytCurrentVideo($q, $http, ytModalGenerator, ytInitAPIs){
-		console.log('ytCurrentVideo');
 		return (id) => {
 			let url = 'https://www.googleapis.com/youtube/v3/videos',
 			request = {
@@ -239,7 +235,6 @@
 
 	//Used to get back a video's channel data (which requires a different call from ytCurrentVideo)
 	function ytCurrentChannel($q, $http, ytModalGenerator, ytInitAPIs){
-		console.log('ytCurrentChannel');
 		return (id) => {
 			let url = "https://www.googleapis.com/youtube/v3/channels",
 			request = {
@@ -274,8 +269,6 @@
 	function ytVideoItems($q, $state, $stateParams, ytModalGenerator, ytUtilities){
 		let videoIdObj = {videoId : $stateParams.videoId};
 		let items = [];
-		// console.log('ytVideoItems');
-		// console.log('in service:', currentVideoId);
 
 		this.services = {
 			init: init,
@@ -336,7 +329,6 @@
 				deferred.resolve(content);
 			} else{
 				let errorVideoExistsTemp = ytModalGenerator().getTemp('errorVideoExistsTemp');
-				console.log('video already exists!');
 				//Call modal
 				ytModalGenerator().openModal(errorVideoExistsTemp)
 					.then(()=> {
@@ -438,8 +430,6 @@
 	function ytVideoItemsFB($q, $timeout, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase){
 
 		let videoIdObj = {videoId : null};
-		console.log('ytVideoItemsFB');
-		console.log('in service:');
 		
 		var items = null;
 		//For clearing all items, we would prob grab an obj ref of savedVideos so we can use the $remove service to clear it completely
@@ -464,7 +454,6 @@
 		}
 
 		function getItems(){
-			// console.log(items);
 			if(!items.length){
 				init();
 			}
@@ -487,12 +476,10 @@
 					items.$add(content)
 					.then((ref) => {
 						ytFirebase.services.hotSave();
-						console.log("item added: " + ref);
 						deferred.resolve(content);
 					});
 				} else {
 					let errorVideoExistsTemp = ytModalGenerator().getTemp('errorVideoExistsTemp');
-					console.log('video already exists!');
 					//Call modal
 					ytModalGenerator().openModal(errorVideoExistsTemp)
 						.then(()=> {
@@ -515,7 +502,6 @@
 			function initClear(_item_){
 				items.$remove(_item_)
 				.then((ref) => {
-					console.log('item removed:', ref);
 					ytFirebase.services.hotSave();
 				});
 			}
@@ -555,11 +541,9 @@
 			ytModalGenerator().openModal(dangerTemp)
 			.then(() => {
 				var objRef = ytFirebase.services.getRefObj('savedVideos');
-				console.log(objRef);
 				objRef.$remove()
 				.then(()=>{
 					ytFirebase.services.hotSave();
-					console.log('all removed');
 					deferred.resolve(items);
 				});
 			}, () => {
@@ -582,9 +566,7 @@
 		//Bug: this will not always be retrieved in time if loading page from video state. It would depend on how quickly fbase loads up. Make async/use promise?
 		function isSaved(id){
 			let bool;
-			console.log('items', items);
 			if(items.length){
-				console.log('items are loaded');
 				items.forEach((_item_) => {
 					if(_item_.id.videoId === id){
 						bool = true;
@@ -667,7 +649,6 @@
 				}
 			}
 			params.keyword = newParams.searchedKeyword;
-			console.log(params);
 
 		}
 
@@ -893,7 +874,6 @@
 				if(params.name === 'cancel'){
 					//Aborted
 				} else if(params.name){
-					console.log('params', params);
 					for(var key in params){
 						if(params[key] === undefined){
 							params[key] = null;
@@ -906,11 +886,9 @@
 					params.nameShrt = params.name;
 					params.name = params.name+'-uyts';
 					params.date = Date.now();
-					console.log('params are now..', params);
 					pastSearches.$add(params)
 					.then((ref)=>{
 						ytFirebase.services.hotSave();
-						console.log("search added: " + ref);
 					});
 				} else {
 					service.set(params, service);
@@ -924,7 +902,6 @@
 			function initClear(){
 				pastSearches.$remove(search)
 				.then((ref) => {
-					console.log('search removed:', ref);
 					ytFirebase.services.hotSave();
 				});
 			}
@@ -951,11 +928,9 @@
 			ytModalGenerator().openModal(dangerTemp)
 			.then(() => {
 				var objRef = ytFirebase.services.getRefObj('savedSearches');
-				console.log(objRef);
 				objRef.$remove()
 				.then(()=>{
 					ytFirebase.services.hotSave();
-					console.log('all removed');
 					deferred.resolve(pastSearches);
 				});
 			}, () => {
@@ -1080,19 +1055,15 @@
 
 			//Match cb's that will be used in each situation. Navbar will be hidden if user scrolls down OR if page loads in middle of screen.
 			function check(scrollDownCB, scrollUpCB){
-				window.addEventListener('load', ()=>{
-					let scroll = window.scrollY;
-
-					window.addEventListener('scroll', () => {
-						if(window.scrollY > scroll){
-							scrollDownCB();
-						} else {
-							scrollUpCB();
-						}
-						scroll = window.scrollY;
-					});
+				let scroll = window.scrollY;
+				window.addEventListener('scroll', () => {
+					if(window.scrollY > scroll){
+						scrollDownCB();
+					} else {
+						scrollUpCB();
+					}
+					scroll = window.scrollY;
 				});
-
 			}
 
 			function checkB(){
@@ -1541,26 +1512,26 @@
 
 		//Actual ****
 
-		let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX GOOGLE FIREBASE NAME';
+		// let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX GOOGLE FIREBASE NAME';
 		
 
-		this.apisObj = {
-			googKey: 'XXXXXX GOOGLE API KEY',
-			fBaseDB,
-			translateKey: 'XXXXXX YANDEX TRANSLATE API KEY'
-		};
+		// this.apisObj = {
+		// 	googKey: 'XXXXXX GOOGLE API KEY',
+		// 	fBaseDB,
+		// 	translateKey: 'XXXXXX YANDEX TRANSLATE API KEY'
+		// };
 
 		// ****
 
 		//Testing ****
 
-		// let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : '';
+		let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'second-app-afad9';
 
-		// this.apisObj = {
-		// 	googKey: '',
-		// 	fBaseDB,
-		// 	translateKey: ''
-		// };
+		this.apisObj = {
+			googKey: 'AIzaSyDbb-yx8E2gWjYHYhLIesUQ0F9_nL1JuwE',
+			fBaseDB,
+			translateKey: 'trnsl.1.1.20170717T153627Z.53fff103e649494c.00c676e59949006369969ef125fe15ed6b849fe3'
+		};
 
 		// ****
 
@@ -1659,7 +1630,6 @@
 			ytInitAPIs.apisObj.fBaseDB){
 				if(localStorage['uyt-firebase']){
 					credObj = JSON.parse(localStorage['uyt-firebase']);
-					// console.log('have cred obj:', credObj);
 					loggedIn = true;
 				}
 				
@@ -1669,9 +1639,6 @@
 		}
 
 		function initApp(_credObj){
-			//Make sure googKey AND DB name exists..
-
-			// if(ytInitAPIs.apisObj.googKey && ytInitAPIs.apisObj.fBaseDB){
 				let config = {
 					apiKey: ytInitAPIs.apisObj.googKey,
 					authDomain: ytInitAPIs.apisObj.fBaseDB+'.firebaseapp.com',
@@ -1686,7 +1653,6 @@
 				if(_credObj){
 					grabCluster(_credObj);
 				}
-			// }
 			
 		}
 
@@ -1708,16 +1674,9 @@
 			if(currentObj.password){
 				//If password doesn't match..
 				if(currentObj.password !== obj.password){
-					//Change for appropriate modal rendering
-					// loggedIn = false;
-					// console.log('passwords dont match');
 					err();
-					//Reroute
-					// save();
 				} else {
-					// console.log('ok');
 					res();
-					// location.reload();
 				}
 				
 			} else {
@@ -1725,7 +1684,6 @@
 				currentObj.password = obj.password;
 				currentObj.$save()
 				.then((ref)=>{
-					console.log('currentObj saved:', currentObj, 'new?');
 					let newSegTemp = ytModalGenerator().getTemp('newSegTemp');
 
 					
@@ -1752,8 +1710,6 @@
 		//We may just use 'current' since that is our saved user object that we'll only be interacting with anyways
 		function getRefArray(child) {
 			var refChild = current.child(child);
-			// console.log(current.child(child));
-			// console.log($firebaseArray(current.child(child)));
 			return $firebaseArray(refChild);
 			// return $firebaseArray(current);
 		}
@@ -1822,7 +1778,6 @@
 
 			ytModalGenerator().openModal(storageSettingsTemp)
 			.then((res) => {
-				console.log('val in service:',res);
 				setWarn(res.warnVal);
 				if(res.fBaseDB){
 					setFBaseDB(res.fBaseDB);
@@ -1830,7 +1785,6 @@
 				}
 				deferred.resolve(res);
 			},(err)=>{
-				console.log(err);
 				deferred.reject();
 			});
 
@@ -1841,7 +1795,8 @@
 			if(localStorage['uyt-fBaseDB']){
 				return JSON.parse(localStorage['uyt-fBaseDB']);
 			} else {
-				return 'XXXXXX Firebase DB';
+				// return 'XXXXXX Firebase DB';
+				return 'second-app-afad9';
 			}
 		}
 

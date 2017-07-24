@@ -13,8 +13,6 @@
 		vm.isLoggedIn = ytFirebase.services.isLoggedIn();
 		vm.credObj = ytFirebase.services.getCredObj();
 		vm.pwError = false;
-		console.log(vm.isLoggedIn);
-		console.log(vm.credObj);
 
 		//CB will watch for value. If truthy, we're logging in. Else, we log out.
 		function ok(obj){
@@ -26,15 +24,12 @@
 				ytFirebase.services.checkValid(obj, ()=>{
 					//We addCreds only after we know that they're correct
 					vm.pwError = false;
-					console.log('okay');
 					$uibModalInstance.close(obj);
 				}, ()=>{
 					vm.pwError = true;
 				});
 				
 			});
-
-			// $uibModalInstance.close(obj);
 		}
 
 		function logout(){
