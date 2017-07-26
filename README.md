@@ -7,17 +7,21 @@ This is the implementation of SaYs that uses Google Firebase instead of the user
 
 ## Build Instructions
 
-1. Make sure npm is installed, then in the terminal, run 'npm i' to install all dependencies.
+1. Make sure npm is installed, then, inside the terminal, run `npm i` to install all dependencies.
 
 2. Before you start using the app, you will need to supply the app with a few API keys.
 
-  * Navigate to src/components/library.js.
+  * Navigate to config.js.
 
-  * Search for 'XXXXXX' using CMD+F (or whatever search command you can use) within that file. You should find the places where the API keys are needed, as well as a Google Firebase database if you choose to utilize one.
+  * You should find the places where the API keys are needed, as well as a Google Firebase database (fBaseDB) if you choose to utilize one.
 
-  * Your Google API key is required, and it must have YouTube Data and Google Maps enabled for use. The Yandex Translate API key isn't required, however (but don't try altering the translate search options if you don't have the key supplied!).
+  * Your Google API (googKey) key is required, and it must have YouTube Data and Google Maps enabled for use. The Yandex Translate API (translateKey) key isn't required, however (but don't try altering the translate search options if you don't have the key supplied!).
 
-A demo version is currently being created - with no API key insertion required - and a link will be supplied right here when it's usable.
+ 3. Once all dependencies are installed and everything is in place, you can run `gulp build` in the command line to create a build version.
+
+ 4. You can serve the app locally by running `node server`. The app listens at port 8080.
+
+A demo version is currently being created - with no API key insertion required. You can check it out [here](http://youtube-searcher-8972.herokuapp.com/)!
 
 
 

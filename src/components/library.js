@@ -29,7 +29,7 @@
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistView', [ytPlaylistView])
 	.service('ytPlaylistSort', ['ytSettings', ytPlaylistSort])
-	.service('ytInitAPIs', ['$q', 'ytModalGenerator', ytInitAPIs])
+	.service('ytInitAPIs', ['$http', '$q', 'ytModalGenerator', ytInitAPIs])
 	.service('ytSettings', ['$q', 'ytInitAPIs', 'ytModalGenerator', ytSettings])
 	.service('ytFirebase', ['ytModalGenerator', 'ytInitAPIs', '$q', '$state', '$firebaseArray', '$firebaseObject', ytFirebase]);
 
@@ -1508,21 +1508,42 @@
 		};
 	}
 
-	function ytInitAPIs($q, ytModalGenerator){
+	function ytInitAPIs($http, $q, ytModalGenerator){
 
 
-		let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX GOOGLE FIREBASE NAME';
+		// let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX GOOGLE FIREBASE NAME';
 		
 
-		this.apisObj = {
-			googKey: 'XXXXXX GOOGLE API KEY',
-			fBaseDB,
-			translateKey: 'XXXXXX YANDEX TRANSLATE API KEY'
-		};
+		// this.apisObj = {
+		// 	googKey: 'XXXXXX GOOGLE API KEY',
+		// 	fBaseDB,
+		// 	translateKey: 'XXXXXX YANDEX TRANSLATE API KEY'
+		// };
 
-		updateDOM(this.apisObj.googKey);
-
+		// updateDOM(this.apisObj.googKey);
+		this.init = init;
+		this.initKeys = initKeys;
 		this.updateMapsScript = updateMapsScript;
+
+		function init(){
+			let deferred = $q.defer();
+			initKeys()
+			.then((data)=> {
+				this.apisObj = data;
+				updateDOM(this.apisObj.googKey);
+				this.apisObj.fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : this.apisObj.fBaseDB;
+				deferred.resolve();
+			});
+
+			return deferred.promise;
+		}
+
+		function initKeys(){
+			return $http.get('/access')
+					.then((res) => {
+						return res.data;
+					});
+		}
 
 		function updateDOM(key){
 			if(key){

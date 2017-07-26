@@ -14,12 +14,15 @@
 		$rootScope.$on('$stateChangeSuccess', () => {
 			window.scrollTo(0,0);
 		});
-		//Connect to Firebase
-		ytFirebase.services.init();
-		
-		//Retrieve saved content if fb cluster is set up properly
-		ytVideoItemsFB.services.init();
-		ytSearchHistoryFB.init();
+		ytInitAPIs.init()
+			.then(()=> {
+				//Connect to Firebase
+				ytFirebase.services.init();
+				
+				//Retrieve saved content if fb cluster is set up properly
+				ytVideoItemsFB.services.init();
+				ytSearchHistoryFB.init();
+			});
 	}]);
 })();
 
