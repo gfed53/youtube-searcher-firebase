@@ -40,7 +40,6 @@
 			ytCurrentVideo(id).getVideo()
 			.then((response) => {
 				vm.item = response.data.items[0];
-				console.log(vm.item);
 				//Bug: this will not always be retrieved in time if loading page from video state. It would depend on how quickly fbase loads up. Make async/use promise?
 				vm.isSaved = videoItemsService.services.isSaved(vm.item.id);
 			});

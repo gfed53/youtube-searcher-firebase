@@ -1011,6 +1011,7 @@
 	}
 
 	// Displays the scroll button (in results section) depending on appropriate conditions
+
 	function ytCheckScrollBtnStatus($state){
 		
 		return () => {
@@ -1045,6 +1046,7 @@
 	}
 
 	//TODO: Refactor this to use ytCheckScrollY. Make ytCheckScrollY looser so it can be used in both situations
+
 	function ytCheckScrollDir(){
 		return () => {
 			let services = {
@@ -1087,6 +1089,7 @@
 
 
 	//Checks to see if user scrolled down from top, so navbar style can change appropriately
+
 	function ytCheckScrollY(){
 		return () => {
 			let services = {
@@ -1108,6 +1111,7 @@
 	}
 
 	//Initializes the map used in the search section
+
 	function ytInitMap(){
 		return (callback) => {
 			let map = new google.maps.Map(document.getElementById('map'), {
@@ -1141,6 +1145,7 @@
 	}
 
 	//Handles all of the translation functionality used in the search section
+
 	function ytTranslate($http, $q, ytModalGenerator, ytInitAPIs){
 
 		let langs = [{
@@ -1510,17 +1515,6 @@
 
 	function ytInitAPIs($http, $q, ytModalGenerator){
 
-
-		// let fBaseDB = localStorage['uyt-fBaseDB'] ? JSON.parse(localStorage['uyt-fBaseDB']) : 'XXXXXX GOOGLE FIREBASE NAME';
-		
-
-		// this.apisObj = {
-		// 	googKey: 'XXXXXX GOOGLE API KEY',
-		// 	fBaseDB,
-		// 	translateKey: 'XXXXXX YANDEX TRANSLATE API KEY'
-		// };
-
-		// updateDOM(this.apisObj.googKey);
 		this.init = init;
 		this.initKeys = initKeys;
 		this.updateMapsScript = updateMapsScript;
@@ -1630,7 +1624,6 @@
 			});
 		}
 
-		// localStorage['uyt-firebase']
 		function init(){
 			if(ytInitAPIs.apisObj.googKey &&
 			ytInitAPIs.apisObj.fBaseDB){
@@ -1664,7 +1657,7 @@
 
 		//Lets the app know which cluster the user will be assigned to. This will run assuming the app is already initialized
 		function grabCluster(_credObj){
-			var deferred = $q.defer();
+			let deferred = $q.defer();
 			current = getReference(_credObj.username);
 			currentObj = $firebaseObject(current);
 			currentObj.$loaded()
@@ -1692,12 +1685,10 @@
 				.then((ref)=>{
 					let newSegTemp = ytModalGenerator().getTemp('newSegTemp');
 
-					
 					//Here we can prompt user that a new cluster has been made, using modal
 					ytModalGenerator().openModal(newSegTemp)
 					.then(()=>{
 						res();
-						// location.reload();
 					});
 				});
 			}
@@ -1708,7 +1699,7 @@
 		}
 
 		function getRefObj(child) {
-			var ref = current.child(child);
+			let ref = current.child(child);
 			return $firebaseObject(ref);
 		}
 
@@ -1717,7 +1708,6 @@
 		function getRefArray(child) {
 			var refChild = current.child(child);
 			return $firebaseArray(refChild);
-			// return $firebaseArray(current);
 		}
 
 		function getCredObj(){
@@ -1773,9 +1763,6 @@
 
 		this.getWarn = getWarn;
 		this.setWarn = setWarn;
-
-		this.getFBaseDB = getFBaseDB;
-
 		this.getSortOpts = getSortOpts;
 		this.setSortOpts = setSortOpts;
 
@@ -1795,14 +1782,6 @@
 			});
 
 			return deferred.promise;
-		}
-
-		function getFBaseDB(){
-			if(localStorage['uyt-fBaseDB']){
-				return JSON.parse(localStorage['uyt-fBaseDB']);
-			} else {
-				return 'XXXXXX Firebase DB';
-			}
 		}
 
 		function getWarn(){

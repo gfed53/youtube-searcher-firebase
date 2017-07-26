@@ -13,7 +13,6 @@
 		var videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
 		var searchHistoryService = ytFirebase.services.isLoggedIn() ? ytSearchHistoryFB : ytSearchHistory;
 
-		// should only show if we are using Firebase (no sh..)
 		vm.isUsingFBase = ytFirebase.services.canUseFBase();
 
 		//Fetching content
@@ -55,11 +54,6 @@
 		vm.segName = ytFirebase.services.getSegName();
 
 		vm.handleStorageSettings = handleStorageSettings;
-
-
-		//Sort should default to name for both videos and channels.
-		//When user changes sort, it should be saved to service and localStorage
-		//If user has We want to retrieve 
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){

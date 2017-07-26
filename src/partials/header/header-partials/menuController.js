@@ -14,7 +14,6 @@ function MenuCtrl($scope, $rootScope, $timeout, $stateParams, ytVideoItems, ytVi
 
 	vm.videoIdObj = videoItemsService.services.getVideoId();
 
-	// vm.videoId = vm.videoIdObj.videoId;
 	vm.showNav = ytCheckScrollDir().checkB();
 	vm.showFixed = false;
 	vm.update = update;
@@ -47,7 +46,6 @@ function MenuCtrl($scope, $rootScope, $timeout, $stateParams, ytVideoItems, ytVi
 	$rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
 		if(toState.name === 'video'){
 			vm.videoId = videoItemsService.services.getVideoId();
-			console.log('video id?', vm.videoId);
 		}
 		vm.collapsed = true;
 	});
