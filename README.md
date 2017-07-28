@@ -15,7 +15,12 @@ This is the implementation of SaYs that uses Google Firebase instead of the user
 
   * You should find the places where the API keys are needed, as well as a Google Firebase database (fBaseDB) if you choose to utilize one.
 
-  * Your Google API (googKey) key is required, and it must have YouTube Data and Google Maps enabled for use. The Yandex Translate API (translateKey) key isn't required, however (but don't try altering the translate search options if you don't have the key supplied!).
+  * Your Google API (googKey) key is required, and it must have the YouTube Data API and Google Maps Javascript API enabled for use (Only one key should be needed for all Google APIs). The Yandex Translate API (translateKey) key isn't required, however (but don't try altering the translate search options if you don't have the key supplied!).
+
+  	* [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/)
+  	* [YouTube Data API](https://developers.google.com/youtube/v3/getting-started)
+  	* [Google Firebase](https://console.firebase.google.com/)
+  	* [Yandex Translate API](https://tech.yandex.com/translate/)
 
  3. Once all dependencies are installed and everything is in place, you can run `gulp build` in the command line to create a build version.
 
@@ -33,17 +38,17 @@ In the future there may be more search options available, so stay tuned, and in 
 
 ## Guide
 
-You can simply do a basic video search via the default search bar. Clicking "Toggle Advanced" brings out the advanced search parameters
+You can simply do a basic video search via the default search bar. Note that there are more search parameters and filters that you can use to make a much finer search.
 
-Currently, you can search by location, result order, safe search settings, date range (from, to), and also by a particular channel filter.
+Currently, you can search by location, result order, date range, and also by a particular channel.
 
 The location parameter uses Google Maps to allow the user to select a portion of the map using an adjustable circular selector. Due to the limits of the API, radii of selections cannot exceed 1000 kilometers. You can clear the selection by clicking the "Clear Selection" button. The coordinates of the center of the circle and its radius are displayed to the left and right of the "Clear Selection" button, respectively.
 
 
-If you want to search the contents of a specific channel, here's what you do:
+If, for example, you want to search the contents of a specific channel, here's what you do:
 
 First, search for a channel in the "Search Channel" input box
-Assuming you get back results, select whichever channel you'd like by clicking on its image.
+Assuming you get back results, select whichever channel you'd like by clicking on its image. Note that the advanced parameters aren't utilized when searching by channel, only when searching by video.
 
 You should then see the filter applied represented by an icon below the search bar.
 
@@ -51,9 +56,13 @@ You will now only get results from that particular channel back. Clicking on ano
 
 You can remove the filter by clicking the "Clear Filter" button.
 
-The translate feature is the newest addition to the app. You can set a language, and before search execution, the API will translate the keywords (you will also see it in the search bar, allowing you to make tweaks if you wanted to get different results).
+You can also use the translate feature to quickly search for videos in different languages. You can set a language, and before search execution, the API will translate the keywords (you will also see it in the search bar, allowing you to make tweaks if you wanted to get different results).
 
-You can also click the "Save Search" button to save and store the current search parameters as an item in your local storage. You can find all of your saved past searches in the "Personal" view. In the "Saved Searches" area of this view, clicking the "Grab!" button will activate the respective saved search and fill the current parameters. Note that this doesn't immediately initialize the search, so you can tweak any of the parameters as you wish before making your search.
+An example of utilizing these features would be maybe searching for concert performances of an artist you like, but say you only wanted concerts from their European tours in 2006 and 2011. Or maybe you want to find videos from a certain channel, but only within a specific timeframe.  
+
+You can also click the "Save Search" button to save and store the current search parameters, as well as save videos to watch later. You can find all of your saved past searches and videos in the "My Saved Content" view. In the "Saved Searches" area of this view, clicking the "Grab!" button will activate the respective saved search and fill the current parameters. Note that this doesn't immediately initialize the search, so you can tweak any of the parameters as you wish before making your search.
+
+By default, the app uses the HTML5 Local Storage API to store saved data (videos and past searches), but you can also utilize a Google Firebase database, enabling you to access your saved content wherever you like. The app relies on a simple login system where, for each database, you can create any number of new segments completely isolated from one another using an ID and password. 
 
 ## Known Bugs/Issues
 
@@ -75,9 +84,4 @@ This app uses CORS requests to get data from the Youtube API, and uses the ifram
 I also began following John Papa's [Style Guide](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md) for best practices in developing AngularJS projects, as I have with other projects.
 
 This app is powered by the [Youtube Data API](https://developers.google.com/maps/documentation/javascript/), [Google Maps API](https://developers.google.com/maps/documentation/javascript/), [Yandex Translate API](https://tech.yandex.com/translate/), and [Google Firebase](https://console.firebase.google.com/).
-
-
-## Resources
-
-The src directory contains the source code, while the build version is not currently distributed.
 

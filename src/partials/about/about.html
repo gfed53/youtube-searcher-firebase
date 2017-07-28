@@ -6,18 +6,19 @@
 	</div>
 	<div id="about-guide">
 		<h2>Guide</h2>
-		<p>You can simply do a basic video search via the default search bar. Clicking "Toggle Advanced" brings out the advanced search parameters.</p>
-		<p>Once you have results on the page, you can click "Show/Hide Videos" to toggle the view of these results. Utilizing this and "Show/Hide Channels" can be useful if you need to toggle between video and channel results. Channel search will be explained shortly.</p>
+		<p>You can simply do a basic video search via the default search bar. Note that there are more search parameters and filters that you can use to make a much finer search.</p>
 		<p>Currently, you can search by location, result order, safe search settings, date range (from, to), and also by a particular channel filter.</p>
 		<p>The location parameter uses Google Maps to allow the user to select a portion of the map using an adjustable circular selector. <span class="bold emph">Due to the limits of the API, radii of selections cannot exceed 1000 kilometers.</span> You can clear the selection by clicking the "Clear Selection" button. The coordinates of the center of the circle and its radius are displayed to the left and right of the "Clear Selection" button, respectively. </p>
-		<p>If you want to search the contents of a specific channel, here's what you do:</p>
+		<p>If, for example, you want to search the contents of a specific channel, here's what you do:</p>
 		<ol>
-			<li>First, search for a channel in the "Search Channel" input box</li>
+			<li>First, search for a channel in the "Search Channel" input box. <span class="bold emph">Note that the advanced parameters aren't utilized when searching by channel, only when searching by video.</span></li>
 			<li>Assuming you get back results, select whichever channel you'd like by clicking on its image. You should then see the filter applied represented by an icon below the search bar.</li>
 			<li>You will now only get results from that particular channel back. Clicking on another channel will reset the filter. You can remove the filter by clicking the "Clear Filter" button.</li>
 		</ol>
-		<p>The translate feature is the newest addition to the app. You can set a language, and before search execution, the API will translate the keywords (you will also see it in the search bar, allowing you to make tweaks if you wanted to get different results).</p>
-		<p>You can also click the "Save Search" button to save and store the current search parameters as an item in your local storage. You can find all of your saved past searches in the "Personal" view. In the "Saved Searches" area of this view, clicking the "Grab!" button will activate the respective saved search and fill the current parameters. Note that this doesn't immediately initialize the search, so you can tweak any of the parameters as you wish before making your search.</p> 
+		<p>You can also use the translate feature to quickly search for videos in different languages. You can set a language, and before search execution, the API will translate the keywords (you will also see it in the search bar, allowing you to make tweaks if you wanted to get different results).</p>
+		<p>An example of utilizing these features would be maybe searching for concert performances of an artist you like, but say you only wanted concerts from their European tours in 2011 and 2013. Or maybe you want to find videos from a certain channel, but only within a specific timeframe.</p>
+		<p>You can also click the "Save Search" button to save and store the current search parameters as an item in your local storage. You can find all of your saved past searches in the "My Saved Content" view. In the "Saved Searches" area of this view, clicking the "Grab!" button will activate the respective saved search and fill the current parameters. Note that this doesn't immediately initialize the search, so you can tweak any of the parameters as you wish before making your search.</p> 
+		<p>By default, the app uses the HTML5 Local Storage API to store saved data (videos and past searches), but you can also utilize a Google Firebase database, enabling you to access your saved content wherever you like. The app relies on a simple login system where, for each database, you can create any number of new segments completely isolated from one another using an ID and password.</p>
 	</div>
 	<div class="about-other">
 	<h2>Known Bugs/Issues</h2>

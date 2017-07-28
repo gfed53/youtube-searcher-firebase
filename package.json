@@ -2,7 +2,9 @@
   "name": "youtube-searcher-firebase",
   "version": "1.0.0",
   "main": "server.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node server"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
