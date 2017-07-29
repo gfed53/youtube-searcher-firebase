@@ -28,8 +28,6 @@ This is the implementation of SaYs that uses Google Firebase instead of the user
 
 A demo version is currently being created - with no API key insertion required. You can check it out [here](http://youtube-searcher-8972.herokuapp.com/)!
 
-
-
 ## Introduction
 
 Welcome to the Swiss Army YouTube Searcher! (The name is subject to change, as it has changed once already. Fair warning..) The goal of this app is to allow the user to gain more freedom in searching for YouTube videos. It was originally created with all of the hardcore YouTube junkies out there in mind (myself included), but of course can be enjoyed and used by anybody.
@@ -42,19 +40,19 @@ You can simply do a basic video search via the default search bar. Note that the
 
 Currently, you can search by location, result order, date range, and also by a particular channel.
 
-The location parameter uses Google Maps to allow the user to select a portion of the map using an adjustable circular selector. Due to the limits of the API, radii of selections cannot exceed 1000 kilometers. You can clear the selection by clicking the "Clear Selection" button. The coordinates of the center of the circle and its radius are displayed to the left and right of the "Clear Selection" button, respectively.
+The location parameter uses Google Maps to allow the user to select a portion of the map using an adjustable circular selector. **Due to the limits of the API, radii of selections cannot exceed 1000 kilometers.** You can clear the selection by clicking the "Clear Selection" button. The coordinates of the center of the circle and its radius are displayed to the left and right of the "Clear Selection" button, respectively.
 
 
 If, for example, you want to search the contents of a specific channel, here's what you do:
 
-First, search for a channel in the "Search Channel" input box
-Assuming you get back results, select whichever channel you'd like by clicking on its image. Note that the advanced parameters aren't utilized when searching by channel, only when searching by video.
+	* First, search for a channel in the "Search Channel" input box
+	Assuming you get back results, select whichever channel you'd like by clicking on its image. **Note that the advanced parameters aren't utilized when searching by channel, only when searching by video.**
 
-You should then see the filter applied represented by an icon below the search bar.
+	* You should then see the filter applied represented by an icon below the search bar.
 
-You will now only get results from that particular channel back. Clicking on another channel will reset the filter. 
+	* You will now only get results from that particular channel back. Clicking on another channel will reset the filter. 
 
-You can remove the filter by clicking the "Clear Filter" button.
+	* You can remove the filter by clicking the "Clear Filter" button.
 
 You can also use the translate feature to quickly search for videos in different languages. You can set a language, and before search execution, the API will translate the keywords (you will also see it in the search bar, allowing you to make tweaks if you wanted to get different results).
 
