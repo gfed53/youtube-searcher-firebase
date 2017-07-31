@@ -45,14 +45,13 @@ The location parameter uses Google Maps to allow the user to select a portion of
 
 If, for example, you want to search the contents of a specific channel, here's what you do:
 
-	* First, search for a channel in the "Search Channel" input box
-	Assuming you get back results, select whichever channel you'd like by clicking on its image. **Note that the advanced parameters aren't utilized when searching by channel, only when searching by video.**
+  * First, search for a channel in the "Search Channel" input box. Assuming you get back results, select whichever channel you'd like by clicking on its image. **Note that the advanced parameters aren't utilized when searching by channel, only when searching by video.**
 
-	* You should then see the filter applied represented by an icon below the search bar.
+  * You should then see the filter applied represented by an icon below the search bar.
 
-	* You will now only get results from that particular channel back. Clicking on another channel will reset the filter. 
+  * You will now only get results from that particular channel back. Clicking on another channel will reset the filter. 
 
-	* You can remove the filter by clicking the "Clear Filter" button.
+  * You can remove the filter by clicking the "Clear Filter" button.
 
 You can also use the translate feature to quickly search for videos in different languages. You can set a language, and before search execution, the API will translate the keywords (you will also see it in the search bar, allowing you to make tweaks if you wanted to get different results).
 

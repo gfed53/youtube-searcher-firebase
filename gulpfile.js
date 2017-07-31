@@ -14,6 +14,7 @@ var usemin = require('gulp-usemin');
 var rev = require('gulp-rev');
 var clean = require('gulp-clean');
 var del = require('del');
+var runSequence = require('run-sequence');
 
 var paths = {
 	scripts: 'src/**/*.js',
@@ -49,17 +50,17 @@ gulp.task('watch', function(){
 
 // Build
 gulp.task('clean', function(){
-	del(paths.build);
+	return del(paths.build);
 });
 
-gulp.task('htmlmin', [ 'clean' ], function(){
+gulp.task('htmlmin', function(){
 	var allHtml = paths.index.concat(paths.html);
 	return gulp.src( './src/**/*.html' )
 		.pipe(htmlmin({collapseWhitespace: true}))
 		.pipe(gulp.dest( paths.build ));
 });
 
-gulp.task('usemin', [ 'htmlmin' ], function(){
+gulp.task('usemin', function(){
 	return gulp.src( paths.index )
 		.pipe(usemin({
 			css: [ minifyCss(), 'concat' ],
@@ -68,14 +69,19 @@ gulp.task('usemin', [ 'htmlmin' ], function(){
 		.pipe(gulp.dest( paths.build ));
 });
 
-gulp.task('indexmin', [ 'usemin' ], function(){
+gulp.task('indexmin', function(){
 	var allHtml = paths.index.concat(paths.html);
 	return gulp.src( './build/*.html' )
 		.pipe(htmlmin({collapseWhitespace: true}))
 		.pipe(gulp.dest( paths.build ));
 });
 
-gulp.task('build', ['indexmin']);
+gulp.task('build', function(){
+	runSequence('clean',
+				'htmlmin',
+				'usemin',
+				'indexmin');
+});
 
 //Default
 gulp.task('default', ['jshint', 'sass', 'watch']);

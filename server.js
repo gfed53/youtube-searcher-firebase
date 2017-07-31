@@ -9,7 +9,7 @@ var app = express();
 app.use(bodyParser.json());
 
 // ******* You can toggle between serving 'src' and 'build' directories if need be.
-app.use(express.static('src'));
+app.use(express.static('build'));
 
 app.get('/access', function(req, res){
     res.json(config.KEYS);

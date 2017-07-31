@@ -5,4 +5,3 @@ exports.KEYS = {
 	fBaseDB: '',
 	translateKey: ''
 };
-
