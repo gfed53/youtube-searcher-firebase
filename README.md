@@ -1,32 +1,9 @@
 # The Swiss Army YouTube Searcher (Google Firebase Version)
 
-## Note
 
-This is the implementation of SaYs that uses Google Firebase instead of the user's localStorage to store saved content. It is still possible to use localStorage instead, as it serves as a fallback if you don't want to provide a database to use.
+## Live Demo
 
-
-## Build Instructions
-
-1. Make sure npm is installed, then, inside the terminal, run `npm i` to install all dependencies.
-
-2. Before you start using the app, you will need to supply the app with a few API keys.
-
-  * Navigate to config.js.
-
-  * You should find the places where the API keys are needed, as well as a Google Firebase database (fBaseDB) if you choose to utilize one.
-
-  * Your Google API (googKey) key is required, and it must have the YouTube Data API and Google Maps Javascript API enabled for use (Only one key should be needed for all Google APIs). The Yandex Translate API (translateKey) key isn't required, however (but don't try altering the translate search options if you don't have the key supplied!).
-
-  	* [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/)
-  	* [YouTube Data API](https://developers.google.com/youtube/v3/getting-started)
-  	* [Google Firebase](https://console.firebase.google.com/)
-  	* [Yandex Translate API](https://tech.yandex.com/translate/)
-
- 3. Once all dependencies are installed and everything is in place, you can run `gulp build` in the command line to create a build version.
-
- 4. You can serve the app locally by running `node server`. The app listens at port 8080.
-
-A demo version is currently being created - with no API key insertion required. You can check it out [here](http://youtube-searcher-8972.herokuapp.com/)!
+Here is a [live demo version](http://youtube-searcher-8972.herokuapp.com/) that you can jump right into and use. If you want to create your own build and/or learn more about the process, continue reading.
 
 ## Introduction
 
@@ -74,11 +51,31 @@ This app works best in Google Chrome. I continue to add fixes to any cross-brows
 
 (This ends the "about" section content)
 
+
+## Build Instructions
+
+1. Make sure npm is installed, then, inside the terminal, run `npm i` to install all dependencies.
+
+2. Before you start using the app, you will need to supply the app with a few API keys.
+
+  * Navigate to config.js.
+
+  * You should find the places where the API keys are needed, as well as a Google Firebase database (fBaseDB) if you choose to utilize one.
+
+  * Your Google API (googKey) key is required, and it must have the YouTube Data API and Google Maps Javascript API enabled for use (Only one key should be needed for all Google APIs). The Yandex Translate API (translateKey) key isn't required, however (but don't try altering the translate search options if you don't have the key supplied!).
+
+  	* [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/)
+  	* [YouTube Data API](https://developers.google.com/youtube/v3/getting-started)
+  	* [Google Firebase](https://console.firebase.google.com/)
+  	* [Yandex Translate API](https://tech.yandex.com/translate/)
+
+ 3. Once all dependencies are installed and everything is in place, you can run `gulp build` in the command line to create a build version.
+
+ 4. You can serve the app locally by running `node server`. The app listens at port 8080.
+
 ## The Process
 
 This app uses CORS requests to get data from the Youtube API, and uses the iframe element to allow embedded YouTube videos within the app. Aside from working further with API hacks using AngularJS, in developing this app I was also introduced to AngularUI router, which utilizes nested states and views. This dependency is more than just a better alternative to ngView; it changes the way a website or app's structure is viewed, and promotes a more modular approach.
 
 I also began following John Papa's [Style Guide](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md) for best practices in developing AngularJS projects, as I have with other projects.
-
-This app is powered by the [Youtube Data API](https://developers.google.com/maps/documentation/javascript/), [Google Maps API](https://developers.google.com/maps/documentation/javascript/), [Yandex Translate API](https://tech.yandex.com/translate/), and [Google Firebase](https://console.firebase.google.com/).
 
