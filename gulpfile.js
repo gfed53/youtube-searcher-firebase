@@ -54,8 +54,7 @@ gulp.task('clean', function(){
 });
 
 gulp.task('htmlmin', function(){
-	var allHtml = paths.index.concat(paths.html);
-	return gulp.src( './src/**/*.html' )
+	return gulp.src( paths.html )
 		.pipe(htmlmin({collapseWhitespace: true}))
 		.pipe(gulp.dest( paths.build ));
 });
@@ -71,7 +70,7 @@ gulp.task('usemin', function(){
 
 gulp.task('indexmin', function(){
 	var allHtml = paths.index.concat(paths.html);
-	return gulp.src( './build/*.html' )
+	return gulp.src( paths.build+'*.html' )
 		.pipe(htmlmin({collapseWhitespace: true}))
 		.pipe(gulp.dest( paths.build ));
 });
