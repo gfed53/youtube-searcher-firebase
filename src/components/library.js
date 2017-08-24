@@ -1827,14 +1827,19 @@
 		function getVideoFilter(){
 			if(localStorage['uyt-video-filter']){
 				let dateObj = JSON.parse(localStorage['uyt-video-filter']);
-				// if(dateObj.addedAfter){
-				// 	dateObj.addedAfter = JSON.parse(dateObj.addedAfter);
-				// 	console.log('type?',typeof dateObj.addedAfter);
-				// }
-				// if(dateObj.addedBefore){
-				// 	dateObj.addedBefore = JSON.parse(dateObj.addedBefore);
-				// 	console.log('type?',typeof dateObj.addedBefore);
-				// }
+				console.log('type?',typeof dateObj.addedAfter);
+
+				// Create a moment from around 2005, and check each date obj to make sure it's after this moment. Otherwise set to null. This is to combat partially typed dates being converted to arbitrary old years.
+				if(dateObj.addedAfter){
+					//Convert to date object using service/moment.js
+					dateObj.addedAfter = moment(dateObj.addedAfter)._d;
+					console.log('addedAfter',dateObj.addedAfter);
+					console.log('type?',typeof dateObj.addedAfter);
+				}
+				if(dateObj.addedBefore){
+					dateObj.addedBefore = moment(dateObj.addedBefore)._d;
+					console.log('type?',typeof dateObj.addedBefore);
+				}
 
 				return dateObj;
 
