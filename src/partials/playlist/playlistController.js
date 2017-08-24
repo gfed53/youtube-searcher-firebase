@@ -4,9 +4,9 @@
 	angular
 	.module('myApp')
 
-	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytVideoItemsFB', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', 'ytFirebase', PlaylistCtrl]);
+	.controller('PlaylistCtrl', ['$scope', '$rootScope', '$state', '$timeout', 'ytVideoItems', 'ytVideoItemsFB', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', 'ytFirebase', PlaylistCtrl]);
 
-	function PlaylistCtrl($state, $timeout, ytVideoItems, ytVideoItemsFB, ytSearchHistory, ytSearchHistoryFB, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings, ytFirebase){
+	function PlaylistCtrl($scope, $rootScope, $state, $timeout, ytVideoItems, ytVideoItemsFB, ytSearchHistory, ytSearchHistoryFB, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings, ytFirebase){
 		let vm = this;
 
 		// Decide which services to use (firebase or localStorage)
@@ -35,6 +35,10 @@
 		vm.sortVideos = sortVideos;
 		vm.sortSearches = sortSearches;
 
+		//Retrieving saved filters (if any)
+		vm.videoFilter = ytSettings.getVideoFilter();
+		console.log('vm.videoFilter',vm.videoFilter);
+
 		//Keeps track of collapsed/expanded sections in saved/playlist section
 		vm.collapsed = ytPlaylistView.get();
 
@@ -54,6 +58,11 @@
 		vm.segName = ytFirebase.services.getSegName();
 
 		vm.handleStorageSettings = handleStorageSettings;
+
+		$scope.$watchCollection('playlist.videoFilter', () => {
+			console.log('change occured',vm.videoFilter);
+			ytSettings.setVideoFilter(vm.videoFilter);
+		});
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
@@ -156,6 +165,8 @@
 				vm.warnActive = res;
 			});
 		}
+
+		
 	}
 })();
 

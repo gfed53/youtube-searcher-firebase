@@ -14,6 +14,11 @@
 		$rootScope.$on('$stateChangeSuccess', () => {
 			window.scrollTo(0,0);
 		});
+		$rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
+			if(fromState.name === 'playlist'){
+				console.log('execute saves');
+			}
+		});
 		ytInitAPIs.init()
 			.then(()=> {
 				//Connect to Firebase

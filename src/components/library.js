@@ -1318,7 +1318,7 @@
 				if(filter && filter.addedAfter){
 					if(item.dateAdded){
 						let dateAdded = parseInt(moment(ytDateHandler().getDate(item.dateAdded, 'M/D/YYYY')).format('X'), 10),
-						after = parseInt(moment(ytDateHandler().getDate(filter.addedAfter, 'M/D/YYYY')).format('X'), 10);
+							after = parseInt(moment(ytDateHandler().getDate(filter.addedAfter, 'M/D/YYYY')).format('X'), 10);
 						bool = (dateAdded >= after);
 					} else {
 						bool = false;
@@ -1334,7 +1334,7 @@
 				if(videoFilter && videoFilter.addedBefore){
 					if(video.dateAdded){
 						let dateAdded = parseInt(moment(ytDateHandler().getDate(video.dateAdded, 'M/D/YYYY')).format('X'), 10),
-						before = parseInt(moment(ytDateHandler().getDate(videoFilter.addedBefore, 'M/D/YYYY')).format('X'), 10);
+							before = parseInt(moment(ytDateHandler().getDate(videoFilter.addedBefore, 'M/D/YYYY')).format('X'), 10);
 						bool = (dateAdded < before);
 					} else {
 						bool = false;
@@ -1765,6 +1765,8 @@
 		this.setWarn = setWarn;
 		this.getSortOpts = getSortOpts;
 		this.setSortOpts = setSortOpts;
+		this.getVideoFilter = getVideoFilter;
+		this.setVideoFilter = setVideoFilter;
 
 		function handleStorageSettings(){
 			let deferred = $q.defer();
@@ -1820,6 +1822,34 @@
 
 		function setSortOpts(obj){
 			localStorage.setItem('uyt-sort-opts', JSON.stringify(obj));
+		}
+
+		function getVideoFilter(){
+			if(localStorage['uyt-video-filter']){
+				let dateObj = JSON.parse(localStorage['uyt-video-filter']);
+				// if(dateObj.addedAfter){
+				// 	dateObj.addedAfter = JSON.parse(dateObj.addedAfter);
+				// 	console.log('type?',typeof dateObj.addedAfter);
+				// }
+				// if(dateObj.addedBefore){
+				// 	dateObj.addedBefore = JSON.parse(dateObj.addedBefore);
+				// 	console.log('type?',typeof dateObj.addedBefore);
+				// }
+
+				return dateObj;
+
+			} else {
+				return {
+					keyword: '',
+					addedAfter: null,
+					addedBefore: null
+				};
+			}
+		}
+
+		function setVideoFilter(obj){
+			localStorage.setItem('uyt-video-filter', JSON.stringify(obj));
+			console.log('should be all set');
 		}
 	}
 
