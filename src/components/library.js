@@ -1830,15 +1830,24 @@
 				console.log('type?',typeof dateObj.addedAfter);
 
 				// Create a moment from around 2005, and check each date obj to make sure it's after this moment. Otherwise set to null. This is to combat partially typed dates being converted to arbitrary old years.
+				let turnPoint = moment('02-01-2005', 'MM-DD-YYYY');
+
+				console.log('turnPoint',turnPoint);
+
 				if(dateObj.addedAfter){
 					//Convert to date object using service/moment.js
-					dateObj.addedAfter = moment(dateObj.addedAfter)._d;
+					console.log('actual date object',moment(dateObj.addedAfter));
+					console.log('this should be false..',moment(dateObj.addedAfter) < turnPoint);
+					let momentObj = moment(dateObj.addedAfter);
+
+					//If date obj is past turning point, pass it thru. If not, null.
+					dateObj.addedAfter = momentObj > turnPoint ? moment(dateObj.addedAfter)._d : null;
 					console.log('addedAfter',dateObj.addedAfter);
 					console.log('type?',typeof dateObj.addedAfter);
 				}
 				if(dateObj.addedBefore){
-					dateObj.addedBefore = moment(dateObj.addedBefore)._d;
-					console.log('type?',typeof dateObj.addedBefore);
+					let momentObj = moment(dateObj.addedBefore);
+					dateObj.addedBefore = momentObj > turnPoint ? moment(dateObj.addedBefore)._d : null;
 				}
 
 				return dateObj;
