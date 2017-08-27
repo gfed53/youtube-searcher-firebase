@@ -39,6 +39,9 @@
 		vm.videoFilter = ytSettings.getVideoFilter();
 		console.log('vm.videoFilter',vm.videoFilter);
 
+		vm.searchFilter = ytSettings.getSearchFilter();
+
+
 		//Keeps track of collapsed/expanded sections in saved/playlist section
 		vm.collapsed = ytPlaylistView.get();
 
@@ -62,6 +65,11 @@
 		$scope.$watchCollection('playlist.videoFilter', () => {
 			console.log('change occured',vm.videoFilter);
 			ytSettings.setVideoFilter(vm.videoFilter);
+		});
+
+		$scope.$watchCollection('playlist.searchFilter', () => {
+			console.log('change occured search',vm.searchFilter);
+			ytSettings.setSearchFilter(vm.searchFilter);
 		});
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
@@ -152,11 +160,11 @@
 		}
 
 		function addedAfterSearches(search){
-			return ytFilters().addedAfterSearches(search, vm.searchesFilter);
+			return ytFilters().addedAfterSearches(search, vm.searchFilter);
 		}
 
 		function addedBeforeSearches(search){
-			return ytFilters().addedBeforeSearches(search, vm.searchesFilter);
+			return ytFilters().addedBeforeSearches(search, vm.searchFilter);
 		}
 
 		function handleStorageSettings(){

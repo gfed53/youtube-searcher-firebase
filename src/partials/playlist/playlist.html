@@ -252,17 +252,17 @@
 			<h3 class="filter-buttons-header">Filter By:</h3>
 			<div class="filter-input-group filter-input-group-keyword">
 				<label class="filt-label" for="">Keyword:</label>
-				<input type="text" class="form-control" ng-model="playlist.searchesFilter.keyword" placeholder="keyword..">
+				<input type="text" class="form-control" ng-model="playlist.searchFilter.keyword" placeholder="keyword..">
 			</div>
 			<div class="filter-input-group">
 				<label class="filt-label" for="">Added After:</label>
-				<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
-				<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
+				<input class="form-control" ng-model="playlist.searchFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
+				<input class="form-control" ng-model="playlist.searchFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
 			</div>
 			<div class="filter-input-group">
 				<label class="filt-label" for="">Added Before:</label>
-				<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
-				<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
+				<input class="form-control" ng-model="playlist.searchFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
+				<input class="form-control" ng-model="playlist.searchFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
 			</div>
 		</div>
 
@@ -274,26 +274,26 @@
 					<h3 class="sort-filter-header filter-buttons-header">Filter By:</h3>
 				</div>
 				<div class="col-xs-4">
-					<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchesFilterCollapsed = !playlist.collapsed.searchesFilterCollapsed">
-					<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.searchesFilterCollapsed"></span>
-					<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.searchesFilterCollapsed"></span>
+					<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchFilterCollapsed = !playlist.collapsed.searchFilterCollapsed">
+					<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.searchFilterCollapsed"></span>
+					<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.searchFilterCollapsed"></span>
 				</button>
 				</div>
 			</div>
-			<div class="buttons-mobile-container" uib-collapse="playlist.collapsed.searchesFilterCollapsed">
+			<div class="buttons-mobile-container" uib-collapse="playlist.collapsed.searchFilterCollapsed">
 				<div class="filter-input-group filter-input-group-keyword">
 					<label class="filt-label" for="">Keyword:</label>
-					<input type="text" class="form-control" ng-model="playlist.searchesFilter.keyword" placeholder="keyword..">
+					<input type="text" class="form-control" ng-model="playlist.searchFilter.keyword" placeholder="keyword..">
 				</div>
 				<div class="filter-input-group">
 					<label class="filt-label" for="">Added After:</label>
-					<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
-					<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
+					<input class="form-control" ng-model="playlist.searchFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
+					<input class="form-control" ng-model="playlist.searchFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
 				</div>
 				<div class="filter-input-group">
 					<label class="filt-label" for="">Added Before:</label>
-					<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
-					<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
+					<input class="form-control" ng-model="playlist.searchFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
+					<input class="form-control" ng-model="playlist.searchFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
 				</div>
 			</div>
 		</div>
@@ -301,7 +301,7 @@
 		<!-- Searches Collection -->
 
 		<div class="saved-content-container playlist-content-container">
-			<div ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchesFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches track by search.name" class="saved-content-inner">
+			<div ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches track by search.name" class="saved-content-inner">
 				<p class="emph">{{ search.nameShrt || search.name }}</p>
 				<div class="row">
 					<div class="col-sm-6">
