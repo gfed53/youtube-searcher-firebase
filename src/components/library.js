@@ -1829,23 +1829,16 @@
 		function getVideoFilter(){
 			if(localStorage['uyt-video-filter']){
 				let dateObj = JSON.parse(localStorage['uyt-video-filter']);
-				console.log('type?',typeof dateObj.addedAfter);
 
 				// Create a moment from around 2005, and check each date obj to make sure it's after this moment. Otherwise set to null. This is to combat partially typed dates being converted to arbitrary old years.
 				let turnPoint = moment('02-01-2005', 'MM-DD-YYYY');
 
-				console.log('turnPoint',turnPoint);
-
 				if(dateObj.addedAfter){
 					//Convert to date object using service/moment.js
-					console.log('actual date object',moment(dateObj.addedAfter));
-					console.log('this should be false..',moment(dateObj.addedAfter) < turnPoint);
 					let momentObj = moment(dateObj.addedAfter);
 
 					//If date obj is past turning point, pass it thru. If not, null.
 					dateObj.addedAfter = momentObj > turnPoint ? moment(dateObj.addedAfter)._d : null;
-					console.log('addedAfter',dateObj.addedAfter);
-					console.log('type?',typeof dateObj.addedAfter);
 				}
 				if(dateObj.addedBefore){
 					let momentObj = moment(dateObj.addedBefore);
@@ -1865,29 +1858,17 @@
 
 		function setVideoFilter(obj){
 			localStorage.setItem('uyt-video-filter', JSON.stringify(obj));
-			console.log('should be all set');
 		}
 
 		function getSearchFilter(){
 			if(localStorage['uyt-search-filter']){
 				let dateObj = JSON.parse(localStorage['uyt-search-filter']);
-				console.log('type?',typeof dateObj.addedAfter);
 
-				// Create a moment from around 2005, and check each date obj to make sure it's after this moment. Otherwise set to null. This is to combat partially typed dates being converted to arbitrary old years.
 				let turnPoint = moment('02-01-2005', 'MM-DD-YYYY');
 
-				console.log('turnPoint',turnPoint);
-
 				if(dateObj.addedAfter){
-					//Convert to date object using service/moment.js
-					console.log('actual date object',moment(dateObj.addedAfter));
-					console.log('this should be false..',moment(dateObj.addedAfter) < turnPoint);
 					let momentObj = moment(dateObj.addedAfter);
-
-					//If date obj is past turning point, pass it thru. If not, null.
 					dateObj.addedAfter = momentObj > turnPoint ? moment(dateObj.addedAfter)._d : null;
-					console.log('addedAfter',dateObj.addedAfter);
-					console.log('type?',typeof dateObj.addedAfter);
 				}
 				if(dateObj.addedBefore){
 					let momentObj = moment(dateObj.addedBefore);
@@ -1907,7 +1888,6 @@
 
 		function setSearchFilter(obj){
 			localStorage.setItem('uyt-search-filter', JSON.stringify(obj));
-			console.log('should be all set');
 		}
 	}
 

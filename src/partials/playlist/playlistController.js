@@ -37,7 +37,6 @@
 
 		//Retrieving saved filters (if any)
 		vm.videoFilter = ytSettings.getVideoFilter();
-		console.log('vm.videoFilter',vm.videoFilter);
 
 		vm.searchFilter = ytSettings.getSearchFilter();
 
@@ -63,12 +62,10 @@
 		vm.handleStorageSettings = handleStorageSettings;
 
 		$scope.$watchCollection('playlist.videoFilter', () => {
-			console.log('change occured',vm.videoFilter);
 			ytSettings.setVideoFilter(vm.videoFilter);
 		});
 
 		$scope.$watchCollection('playlist.searchFilter', () => {
-			console.log('change occured search',vm.searchFilter);
 			ytSettings.setSearchFilter(vm.searchFilter);
 		});
 
