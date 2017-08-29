@@ -9,15 +9,15 @@ var app = express();
 app.use(bodyParser.json());
 
 // ******* You can toggle between serving 'src' and 'build' directories if need be.
-app.use(express.static('src'));
+app.use(express.static('build'));
 
 app.get('/access', function(req, res){
     res.json(config.KEYS);
 });
 
 var runServer = function(callback) {
-    
     app.listen(config.PORT, function() {
+        console.log('Server listening at localhost:' + config.PORT + '!');
         if (callback) {
             callback();
         }
