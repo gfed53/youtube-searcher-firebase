@@ -2,7 +2,7 @@
 
 	<!-- Saved Videos Section -->
 	<div class="playlist-section-options">
-		<p ng-if="playlist.isUsingFBase && playlist.segName">Using the <span class="emph">{{ playlist.segName }}</span> segment.</p>
+		<p ng-if="playlist.isUsingFBase && playlist.segName">Hello <span class="emph">{{ playlist.segName }}</span>!</p>
 		<p ng-if="!playlist.segName">Using <span class="emph">Local Storage</span></p>
 		<button class="btn btn-default btn-storage" ng-if="playlist.isUsingFBase" ng-click="playlist.fbaseSave()">
 			<span ng-if="!playlist.segName">Connect to Firebase</span>
