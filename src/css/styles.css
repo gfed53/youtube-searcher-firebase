@@ -678,7 +678,9 @@ body #page-header #header-wrapper #credit {
     width: 12em; } }
 
 #animate-view-container {
-  position: relative; }
+  position: relative;
+  max-width: 1200px;
+  margin: auto; }
   #animate-view-container .animate-view {
     transition: 500ms linear all;
     position: absolute;
