@@ -309,10 +309,11 @@
 		}
 
 		function setItem(result){
-			let itemName = result.snippet.title+'-uytp',
-			dateAdded = Date.now(),
-			deferred = $q.defer();
-			content = result;
+			let dateAdded = Date.now(),
+					content = result,
+					itemName = result.snippet.title+'-'+content.id.videoId+'-uytp',
+					deferred = $q.defer();
+
 			delete content.$$hashKey;
 
 			content.dateAdded = dateAdded;
@@ -461,15 +462,21 @@
 		}
 
 		function setItem(result){
-			let deferred = $q.defer(),
-			dateAdded = Date.now(),
-			content = result;
+
+			let dateAdded = Date.now(),
+					content = result,
+					itemName = result.snippet.title+'-'+content.id.videoId+'-uytp',
+					deferred = $q.defer();
+
+			// let deferred = $q.defer(),
+			// 		dateAdded = Date.now(),
+			// 		content = result;
 			
 			delete content.$$hashKey;
 
 			content.dateAdded = dateAdded;
 			content.name = content.snippet.title;
-			content.codeName = result.snippet.title+'-'+content.id.videoId+'-uytp';
+			content.codeName = itemName;
 
 			//Check if video already exists!
 			if(ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName) === -1){

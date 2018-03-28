@@ -195,6 +195,7 @@
 		}
 
 		function addToPlaylist(result){
+			console.log('addToPlaylist result',result);
 			videoItemsService.services.setItem(result)
 			.then((res)=>{
 				vm.savedVideos.push(result);
