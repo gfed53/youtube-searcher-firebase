@@ -4,13 +4,9 @@
 	angular
 	.module('myApp')
 
-	.controller('HeaderCtrl', [ '$timeout', HeaderCtrl]);
+	.controller('HeaderCtrl', [HeaderCtrl]);
 
-	function HeaderCtrl($timeout){
+	function HeaderCtrl(){
 		let vm = this;
-		//For the slide-in animation of header contents
-		$timeout(() => {
-			vm.active = true;
-		}, 100);
 	}
 })();

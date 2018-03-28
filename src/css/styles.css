@@ -687,18 +687,6 @@ body #page-header #header-wrapper #credit {
     right: 0;
     bottom: 0; }
 
-#mast-header.ng-enter {
-  right: 50em; }
-
-#mast-header.ng-enter.ng-enter-active {
-  right: 0; }
-
-#credit.ng-enter {
-  left: 75em; }
-
-#credit.ng-enter.ng-enter-active {
-  left: 0; }
-
 .animate-view.ng-enter {
   opacity: 0;
   z-index: 100; }
