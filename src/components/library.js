@@ -143,7 +143,7 @@
 		};
 	}
 
-	//Searches the API for channels based on search query
+	// Searches the API for channels based on search query
 	function ytChanSearch($q, $http, ytModalGenerator, ytInitAPIs){
 		return (channel) => {
 			let url = 'https://www.googleapis.com/youtube/v3/search';
@@ -181,7 +181,7 @@
 		};
 	}
 
-	//Filters a video search by channel
+	// Filters a video search by channel
 	function ytChanFilter(){
 		this.id = '';
 		this.image = '';
@@ -207,7 +207,7 @@
 			request = {
 				key: ytInitAPIs.apisObj.googKey,
 				part: 'snippet, contentDetails',
-				//contentDetails contains the duration property.
+				// contentDetails contains the duration property.
 				id: id
 			},
 			errorModalObj = ytModalGenerator().getTemp('videoTemp'),
@@ -233,7 +233,7 @@
 		};
 	}
 
-	//Used to get back a video's channel data (which requires a different call from ytCurrentVideo)
+	// Used to get back a video's channel data (which requires a different call from ytCurrentVideo)
 	function ytCurrentChannel($q, $http, ytModalGenerator, ytInitAPIs){
 		return (id) => {
 			let url = "https://www.googleapis.com/youtube/v3/channels",

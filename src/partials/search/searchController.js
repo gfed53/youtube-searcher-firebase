@@ -37,8 +37,8 @@
 		vm.isDateTypeComp = ytDateHandler().check();
 		
 
-		//Retrieving our saved variables, if any
-		//type refers to the search type, whether the user sees the basic or advanced search in the view
+		// Retrieving our saved variables, if any.
+		// 'type' refers to the search type, whether the user sees the basic or advanced search in the view.
 
 		vm.results = ytResults.getResults();
 		vm.chanResults = ytResults.getChanResults();
@@ -51,12 +51,12 @@
 		vm.translate = translate;
 
 
-		//Keep a log of searched videos that were moved to playlist, so add button gets disabled once you add video.
+		// Keep a log of searched videos that were moved to playlist, so add button gets disabled once you add video.
 
 		vm.savedVideos = [];
 
 
-		//Default search settings
+		// Default search settings
 
 		vm.params.searchType = (vm.params.searchType || 'video');
 
@@ -64,7 +64,7 @@
 		vm.sort = sort;
 
 
-		//User authentication
+		// User authentication
 
 		vm.userName = ytInitAPIs.apisObj.id;
 		vm.updateAPIInfo = ytInitAPIs.update;
@@ -172,7 +172,6 @@
 
 		function clearSelection(){
 			//Clears location/locationRadius params
-			//TODO: make DRYer
 			vm.params.lat = undefined;
 			vm.params.lng = undefined;
 			vm.params.radius = undefined;
