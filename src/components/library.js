@@ -1783,9 +1783,17 @@
 			ytModalGenerator().openModal(storageSettingsTemp)
 			.then((res) => {
 				setWarn(res.warnVal);
-				if(res.fBaseDB){
-					setFBaseDB(res.fBaseDB);
+				if(res.setDefault){
+					setFBaseDB('second-app-afad9');
 					location.reload();
+				} else if(res.fBaseDB){
+					setFBaseDB(res.fBaseDB);	
+				}
+
+				if(res.setDefault || res.fBaseDB){
+					//Automatically clear saved creds when switching to a different database.
+					
+					ytFirebase.services.clearCreds();
 				}
 				deferred.resolve(res);
 			},(err)=>{
@@ -1794,6 +1802,24 @@
 
 			return deferred.promise;
 		}
+
+		// function handleStorageSettings(){
+		// 	let deferred = $q.defer();
+
+		// 	ytModalGenerator().openModal(storageSettingsTemp)
+		// 	.then((res) => {
+		// 		setWarn(res.warnVal);
+		// 		if(res.fBaseDB){
+		// 			setFBaseDB(res.fBaseDB);
+		// 			location.reload();
+		// 		}
+		// 		deferred.resolve(res);
+		// 	},(err)=>{
+		// 		deferred.reject();
+		// 	});
+
+		// 	return deferred.promise;
+		// }
 
 		function getWarn(){
 			if(localStorage['uyt-warn']){
