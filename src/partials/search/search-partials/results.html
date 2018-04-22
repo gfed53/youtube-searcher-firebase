@@ -11,12 +11,21 @@
 			<div class="row page-selector-inner">
 				<div id="prev-page-section" class="col-xs-6">
 					<span>
-						<span id="prev-page" ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')" ng-if="search.paramsPrev.prevPageToken" class="glyphicon glyphicon-chevron-left page-change-button"></span>
+						<button 
+						id="prev-page"
+						ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')" ng-if="search.paramsPrev.prevPageToken"
+						>
+							<span class="glyphicon glyphicon-chevron-left page-change-button"></span>
+						</button>		
 					</span>
 				</div>
 				<div id="next-page-section" class="col-xs-6">
 					<span>
-						<span id="next-page" ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')" ng-if="search.paramsPrev.nextPageToken" class="glyphicon glyphicon-chevron-right page-change-button"></span>
+						<button 
+						id="next-page" 
+						ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')" ng-if="search.paramsPrev.nextPageToken">
+							<span class="glyphicon glyphicon-chevron-right page-change-button"></span>
+						</button>
 					</span>
 				</div>
 			</div>
@@ -80,13 +89,17 @@
 					<p>{{result.snippet.description}}</p>
 				</div>
 				<div class="col-md-6 results-img-container">
-					<img ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)" ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
+					<button class="btn-channel-filter-img" ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)">
+						<img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
+					</button>
 				</div>
 			</div>
 			<div class="row inner-result result-mobile">
 				<h3>{{result.snippet.channelTitle}}</h3>
 				<div class="col-md-6 results-img-container">
-					<img ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)" ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
+					<button class="btn-channel-filter-img" ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)">
+						<img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
+					</button>
 				</div>
 				<div class="col-md-6">
 					<p>{{result.snippet.description}}</p>
