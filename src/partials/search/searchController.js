@@ -4,9 +4,9 @@
 	angular
 	.module('myApp')
 
-	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$interval', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytVideoItems', 'ytVideoItemsFB', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', 'ytInitAPIs', 'ytFirebase', SearchCtrl]);
+	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$interval', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytVideoItems', 'ytVideoItemsFB', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', 'ytInitAPIs', 'ytFirebase', 'ytFocus', SearchCtrl]);
 
-	function SearchCtrl($scope, $location, $timeout, $interval, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytSearchHistoryFB, ytVideoItems, ytVideoItemsFB, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler, ytInitAPIs, ytFirebase){
+	function SearchCtrl($scope, $location, $timeout, $interval, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytSearchHistoryFB, ytVideoItems, ytVideoItemsFB, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler, ytInitAPIs, ytFirebase, ytFocus){
 
 		let vm = this;
 		
@@ -70,7 +70,11 @@
 		vm.updateAPIInfo = ytInitAPIs.update;
 
 		$timeout(() => {
-				vm.initMap();
+			vm.initMap();
+
+			// Set focus to search bar
+			ytFocus('video-search-bar');
+
 			}, 1000);
 		
 		$location.url('/search');
@@ -184,8 +188,7 @@
 			ytChanSearch(channel).getResults()
 			.then((response) => {
 				vm.firstChanResult = response.data.items[0];
-				vm.chanFilter(vm.firstChanResult.id.channelId, vm.firstChanResult.snippet.thumbnails.default.url);
-				
+				vm.chanFilter(vm.firstChanResult.id.channelId, vm.firstChanResult.snippet.thumbnails.default.url);		
 			});
 		}
 
@@ -194,7 +197,6 @@
 		}
 
 		function addToPlaylist(result){
-			console.log('addToPlaylist result',result);
 			videoItemsService.services.setItem(result)
 			.then((res)=>{
 				vm.savedVideos.push(result);
