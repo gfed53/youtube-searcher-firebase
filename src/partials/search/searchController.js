@@ -132,6 +132,9 @@
 				$timeout(() => {
 					vm.scrollTo('scroll-point');
 					vm.offSet = true;
+
+					// Focus on save search button
+					ytFocus('btn-save-search'); 
 				}, 1000);
 			});
 		}
@@ -152,6 +155,8 @@
 				$timeout(() => {
 					vm.scrollTo('scroll-point');
 					vm.offSet = true;
+
+					ytFocus('btn-save-search');
 				}, 1000);			
 			});
 		}
