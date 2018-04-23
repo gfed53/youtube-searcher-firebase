@@ -9,16 +9,38 @@
 	transition: all 0.5s ease-in-out;
 }
 
-.scroll-top, .page-change-button {
+.scroll-top, .btn-change-page-inner {
 	transition: all 0.5s ease-in-out;
 }
+
+.btn-change-page, .btn-channel-filter {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: transparent;
+	border: none;
+}
+
+// .btn-channel-filter {
+// 	.img-channel-filter {
+// 		width: 100%;
+// 	}
+// }
 
 .btn[disabled], .btn.disabled {
 	cursor: auto;
 }
 
+@media screen and ($results-tweakpoint){
+	// .btn-channel-filter {
+	// 	width: 60%;
+	// 	.img-channel-filter {
+	// 		// width: 100%;
+	// 	}
+	// }
+}
+
 @media screen and ($desktop){
-	.scroll-top:hover, .page-change-button:hover {
+	.scroll-top:hover, .btn-change-page-inner:hover {
 		color: #888888;
 		cursor: pointer;
 		opacity: 1.0;

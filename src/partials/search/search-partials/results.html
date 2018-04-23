@@ -1,3 +1,4 @@
+<!-- Video Results -->
 <div ng-if="search.searchTypePrev === 'video'" id="video-results" class="results">
 	<h2 ng-if="search.paramsPrev.searchedKeyword">We found {{ search.results.length }} results for "{{ search.paramsPrev.searchedKeyword }}".</h2>
 	<h2 ng-if="!search.paramsPrev.searchedKeyword">We found {{ search.results.length }} results.</h2>
@@ -12,19 +13,21 @@
 				<div id="prev-page-section" class="col-xs-6">
 					<span>
 						<button 
+						class="btn-change-page"
 						id="prev-page"
 						ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')" ng-if="search.paramsPrev.prevPageToken"
 						>
-							<span class="glyphicon glyphicon-chevron-left page-change-button"></span>
+							<span class="glyphicon glyphicon-chevron-left btn-change-page-inner"></span>
 						</button>		
 					</span>
 				</div>
 				<div id="next-page-section" class="col-xs-6">
 					<span>
-						<button 
+						<button
+						class="btn-change-page"
 						id="next-page" 
 						ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')" ng-if="search.paramsPrev.nextPageToken">
-							<span class="glyphicon glyphicon-chevron-right page-change-button"></span>
+							<span class="glyphicon glyphicon-chevron-right btn-change-page-inner"></span>
 						</button>
 					</span>
 				</div>
@@ -78,6 +81,7 @@
 		</div>
 	</div>
 </div>
+<!-- Channel Results -->
 <div ng-if="search.searchTypePrev === 'channel'" id="channel-results" class="results">
 	<h2>We found {{ search.results.length }} results.</h2>
 	<p class="result-dir">Select a channel by clicking on its image. The channel will then be added as a search filter.</p>
@@ -89,16 +93,16 @@
 					<p>{{result.snippet.description}}</p>
 				</div>
 				<div class="col-md-6 results-img-container">
-					<button class="btn-channel-filter-img" ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)">
-						<img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
+					<button class="btn-channel-filter" ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)">
+						<img class="img-channel-filter" ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
 					</button>
 				</div>
 			</div>
 			<div class="row inner-result result-mobile">
 				<h3>{{result.snippet.channelTitle}}</h3>
 				<div class="col-md-6 results-img-container">
-					<button class="btn-channel-filter-img" ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)">
-						<img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
+					<button class="btn-channel-filter" ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)">
+						<img class="img-channel-filter" ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
 					</button>
 				</div>
 				<div class="col-md-6">

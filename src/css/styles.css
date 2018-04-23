@@ -399,6 +399,8 @@ body #page-header #header-wrapper #credit {
       margin: 2em 0;
       height: 100%;
       width: 50%; }
+    .results .inner-result .btn-channel-filter .img-channel-filter {
+      width: 100%; }
   .results .last > .inner-result {
     border-bottom-width: 2px; }
   .results .first > .inner-result {
@@ -504,6 +506,8 @@ body #page-header #header-wrapper #credit {
 @media screen and (min-width: 994px) {
   .results .inner-result img {
     width: 60%; }
+  .results .inner-result .btn-channel-filter {
+    width: 60%; }
   .results .inner-result .tit-descrip-container .playlist-button-wrapper, .results .inner-result .tit-descrip-container .outer-wrapper {
     text-align: left; }
   .results .inner-result .tit-descrip-container .result-chan-descrip {
@@ -597,14 +601,20 @@ body #page-header #header-wrapper #credit {
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out; }
 
-.scroll-top, .page-change-button {
+.scroll-top, .btn-change-page-inner {
   transition: all 0.5s ease-in-out; }
+
+.btn-change-page, .btn-channel-filter {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: none; }
 
 .btn[disabled], .btn.disabled {
   cursor: auto; }
 
 @media screen and (min-width: 1024px) {
-  .scroll-top:hover, .page-change-button:hover {
+  .scroll-top:hover, .btn-change-page-inner:hover {
     color: #888888;
     cursor: pointer;
     opacity: 1.0; } }

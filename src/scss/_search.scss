@@ -146,6 +146,7 @@
 		box-shadow: 0px 1px 3px 0px;
 		border-color: rgba(0, 0, 0, 0.58);
 		border-width: 1px 2px 0 2px;
+		
 		.tit-descrip-container {
 			z-index: 1;			
 			.playlist-button-wrapper, .outer-wrapper {
@@ -176,6 +177,12 @@
 			margin:  2em 0;
 			height: 100%;
 			width: 50%;
+		}
+
+		.btn-channel-filter {
+			.img-channel-filter {
+				width: 100%;
+			}
 		}
 	}
 	.last > .inner-result {
@@ -267,7 +274,7 @@
 		}
 	}
 }
-@media screen and ('min-width: 462px'){
+@media screen and (min-width: 462px){
 	#advanced-search {
 		#form-advanced-video-search{
 			#translate-wrapper {
@@ -299,7 +306,7 @@
 	}
 }
 
-@media screen and ('min-width: 594px'){
+@media screen and (min-width: 594px){
 	#advanced-search {
 		#form-advanced-video-search{
 			#translate-wrapper {
@@ -344,7 +351,7 @@
 	}
 }
 
-@media screen and ('min-width: 786px'){
+@media screen and (min-width: 786px){
 	#advanced-search {
 		#form-advanced-video-search{
 			#translate-wrapper {
@@ -360,6 +367,9 @@
 	.results {
 		.inner-result {
 			img {
+				width: 60%;
+			}
+			.btn-channel-filter {
 				width: 60%;
 			}
 			.tit-descrip-container {
