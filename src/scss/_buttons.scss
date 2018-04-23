@@ -13,30 +13,15 @@
 	transition: all 0.5s ease-in-out;
 }
 
-.btn-change-page, .btn-channel-filter {
+.btn-no-style {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	background: transparent;
 	border: none;
 }
 
-// .btn-channel-filter {
-// 	.img-channel-filter {
-// 		width: 100%;
-// 	}
-// }
-
 .btn[disabled], .btn.disabled {
 	cursor: auto;
-}
-
-@media screen and ($results-tweakpoint){
-	// .btn-channel-filter {
-	// 	width: 60%;
-	// 	.img-channel-filter {
-	// 		// width: 100%;
-	// 	}
-	// }
 }
 
 @media screen and ($desktop){

@@ -604,7 +604,7 @@ body #page-header #header-wrapper #credit {
 .scroll-top, .btn-change-page-inner {
   transition: all 0.5s ease-in-out; }
 
-.btn-change-page, .btn-channel-filter {
+.btn-no-style {
   -webkit-appearance: none;
   -moz-appearance: none;
   background: transparent;
