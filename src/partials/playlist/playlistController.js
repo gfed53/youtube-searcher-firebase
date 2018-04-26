@@ -19,6 +19,10 @@
 		vm.items = videoItemsService.services.getItems();
 		vm.pastSearches = searchHistoryService.get();
 
+
+		// Testing
+		console.log('vm.items',vm.items);
+
 		//Methods
 		vm.setVideoId = setVideoId;
 		vm.grab = grab;

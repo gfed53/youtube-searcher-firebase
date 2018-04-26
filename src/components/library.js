@@ -23,7 +23,7 @@
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
 	.service('ytResults', [ytResults])
 	.service('ytVideoItems', ['$q', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', ytVideoItems])
-	.service('ytVideoItemsFB', ['$q', '$timeout', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', 'ytFirebase', ytVideoItemsFB])
+	.service('ytVideoItemsFB', ['$q', '$timeout', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', 'ytFirebase', 'ytVideoItems', ytVideoItemsFB])
 	.service('ytSearchHistory', ['$q', 'ytModalGenerator', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
 	.service('ytSearchHistoryFB', ['$q', 'ytModalGenerator', 'ytSearchParams', 'ytUtilities', 'ytFirebase', ytSearchHistoryFB])
 	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', 'ytInitAPIs', ytTranslate])
@@ -282,8 +282,10 @@
 			isSaved: isSaved
 		};
 
-		//Automatically grabs items from localStorage and saves them to variable 'items'
+		// Automatically grabs items from localStorage and saves them to variable 'items'
+		// Should this be executed on app init, and not in playlist init?
 		function init(){
+			console.log('init running');
 			if(localStorage.length){
 				for(let key in localStorage){
 					if(key.includes('uytp')){
@@ -303,6 +305,8 @@
 		}
 
 		function getItems(){
+			console.log('getItems running');
+			console.log('items',items);
 			if(!items.length){
 				init();
 			}
@@ -322,11 +326,15 @@
 			content.codeName = itemName;
 
 			if(ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName) === -1){
+
+				// We're pushing to the items array here. This is a conflict because items.length will be greater than 0, causing the init method not to run, which would skip the grabbing of already saved videos in local storage. 
 				items.push(content);
 
 				content = JSON.stringify(content);
 
 				localStorage.setItem(itemName, content);
+
+				console.log('localStorage keys after setItem',Object.keys(localStorage).length);
 
 				deferred.resolve(content);
 			} else{
@@ -429,7 +437,7 @@
 	}
 
 	//Firebase Version
-	function ytVideoItemsFB($q, $timeout, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase){
+	function ytVideoItemsFB($q, $timeout, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase, ytVideoItems){
 
 		let videoIdObj = {videoId : null};
 		
@@ -447,11 +455,14 @@
 			isSaved: isSaved
 		};
 
-		//Automatically syncs to FB and saves them to variable 'items'
+		// Automatically syncs to FB and saves them to variable 'items'
 		function init(){
 			if(ytFirebase.services.getCurrent()){
 				var ref = ytFirebase.services.getCurrent();
 				items = ytFirebase.services.getRefArray('savedVideos');
+			} else {
+				// Execute what we need to when user uses local storage
+				ytVideoItems.services.init();
 			}
 		}
 
@@ -1727,8 +1738,8 @@
 		}
 
 		//On app load, we will have a reference to the user's Firebase partition, stored in 'current'
-		//We can use 
 		function getCurrent() {
+			console.log('current',current);
 			return current;
 		}
 

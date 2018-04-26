@@ -123,6 +123,9 @@
 				vm.status.videosCollapsed = false;
 				ytSearchParams.setPrev(vm.params, direction);
 				vm.paramsPrev = ytSearchParams.getPrev();
+				// Test
+				console.log('vm.paramsPrev',vm.paramsPrev);
+
 				ytResults.setStatus(vm.status);
 
 				//Saving the results to our service
@@ -202,6 +205,7 @@
 		}
 
 		function addToPlaylist(result){
+			console.log('addToPlaylist running');
 			videoItemsService.services.setItem(result)
 			.then((res)=>{
 				vm.savedVideos.push(result);
