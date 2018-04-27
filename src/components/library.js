@@ -285,7 +285,6 @@
 		// Automatically grabs items from localStorage and saves them to variable 'items'
 		// Should this be executed on app init, and not in playlist init?
 		function init(){
-			console.log('init running');
 			if(localStorage.length){
 				for(let key in localStorage){
 					if(key.includes('uytp')){
@@ -305,8 +304,6 @@
 		}
 
 		function getItems(){
-			console.log('getItems running');
-			console.log('items',items);
 			if(!items.length){
 				init();
 			}
@@ -333,8 +330,6 @@
 				content = JSON.stringify(content);
 
 				localStorage.setItem(itemName, content);
-
-				console.log('localStorage keys after setItem',Object.keys(localStorage).length);
 
 				deferred.resolve(content);
 			} else{
@@ -1739,7 +1734,6 @@
 
 		//On app load, we will have a reference to the user's Firebase partition, stored in 'current'
 		function getCurrent() {
-			console.log('current',current);
 			return current;
 		}
 
@@ -1774,11 +1768,9 @@
 
 		let storageSettingsTemp = ytModalGenerator().getTemp('storageSettingsTemp');
 
-
 		this.warnActive = getWarn();
 
 		this.handleStorageSettings = handleStorageSettings;
-
 
 		this.getWarn = getWarn;
 		this.setWarn = setWarn;
@@ -1814,24 +1806,6 @@
 
 			return deferred.promise;
 		}
-
-		// function handleStorageSettings(){
-		// 	let deferred = $q.defer();
-
-		// 	ytModalGenerator().openModal(storageSettingsTemp)
-		// 	.then((res) => {
-		// 		setWarn(res.warnVal);
-		// 		if(res.fBaseDB){
-		// 			setFBaseDB(res.fBaseDB);
-		// 			location.reload();
-		// 		}
-		// 		deferred.resolve(res);
-		// 	},(err)=>{
-		// 		deferred.reject();
-		// 	});
-
-		// 	return deferred.promise;
-		// }
 
 		function getWarn(){
 			if(localStorage['uyt-warn']){
