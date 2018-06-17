@@ -398,7 +398,8 @@ body #page-header #header-wrapper #credit {
       cursor: pointer;
       margin: 2em 0;
       height: 100%;
-      width: 50%; }
+      width: 50%;
+      box-shadow: 1px 1px 3px black; }
     .results .inner-result .btn-channel-filter .img-channel-filter {
       width: 100%; }
   .results .last > .inner-result {
@@ -621,7 +622,8 @@ body #page-header #header-wrapper #credit {
 
 .my-thumbnail {
   width: 100%;
-  margin: 1em 0; }
+  margin: 1em 0;
+  box-shadow: 1px 1px 3px black; }
 
 .alert-saved-wrapper {
   display: inline-block;
