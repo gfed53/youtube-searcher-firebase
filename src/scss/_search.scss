@@ -29,6 +29,11 @@
 	margin: 1em;
 }
 
+#map-wrapper {
+	position: relative;
+	margin-bottom: 4em;
+}
+
 #map {
 	width: 100%;
 	height: 15em;
@@ -36,9 +41,28 @@
 }
 
 #map-hud {
+	// position: absolute;
+	* {
+		position: absolute;
+	}
+
 	div {
 		text-align: center;
 	}
+
+	.btn-clear-select {
+		right: 50%;
+    transform: translateX(50%);
+	}
+
+	.map-lat-long {
+		left: 5%;
+	}
+
+	.map-radius {
+		right: 5%;
+	}
+
 	span {
 		font-size: 0.7em;
 	}

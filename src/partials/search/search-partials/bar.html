@@ -70,15 +70,15 @@
 			<div id="map-wrapper">
 				<div id="map"></div>
 				<div id="map-hud" class="row" ng-if="search.params.location">
-					<div class="col-xs-4">
-						<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
-					</div>
-					<div class="col-xs-4">
-						<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear">
-					</div>
-					<div class="col-xs-4">
-						<span>{{ search.params.radius | number: 0 }}km</span>
-					</div>
+					<!-- <div class="col-xs-4"> -->
+						<span class="map-lat-long">({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
+					<!-- </div> -->
+					<!-- <div class="col-xs-4"> -->
+						<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
+					<!-- </div> -->
+					<!-- <div class="col-xs-4"> -->
+						<span class="map-radius" ng-class="{'radius-error': search.params.radius > 1000}">{{ search.params.radius | number: 0 }}km</span>
+					<!-- </div> -->
 				</div>
 			</div>
 			<div class="channel-filter" ng-if="search.params.image">
