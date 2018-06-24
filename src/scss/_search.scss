@@ -1,5 +1,4 @@
-//Search
-
+// Search
 #bar, .greeting-container {
 	text-align: center;
 }
@@ -31,7 +30,7 @@
 
 #map-wrapper {
 	position: relative;
-	margin-bottom: 4em;
+	margin-bottom: 6em;
 }
 
 #map {
@@ -42,8 +41,12 @@
 
 #map-hud {
 	// position: absolute;
+	transition:500ms linear all;
+	// height: 4em;
 	* {
 		position: absolute;
+		margin: 1em 0;
+    padding: 0.5em;
 	}
 
 	div {
@@ -52,7 +55,8 @@
 
 	.btn-clear-select {
 		right: 50%;
-    transform: translateX(50%);
+		transform: translateX(50%);
+		margin: 1em auto;
 	}
 
 	.map-lat-long {
@@ -60,7 +64,15 @@
 	}
 
 	.map-radius {
+		transition:500ms linear all;
 		right: 5%;
+		border-radius: 4px;
+
+		&.radius-error {
+			background-color: #ffcfcf;
+			// color: #E74C3C;
+			color: #E74C3C;
+		}
 	}
 
 	span {
@@ -128,7 +140,7 @@
 	#video-search-wrapper {
 		margin-bottom: 1em;
 	}
-	.btn-clear-select, .btn-toggle-map {
+	.btn-toggle-map {
 		margin: 0 0 1em 0;
 	}
 
@@ -141,8 +153,7 @@
 	}
 }
 
-//Results
-
+// Results
 .results {
 	margin: 2em 0;
 	h2, h3, .result-dir, .results-img-container {
@@ -285,7 +296,7 @@
 	margin: 0 auto;
 }
 
-@media screen and ($mobile3){
+@media screen and ($mobile5){
 	#map-hud {
 		span {
 			font-size: 1em;
