@@ -63,6 +63,12 @@
 		left: 5%;
 	}
 
+	.map-radius,
+	.map-msg-radius-error {
+		transition:500ms linear all;
+		// right: 5%;
+	}
+
 	.map-radius {
 		transition:500ms linear all;
 		right: 5%;
@@ -73,6 +79,12 @@
 			// color: #E74C3C;
 			color: #E74C3C;
 		}
+	}
+
+	.map-msg-radius-error {
+		color: #E74C3C;
+		transform: translateY(2em);
+    right: 3%;
 	}
 
 	span {

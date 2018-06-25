@@ -70,9 +70,10 @@
 			<div id="map-wrapper">
 				<div id="map"></div>
 				<div id="map-hud" class="row" ng-if="search.params.location">
-						<span class="map-lat-long">({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
-						<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
-						<span class="map-radius" ng-class="{'radius-error': search.params.radius > 1000}">{{ search.params.radius | number: 0 }}km</span>
+					<span class="map-lat-long">({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
+					<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
+					<span class="map-radius" ng-class="{'radius-error': search.params.radius > 1000}">{{ search.params.radius | number: 0 }}km</span>
+					<span class="map-msg-radius-error" ng-if="search.params.radius > 1000">Out of Range!</span>
 				</div>
 			</div>
 			<div class="channel-filter" ng-if="search.params.image">

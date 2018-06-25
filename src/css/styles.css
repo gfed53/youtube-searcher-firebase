@@ -316,6 +316,9 @@ body #page-header #header-wrapper #credit {
     margin: 1em auto; }
   #map-hud .map-lat-long {
     left: 5%; }
+  #map-hud .map-radius,
+  #map-hud .map-msg-radius-error {
+    transition: 500ms linear all; }
   #map-hud .map-radius {
     transition: 500ms linear all;
     right: 5%;
@@ -323,6 +326,10 @@ body #page-header #header-wrapper #credit {
     #map-hud .map-radius.radius-error {
       background-color: #ffcfcf;
       color: #E74C3C; }
+  #map-hud .map-msg-radius-error {
+    color: #E74C3C;
+    transform: translateY(2em);
+    right: 3%; }
   #map-hud span {
     font-size: 0.7em; }
 
@@ -723,32 +730,26 @@ body #page-header #header-wrapper #credit {
     right: 0;
     bottom: 0; }
 
-.animate-view.ng-enter {
+.animate-view.ng-enter,
+#map-hud.ng-enter,
+.map-msg-radius-error.ng-enter {
   opacity: 0;
   z-index: 100; }
 
-.animate-view.ng-enter.ng-enter-active {
+.animate-view.ng-enter.ng-enter-active,
+#map-hud.ng-enter.ng-enter-active,
+.map-msg-radius-error.ng-enter.ng-enter-active {
   opacity: 1; }
 
-.animate-view.ng-leave {
+.animate-view.ng-leave,
+#map-hud.ng-leave,
+.map-msg-radius-error.ng-leave {
   opacity: 1;
   z-index: 99; }
 
-.animate-view.ng-leave.ng-leave-active {
-  opacity: 0; }
-
-#map-hud.ng-enter {
-  opacity: 0;
-  z-index: 100; }
-
-#map-hud.ng-enter.ng-enter-active {
-  opacity: 1; }
-
-#map-hud.ng-leave {
-  opacity: 1;
-  z-index: 99; }
-
-#map-hud.ng-leave.ng-leave-active {
+.animate-view.ng-leave.ng-leave-active,
+#map-hud.ng-leave.ng-leave-active,
+.map-msg-radius-error.ng-leave.ng-leave-active {
   opacity: 0; }
 
 .scroll-top.ng-enter {
