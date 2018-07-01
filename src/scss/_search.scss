@@ -5,7 +5,7 @@
 
 .greeting-container {
 	padding-bottom: 2em;
-    border-bottom: 1px solid #E7E7E7;
+    border-bottom: 1px solid $border-grey;
 	h3 {
 		display: inline-block;
 		margin: 0 0.5em;
@@ -75,14 +75,13 @@
 		border-radius: 4px;
 
 		&.radius-error {
-			background-color: #ffcfcf;
-			// color: #E74C3C;
-			color: #E74C3C;
+			background-color: $error-red-light;
+			color: $error-red;
 		}
 	}
 
 	.map-msg-radius-error {
-		color: #E74C3C;
+		color: $error-red;
 		transform: translateY(2em);
     right: 3%;
 	}
@@ -108,8 +107,8 @@
 	}
 	
 	.params-container {
-		border: 1px solid #E7E7E7;
-		background-color: #F8F8F8;
+		border: 1px solid $border-grey;
+		background-color: $bg-grey;
 		display: inline-block;
 		padding: 1em;
 		margin: 1em;
@@ -189,7 +188,8 @@
 		display: none;
 	}
 	.inner-result {
-		background-color: rgb(236, 236, 236);
+		// background-color: rgb(236, 236, 236);
+		background-color: $bg-grey;
 		box-shadow: 0px 1px 3px 0px;
 		border-color: rgba(0, 0, 0, 0.58);
 		border-width: 1px 2px 0 2px;
@@ -212,7 +212,8 @@
 		}
 		p {
 			overflow-x: scroll;
-			color: rgba(0, 0, 0, 1);
+			// color: rgba(0, 0, 0, 1);
+			color: black;
 		}
 		h3 {
 			font-size: 1.4em;
@@ -260,14 +261,14 @@
 .page-selector-container {
 	position: relative;
 	#page-selector {
-		color: rgba(39, 174, 96, 0.7);
+		color: $my-green;
 		position: fixed;
 		right: 0;
 		bottom: 0;
 		left: 0;
 		z-index: 9999;
 		height: 2.3em;
-		background-color: #F8F8F8;
+		background-color: $bg-grey;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -297,7 +298,7 @@
 }
 
 #channel-scroll-btn-bar {
-	color: rgba(39, 174, 96, 0.7);
+	color: $my-green;
 	position: fixed;
 	right: 0;
 	bottom: 0;
