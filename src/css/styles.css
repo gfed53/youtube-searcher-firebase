@@ -330,12 +330,14 @@ body #page-header #header-wrapper #credit {
     right: 5%;
     border-radius: 4px; }
     #map-hud .map-radius.radius-error {
-      background-color: #ffcfcf;
       color: #E74C3C; }
   #map-hud .map-msg-radius-error {
-    color: #E74C3C;
     transform: translateY(2em);
-    right: 3%; }
+    right: 0;
+    background: white;
+    border: 1px solid #E7E7E7;
+    font-weight: bold;
+    color: #E74C3C; }
   #map-hud span {
     font-size: 0.7em; }
 
