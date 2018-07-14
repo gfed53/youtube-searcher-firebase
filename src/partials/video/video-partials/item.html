@@ -4,13 +4,14 @@
 
 <div class="content-container video-info-container">
 	<div class="row video-info-row">
-		<div class="col-sm-4 published-info">
+		<div class="col-sm-6 published-info" ng-class="{'col-sm-offset-3': !video.isSaved}">
 			<p>Published: <span class="emph">{{ video.item.snippet.publishedAt | date: mm/dd/yyyy }}</span></p>
+			<div class="video-info-label">
+				<button ng-click="video.setChannelAndNavigate(video.item.snippet.channelId)" class="btn btn-default btn-set-channel">{{ video.item.snippet.channelTitle }}</button>
+			</div>
 		</div>
-		<div class="col-sm-8 channel-info">
-			<p class="video-info-label">Channel: <span class="emph"> {{ video.item.snippet.channelTitle }}</span></p>
-			<button class="btn btn-default" ng-click="video.getChannel(video.item.snippet.channelId)">Filter</button>
-			<div class="remove-video-container" ng-if="video.isSaved">
+		<div class="col-sm-6 playlist-controls" ng-if="video.isSaved">
+			<div class="remove-video-container">
 				<button class="btn btn-default" ng-click="video.clearItem(video.item)" ng-if="!video.cleared">Clear from watch list</button>
 				<button class="btn btn-default" disabled="disabled" ng-if="video.cleared">Cleared</button>
 			</div>

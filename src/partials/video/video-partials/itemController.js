@@ -4,9 +4,9 @@
 	angular
 	.module('myApp')
 
-	.controller('ItemCtrl', ['$state', '$stateParams', 'ytCurrentVideo', 'ytCurrentChannel', 'ytResults', 'ytVideoItems', 'ytVideoItemsFB', 'ytSearchParams', 'ytTrustSrc', 'ytFirebase', ItemCtrl]);
+	.controller('ItemCtrl', ['$state', '$stateParams', 'ytCurrentVideo', 'ytCurrentChannel', 'ytResults', 'ytVideoItems', 'ytVideoItemsFB', 'ytSearchParams', 'ytTrustSrc', 'ytFirebase', 'ytSetChannelAndNavigate', ItemCtrl]);
 
-	function ItemCtrl($state, $stateParams, ytCurrentVideo, ytCurrentChannel, ytResults, ytVideoItems, ytVideoItemsFB, ytSearchParams, ytTrustSrc, ytFirebase){
+	function ItemCtrl($state, $stateParams, ytCurrentVideo, ytCurrentChannel, ytResults, ytVideoItems, ytVideoItemsFB, ytSearchParams, ytTrustSrc, ytFirebase, ytSetChannelAndNavigate){
 		let vm = this;
 
 		// Decide which services to use (firebase or localStorage)
@@ -25,6 +25,8 @@
 		vm.item;
 		vm.cleared;
 		vm.params = ytSearchParams.get();
+
+		vm.setChannelAndNavigate = ytSetChannelAndNavigate;
 
 		vm.getVideoItem(vm.videoId);
 		

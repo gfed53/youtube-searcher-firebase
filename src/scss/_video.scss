@@ -1,6 +1,11 @@
 
 #video {
-	.view-area-header, .video-title, .video-notify, p, .remove-video-container, .channel-info {
+	.view-area-header, 
+	.video-title, 
+	.video-notify, 
+	p,
+	.published-info,
+	.remove-video-container {
 		text-align: center;
 	}
 
@@ -19,7 +24,7 @@
 
 	.video-info-label {
 		display: inline-block;
-		margin-right: 1em;
+		// margin-right: 1em;
 	}
 
 	.video-desc {
@@ -38,15 +43,22 @@
 
 @media screen and ($tablet){
 	#video {
-		p, .remove-video-container, .channel-info {
-			text-align: left;
-		}
+		// p, 
+		// .channel-info {
+		// // .published-info 
+		// 	text-align: left;
+		// }
+
 		.video-info-row {
 			margin: 1em 0;
 		}
 
 		.remove-video-container {
-			display: inline;
+			display: inline-block;
+		}
+
+		.playlist-controls {
+			text-align: right;
 		}
 	}
 }
