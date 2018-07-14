@@ -163,7 +163,7 @@
 					</div>
 					<div class="col-sm-6 playlist-div">
 						<p ng-click="playlist.setVideoId(item.id.videoId || item.id)" class="emph video-link-p"><a ui-sref="video({videoId: (item.id.videoId || item.id)})" >{{ item.name || item.snippet.title || item.name }}</a></p>
-						<p><span class="bold">CHANNEL:</span> {{ item.snippet.channelTitle }}</p><p><span class="bold">ADDED:</span> {{ item.dateAdded | date : short }}</p>
+						<p><span class="bold">CHANNEL:</span> <button ng-click="playlist.setChannelAndNavigate(item.snippet.channelId)" class="btn btn-default btn-set-channel">{{ item.snippet.channelTitle }}</button></p><p><span class="bold">ADDED:</span> {{ item.dateAdded | date : short }}</p>
 						<p><span class="bold">PUBLISHED:</span> {{ item.datePublished || item.snippet.publishedAt | date : short }}</p>
 					</div>
 					<div class="col-sm-2 playlist-div playlist-btn-group">

@@ -4,9 +4,9 @@
 	angular
 	.module('myApp')
 
-	.controller('PlaylistCtrl', ['$scope', '$rootScope', '$state', '$timeout', 'ytVideoItems', 'ytVideoItemsFB', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', 'ytFirebase', PlaylistCtrl]);
+	.controller('PlaylistCtrl', ['$scope', '$rootScope', '$state', '$timeout', 'ytVideoItems', 'ytVideoItemsFB', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', 'ytFirebase', 'ytSetChannelAndNavigate', PlaylistCtrl]);
 
-	function PlaylistCtrl($scope, $rootScope, $state, $timeout, ytVideoItems, ytVideoItemsFB, ytSearchHistory, ytSearchHistoryFB, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings, ytFirebase){
+	function PlaylistCtrl($scope, $rootScope, $state, $timeout, ytVideoItems, ytVideoItemsFB, ytSearchHistory, ytSearchHistoryFB, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings, ytFirebase, ytSetChannelAndNavigate){
 		let vm = this;
 
 		// Decide which services to use (firebase or localStorage)
@@ -26,6 +26,7 @@
 		vm.clearItem = clearItem;
 		vm.clearAllVideos = clearAllVideos;
 		vm.clearAllSearches = clearAllSearches;
+		vm.setChannelAndNavigate = ytSetChannelAndNavigate;
 
 		//Sort methods
 		vm.videosReverse = ytPlaylistSort.videos.reverse;
@@ -170,6 +171,10 @@
 				vm.warnActive = res;
 			});
 		}
+
+		// function setChannelAndNavigate(videoId){
+		// 	ytSetChannelAndNavigate(videoId);
+		// }
 
 		
 	}

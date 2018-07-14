@@ -178,6 +178,8 @@ body #page-header #header-wrapper #credit {
     margin-bottom: 1em; }
   #playlist .video-link-p {
     margin: 1em 0; }
+  #playlist .btn-set-channel {
+    margin-left: 0.5em; }
   #playlist h2 {
     display: inline-block;
     font-size: 1.5em; }

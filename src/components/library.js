@@ -8,6 +8,7 @@
 	.factory('ytChanSearch', ['$q', '$http', 'ytModalGenerator', 'ytInitAPIs', ytChanSearch])
 	.factory('ytCurrentVideo', ['$q', '$http', 'ytModalGenerator', 'ytInitAPIs', ytCurrentVideo])
 	.factory('ytCurrentChannel', ['$q', '$http', 'ytModalGenerator', 'ytInitAPIs', ytCurrentChannel])
+	.factory('ytSetChannelAndNavigate', ['$state', 'ytCurrentChannel', 'ytSearchParams', ytSetChannelAndNavigate])
 	.factory('ytComputeCssClass', [ytComputeCssClass])
 	.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
@@ -264,6 +265,22 @@
 				});	
 			}	
 		};
+	}
+
+	function ytSetChannelAndNavigate($state, ytCurrentChannel, ytSearchParams) {
+		return (videoId) => {
+			let params = ytSearchParams.get();
+			console.log('params',params);
+			ytCurrentChannel(videoId).getChannel()
+				.then((response) => {
+					let channel = response.data.items[0];
+					params.channelId = channel.id;
+					params.image = channel.snippet.thumbnails.default.url;
+					console.log('params now',params);
+					ytSearchParams.set(params);
+					$state.go('search');
+				});
+		}
 	}
 
 	//Used for saving videos to the user's local storage (in the playlist/saved content section)

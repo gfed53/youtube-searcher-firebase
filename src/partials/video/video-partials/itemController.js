@@ -16,7 +16,7 @@
 		
 		vm.videoId = $stateParams.videoId;
 		videoItemsService.services.setVideoId(vm.videoId);
-		console.log('in video:',videoItemsService.services.getVideoId());
+		// console.log('in video:',videoItemsService.services.getVideoId());
 		vm.url = 'http://www.youtube.com/embed/'+vm.videoId;
 		vm.trustedUrl = vm.trustSrc(vm.url);
 		vm.getVideoItem = getVideoItem;
