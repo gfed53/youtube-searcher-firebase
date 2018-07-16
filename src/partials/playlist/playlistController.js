@@ -171,12 +171,6 @@
 				vm.warnActive = res;
 			});
 		}
-
-		// function setChannelAndNavigate(videoId){
-		// 	ytSetChannelAndNavigate(videoId);
-		// }
-
-		
 	}
 })();
 

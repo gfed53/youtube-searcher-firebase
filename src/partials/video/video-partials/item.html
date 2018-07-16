@@ -7,7 +7,7 @@
 		<div class="col-sm-6 published-info" ng-class="{'col-sm-offset-3': !video.isSaved}">
 			<p>Published: <span class="emph">{{ video.item.snippet.publishedAt | date: mm/dd/yyyy }}</span></p>
 			<div class="video-info-label">
-				<button ng-click="video.setChannelAndNavigate(video.item.snippet.channelId)" class="btn btn-default btn-set-channel">{{ video.item.snippet.channelTitle }}</button>
+				<button data-toggle="tooltip" title="Search for videos from this channel" ng-click="video.setChannelAndNavigate(video.item.snippet.channelId)" class="btn btn-default btn-set-channel">{{ video.item.snippet.channelTitle }}</button>
 			</div>
 		</div>
 		<div class="col-sm-6 playlist-controls" ng-if="video.isSaved">

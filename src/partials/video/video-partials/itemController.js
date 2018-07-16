@@ -16,12 +16,10 @@
 		
 		vm.videoId = $stateParams.videoId;
 		videoItemsService.services.setVideoId(vm.videoId);
-		// console.log('in video:',videoItemsService.services.getVideoId());
 		vm.url = 'http://www.youtube.com/embed/'+vm.videoId;
 		vm.trustedUrl = vm.trustSrc(vm.url);
 		vm.getVideoItem = getVideoItem;
 		vm.clearItem = clearItem;
-		vm.getChannel = getChannel;
 		vm.item;
 		vm.cleared;
 		vm.params = ytSearchParams.get();
@@ -51,17 +49,6 @@
 		function clearItem(item){
 			videoItemsService.services.clearItem(item);
 			vm.cleared = true;
-		}
-
-		function getChannel(videoId){
-			ytCurrentChannel(videoId).getChannel()
-			.then((response) => {
-				vm.channel = response.data.items[0];
-				vm.params.channelId = vm.channel.id;
-				vm.params.image = vm.channel.snippet.thumbnails.default.url;
-				ytSearchParams.set(vm.params);
-				$state.go('search');
-			});
 		}
 	}
 })();
