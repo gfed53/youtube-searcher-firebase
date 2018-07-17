@@ -32,7 +32,7 @@
 	.service('ytPlaylistView', [ytPlaylistView])
 	.service('ytPlaylistSort', ['ytSettings', ytPlaylistSort])
 	.service('ytInitAPIs', ['$http', '$q', 'ytModalGenerator', ytInitAPIs])
-	.service('ytSettings', ['$q', 'ytInitAPIs', 'ytModalGenerator', ytSettings])
+	.service('ytSettings', ['$q', 'ytInitAPIs', 'ytFirebase', 'ytModalGenerator', ytSettings])
 	.service('ytFirebase', ['ytModalGenerator', 'ytInitAPIs', '$q', '$state', '$firebaseArray', '$firebaseObject', ytFirebase]);
 
 	//Used to follow security measures with YouTube video links in particular 
@@ -270,13 +270,11 @@
 	function ytSetChannelAndNavigate($state, ytCurrentChannel, ytSearchParams) {
 		return (videoId) => {
 			let params = ytSearchParams.get();
-			console.log('params',params);
 			ytCurrentChannel(videoId).getChannel()
 				.then((response) => {
 					let channel = response.data.items[0];
 					params.channelId = channel.id;
 					params.image = channel.snippet.thumbnails.default.url;
-					console.log('params now',params);
 					ytSearchParams.set(params);
 					$state.go('search');
 				});
@@ -1633,7 +1631,8 @@
 			hotSave: hotSave,
 			isLoggedIn: isLoggedIn,
 			canUseFBase: canUseFBase,
-			addCreds: addCreds
+			addCreds: addCreds,
+			clearCreds: clearCreds
 		};
 
 		let list = null,
@@ -1781,7 +1780,154 @@
 
 	}
 
-	function ytSettings($q, ytInitAPIs, ytModalGenerator){
+	// function ytSettings($q, ytInitAPIs, ytModalGenerator){
+
+	// 	let storageSettingsTemp = ytModalGenerator().getTemp('storageSettingsTemp');
+
+	// 	this.warnActive = getWarn();
+
+	// 	this.handleStorageSettings = handleStorageSettings;
+
+	// 	this.getWarn = getWarn;
+	// 	this.setWarn = setWarn;
+	// 	this.getSortOpts = getSortOpts;
+	// 	this.setSortOpts = setSortOpts;
+	// 	this.getVideoFilter = getVideoFilter;
+	// 	this.setVideoFilter = setVideoFilter;
+	// 	this.getSearchFilter = getSearchFilter;
+	// 	this.setSearchFilter = setSearchFilter;
+
+	// 	function handleStorageSettings(){
+	// 		let deferred = $q.defer();
+
+	// 		ytModalGenerator().openModal(storageSettingsTemp)
+	// 		.then((res) => {
+	// 			setWarn(res.warnVal);
+	// 			if(res.setDefault){
+	// 				setFBaseDB('second-app-afad9');
+	// 				location.reload();
+	// 			} else if(res.fBaseDB){
+	// 				setFBaseDB(res.fBaseDB);	
+	// 			}
+
+	// 			if(res.setDefault || res.fBaseDB){
+	// 				//Automatically clear saved creds when switching to a different database.
+					
+	// 				ytFirebase.services.clearCreds();
+	// 			}
+	// 			deferred.resolve(res);
+	// 		},(err)=>{
+	// 			deferred.reject();
+	// 		});
+
+	// 		return deferred.promise;
+	// 	}
+
+	// 	function getWarn(){
+	// 		if(localStorage['uyt-warn']){
+	// 			return JSON.parse(localStorage['uyt-warn']);
+	// 		} else {
+	// 			return true;
+	// 		}
+	// 	}
+
+	// 	function setWarn(val){
+	// 		localStorage.setItem('uyt-warn', JSON.stringify(val));
+	// 		this.warnActive = getWarn();
+	// 	}
+
+	// 	function setFBaseDB(val){
+	// 		localStorage.setItem('uyt-fBaseDB', JSON.stringify(val));
+	// 	}
+
+	// 	function getSortOpts(){
+	// 		if(localStorage['uyt-sort-opts']){
+	// 			return JSON.parse(localStorage['uyt-sort-opts']);
+	// 		} else {
+	// 			return {
+	// 				videos: {
+	// 					predicate: 'snippet.title',
+	// 					reverse: false
+	// 				},
+	// 				searches: {
+	// 					predicate: 'name',
+	// 					reverse: false
+	// 				}
+	// 			};
+	// 		}
+	// 	}
+
+	// 	function setSortOpts(obj){
+	// 		localStorage.setItem('uyt-sort-opts', JSON.stringify(obj));
+	// 	}
+
+	// 	function getVideoFilter(){
+	// 		if(localStorage['uyt-video-filter']){
+	// 			let dateObj = JSON.parse(localStorage['uyt-video-filter']);
+
+	// 			// Create a moment from around 2005, and check each date obj to make sure it's after this moment. Otherwise set to null. This is to combat partially typed dates being converted to arbitrary old years.
+	// 			let turnPoint = moment('02-01-2005', 'MM-DD-YYYY');
+
+	// 			if(dateObj.addedAfter){
+	// 				//Convert to date object using service/moment.js
+	// 				let momentObj = moment(dateObj.addedAfter);
+
+	// 				//If date obj is past turning point, pass it thru. If not, null.
+	// 				dateObj.addedAfter = momentObj > turnPoint ? moment(dateObj.addedAfter)._d : null;
+	// 			}
+	// 			if(dateObj.addedBefore){
+	// 				let momentObj = moment(dateObj.addedBefore);
+	// 				dateObj.addedBefore = momentObj > turnPoint ? moment(dateObj.addedBefore)._d : null;
+	// 			}
+
+	// 			return dateObj;
+
+	// 		} else {
+	// 			return {
+	// 				keyword: '',
+	// 				addedAfter: null,
+	// 				addedBefore: null
+	// 			};
+	// 		}
+	// 	}
+
+	// 	function setVideoFilter(obj){
+	// 		localStorage.setItem('uyt-video-filter', JSON.stringify(obj));
+	// 	}
+
+	// 	function getSearchFilter(){
+	// 		if(localStorage['uyt-search-filter']){
+	// 			let dateObj = JSON.parse(localStorage['uyt-search-filter']);
+
+	// 			let turnPoint = moment('02-01-2005', 'MM-DD-YYYY');
+
+	// 			if(dateObj.addedAfter){
+	// 				let momentObj = moment(dateObj.addedAfter);
+	// 				dateObj.addedAfter = momentObj > turnPoint ? moment(dateObj.addedAfter)._d : null;
+	// 			}
+	// 			if(dateObj.addedBefore){
+	// 				let momentObj = moment(dateObj.addedBefore);
+	// 				dateObj.addedBefore = momentObj > turnPoint ? moment(dateObj.addedBefore)._d : null;
+	// 			}
+
+	// 			return dateObj;
+
+	// 		} else {
+	// 			return {
+	// 				keyword: '',
+	// 				addedAfter: null,
+	// 				addedBefore: null
+	// 			};
+	// 		}
+	// 	}
+
+	// 	function setSearchFilter(obj){
+	// 		localStorage.setItem('uyt-search-filter', JSON.stringify(obj));
+	// 	}
+	// }
+
+	// Should fix minification-related bugs
+	function ytSettings($q, ytInitAPIs, ytFirebase, ytModalGenerator){
 
 		let storageSettingsTemp = ytModalGenerator().getTemp('storageSettingsTemp');
 
@@ -1799,11 +1945,16 @@
 		this.setSearchFilter = setSearchFilter;
 
 		function handleStorageSettings(){
+			// Saving instance of this.
+			let self = this;
 			let deferred = $q.defer();
 
 			ytModalGenerator().openModal(storageSettingsTemp)
 			.then((res) => {
-				setWarn(res.warnVal);
+
+				// Running setWarn from service object allows function to access it as 'this' so it can access service properties. This wasn't an issue until we minified code, so for builds, this seems to be necessary for now.
+				self.setWarn(res.warnVal);
+				
 				if(res.setDefault){
 					setFBaseDB('second-app-afad9');
 					location.reload();
@@ -1812,8 +1963,7 @@
 				}
 
 				if(res.setDefault || res.fBaseDB){
-					//Automatically clear saved creds when switching to a different database.
-					
+					// Automatically clear saved creds when switching to a different database.
 					ytFirebase.services.clearCreds();
 				}
 				deferred.resolve(res);
@@ -1834,7 +1984,7 @@
 
 		function setWarn(val){
 			localStorage.setItem('uyt-warn', JSON.stringify(val));
-			this.warnActive = getWarn();
+			this.warnActive = this.getWarn();
 		}
 
 		function setFBaseDB(val){

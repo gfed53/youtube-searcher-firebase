@@ -6,6 +6,7 @@ var sass = require('gulp-sass');
 var connect = require('gulp-connect');
 var uglify = require('gulp-uglify');
 var ngmin = require('gulp-ngmin');
+var ngAnnotate = require('gulp-ng-annotate');
 var strip = require('gulp-strip-comments');
 var minifyHtml = require('gulp-minify-html');
 var htmlmin = require('gulp-htmlmin');
