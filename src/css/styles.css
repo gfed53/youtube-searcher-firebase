@@ -460,7 +460,7 @@ body #page-header #header-wrapper #credit {
 .pagination-container .page-label h2 {
   text-align: left; }
 
-.pagination-container .pagination {
+.pagination-container .pagination, .pagination-container .btn-page-group-container {
   text-align: right; }
 
 .pagination-container .btn-change-page {
