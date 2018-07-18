@@ -1512,7 +1512,7 @@
 		};
 	}
 
-	//For cross-browser compatibility, this will convert a stringified date into a date object. Date inputs don't exist in certain browsers such as Firefox, so we use Moment.js to create our own object to be used.
+	// For cross-browser compatibility, this will convert a stringified date into a date object. Date inputs don't exist in certain browsers such as Firefox, so we use Moment.js to create our own object to be used.
 	function ytDateHandler(){
 		return () => {
 
@@ -1581,14 +1581,14 @@
 			let src = 'https://maps.googleapis.com/maps/api/js?key='+key;
 			loadScript(src)
 			.then(() => {
-				//Success
+				// Success
 			}, ()=> {
-				//Error
+				// Error
 			});
 
 		}
 
-		//Appends a script tag
+		// Appends a script tag
 		function loadScript(src) {
 			return new Promise((resolve, reject) => {
 				let s;
@@ -1608,13 +1608,11 @@
 		}
 	}
 
-	//Firebase services/factories
-
-	function ytFirebaseReference(){
-			return new firebase.database().ref();
-	}
+	// function ytFirebaseReference(){
+	// 		return new firebase.database().ref();
+	// }
 	
-	//The API key for the Firebase database **itself** will be stored in the user's local storage. 
+	// The API key for the Firebase database **itself** will be stored in the user's local storage. 
 	function ytFirebase(ytModalGenerator, ytInitAPIs, $q, $state, $firebaseArray, $firebaseObject){
 		let services = {
 			save: save,
@@ -1685,7 +1683,7 @@
 			
 		}
 
-		//Lets the app know which cluster the user will be assigned to. This will run assuming the app is already initialized
+		// Lets the app know which cluster the user will be assigned to. This will run assuming the app is already initialized
 		function grabCluster(_credObj){
 			let deferred = $q.defer();
 			current = getReference(_credObj.username);
@@ -1780,153 +1778,6 @@
 
 	}
 
-	// function ytSettings($q, ytInitAPIs, ytModalGenerator){
-
-	// 	let storageSettingsTemp = ytModalGenerator().getTemp('storageSettingsTemp');
-
-	// 	this.warnActive = getWarn();
-
-	// 	this.handleStorageSettings = handleStorageSettings;
-
-	// 	this.getWarn = getWarn;
-	// 	this.setWarn = setWarn;
-	// 	this.getSortOpts = getSortOpts;
-	// 	this.setSortOpts = setSortOpts;
-	// 	this.getVideoFilter = getVideoFilter;
-	// 	this.setVideoFilter = setVideoFilter;
-	// 	this.getSearchFilter = getSearchFilter;
-	// 	this.setSearchFilter = setSearchFilter;
-
-	// 	function handleStorageSettings(){
-	// 		let deferred = $q.defer();
-
-	// 		ytModalGenerator().openModal(storageSettingsTemp)
-	// 		.then((res) => {
-	// 			setWarn(res.warnVal);
-	// 			if(res.setDefault){
-	// 				setFBaseDB('second-app-afad9');
-	// 				location.reload();
-	// 			} else if(res.fBaseDB){
-	// 				setFBaseDB(res.fBaseDB);	
-	// 			}
-
-	// 			if(res.setDefault || res.fBaseDB){
-	// 				//Automatically clear saved creds when switching to a different database.
-					
-	// 				ytFirebase.services.clearCreds();
-	// 			}
-	// 			deferred.resolve(res);
-	// 		},(err)=>{
-	// 			deferred.reject();
-	// 		});
-
-	// 		return deferred.promise;
-	// 	}
-
-	// 	function getWarn(){
-	// 		if(localStorage['uyt-warn']){
-	// 			return JSON.parse(localStorage['uyt-warn']);
-	// 		} else {
-	// 			return true;
-	// 		}
-	// 	}
-
-	// 	function setWarn(val){
-	// 		localStorage.setItem('uyt-warn', JSON.stringify(val));
-	// 		this.warnActive = getWarn();
-	// 	}
-
-	// 	function setFBaseDB(val){
-	// 		localStorage.setItem('uyt-fBaseDB', JSON.stringify(val));
-	// 	}
-
-	// 	function getSortOpts(){
-	// 		if(localStorage['uyt-sort-opts']){
-	// 			return JSON.parse(localStorage['uyt-sort-opts']);
-	// 		} else {
-	// 			return {
-	// 				videos: {
-	// 					predicate: 'snippet.title',
-	// 					reverse: false
-	// 				},
-	// 				searches: {
-	// 					predicate: 'name',
-	// 					reverse: false
-	// 				}
-	// 			};
-	// 		}
-	// 	}
-
-	// 	function setSortOpts(obj){
-	// 		localStorage.setItem('uyt-sort-opts', JSON.stringify(obj));
-	// 	}
-
-	// 	function getVideoFilter(){
-	// 		if(localStorage['uyt-video-filter']){
-	// 			let dateObj = JSON.parse(localStorage['uyt-video-filter']);
-
-	// 			// Create a moment from around 2005, and check each date obj to make sure it's after this moment. Otherwise set to null. This is to combat partially typed dates being converted to arbitrary old years.
-	// 			let turnPoint = moment('02-01-2005', 'MM-DD-YYYY');
-
-	// 			if(dateObj.addedAfter){
-	// 				//Convert to date object using service/moment.js
-	// 				let momentObj = moment(dateObj.addedAfter);
-
-	// 				//If date obj is past turning point, pass it thru. If not, null.
-	// 				dateObj.addedAfter = momentObj > turnPoint ? moment(dateObj.addedAfter)._d : null;
-	// 			}
-	// 			if(dateObj.addedBefore){
-	// 				let momentObj = moment(dateObj.addedBefore);
-	// 				dateObj.addedBefore = momentObj > turnPoint ? moment(dateObj.addedBefore)._d : null;
-	// 			}
-
-	// 			return dateObj;
-
-	// 		} else {
-	// 			return {
-	// 				keyword: '',
-	// 				addedAfter: null,
-	// 				addedBefore: null
-	// 			};
-	// 		}
-	// 	}
-
-	// 	function setVideoFilter(obj){
-	// 		localStorage.setItem('uyt-video-filter', JSON.stringify(obj));
-	// 	}
-
-	// 	function getSearchFilter(){
-	// 		if(localStorage['uyt-search-filter']){
-	// 			let dateObj = JSON.parse(localStorage['uyt-search-filter']);
-
-	// 			let turnPoint = moment('02-01-2005', 'MM-DD-YYYY');
-
-	// 			if(dateObj.addedAfter){
-	// 				let momentObj = moment(dateObj.addedAfter);
-	// 				dateObj.addedAfter = momentObj > turnPoint ? moment(dateObj.addedAfter)._d : null;
-	// 			}
-	// 			if(dateObj.addedBefore){
-	// 				let momentObj = moment(dateObj.addedBefore);
-	// 				dateObj.addedBefore = momentObj > turnPoint ? moment(dateObj.addedBefore)._d : null;
-	// 			}
-
-	// 			return dateObj;
-
-	// 		} else {
-	// 			return {
-	// 				keyword: '',
-	// 				addedAfter: null,
-	// 				addedBefore: null
-	// 			};
-	// 		}
-	// 	}
-
-	// 	function setSearchFilter(obj){
-	// 		localStorage.setItem('uyt-search-filter', JSON.stringify(obj));
-	// 	}
-	// }
-
-	// Should fix minification-related bugs
 	function ytSettings($q, ytInitAPIs, ytFirebase, ytModalGenerator){
 
 		let storageSettingsTemp = ytModalGenerator().getTemp('storageSettingsTemp');
