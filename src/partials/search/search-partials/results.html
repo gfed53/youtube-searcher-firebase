@@ -2,14 +2,37 @@
 <div ng-if="search.searchTypePrev === 'video'" id="video-results" class="results">
 	<h2 ng-if="search.paramsPrev.searchedKeyword">We found {{ search.results.length }} results for "{{ search.paramsPrev.searchedKeyword }}".</h2>
 	<h2 ng-if="!search.paramsPrev.searchedKeyword">We found {{ search.results.length }} results.</h2>
-	<h2>Page {{ search.currentPage }}</h2>
+	<div class="row pagination-container">
+		<div class="col-sm-6 page-label">
+			<h2>Page {{ search.currentPage }}</h2>
+		</div>
+		<ul class="col-sm-6 pagination">
+			<li class="page-item">
+				<button 
+					class="btn-default btn-change-page"
+					id="prev-page"
+					ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')" ng-if="search.paramsPrev.prevPageToken"
+					>
+					<span class="glyphicon glyphicon-chevron-left"></span> Previous
+				</button>
+			</li>
+			<li class="page-item">
+					<button
+					class="btn-default btn-change-page"
+					id="next-page" 
+					ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')" ng-if="search.paramsPrev.nextPageToken">
+					Next <span class="glyphicon glyphicon-chevron-right"></span>
+					</button>
+			</li>
+		</ul>
+	</div>
 	<div class="search-order-arrow-container" ng-click="search.videosReverse = !search.videosReverse">
 		<span>Order: </span>
 		<button class="btn-no-style">
 			<span class="glyphicon glyphicon-triangle-top my-arrow" ng-class="{flipped: search.videosReverse}"></span>
 		</button>
 	</div>
-	<div class="page-selector-container">
+	<!-- <div class="page-selector-container">
 		<form id="page-selector">
 			<div class="row page-selector-inner">
 				<div id="prev-page-section" class="col-xs-6">
@@ -35,7 +58,7 @@
 				</div>
 			</div>
 		</form>
-	</div>
+	</div> -->
 	<div class="row results-row">
 		<div class="result" ng-repeat="result in search.results | orderBy:'result.$$hashKey':search.videosReverse" ng-class="search.computeCssClass($first, $last)">
 		<!-- Larger Viewports -->
@@ -113,6 +136,30 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="row pagination-container">
+	<div class="col-sm-6 page-label">
+		<!-- <h2>Page {{ search.currentPage }}</h2> -->
+	</div>
+	<ul class="col-sm-6 pagination">
+		<li class="page-item">
+			<button 
+				class="btn-default btn-change-page"
+				id="prev-page"
+				ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')" ng-if="search.paramsPrev.prevPageToken"
+				>
+				<span class="glyphicon glyphicon-chevron-left"></span> Previous
+			</button>
+		</li>
+		<li class="page-item">
+				<button
+				class="btn-default btn-change-page"
+				id="next-page" 
+				ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')" ng-if="search.paramsPrev.nextPageToken">
+				Next <span class="glyphicon glyphicon-chevron-right"></span>
+				</button>
+		</li>
+	</ul>
 </div>
 <div class="page-selector-container">
 	<form id="channel-scroll-btn-bar">

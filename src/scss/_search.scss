@@ -255,6 +255,21 @@
 	}
 }
 
+.pagination-container {
+	.page-label {
+		h2 {
+			text-align: left;
+		}
+	}
+	.pagination {
+		text-align: right;
+	}
+	.btn-change-page {
+		padding: 0.35em;
+	}
+
+}
+
 .page-selector-container {
 	position: relative;
 	#page-selector {

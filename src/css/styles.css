@@ -457,6 +457,15 @@ body #page-header #header-wrapper #credit {
   .search-order-arrow-container .flipped {
     transform: rotateX(180deg); }
 
+.pagination-container .page-label h2 {
+  text-align: left; }
+
+.pagination-container .pagination {
+  text-align: right; }
+
+.pagination-container .btn-change-page {
+  padding: 0.35em; }
+
 .page-selector-container {
   position: relative; }
   .page-selector-container #page-selector {
