@@ -66,8 +66,8 @@
 					<p>Date: {{ result.snippet.publishedAt | date : 'short' }}</p>
 					<div class="outer-wrapper">
 						<div class="result-chan-wrapper">
-							<p class="result-chan-descrip">Channel: {{ result.snippet.channelTitle }}</p>
-							<input class="btn btn-default" type="button" value="Filter" ng-click="search.searchAndChanFilter(result.snippet.channelTitle)">
+							<span>Channel: </span>
+							<button data-toggle="tooltip" title="Search for videos from this channel" ng-click="search.setChannelAndNavigate(result.snippet.channelId)" class="btn btn-default btn-set-channel">{{ result.snippet.channelTitle }}</button>
 						</div>
 					</div>
 					<div class="playlist-button-wrapper">
@@ -90,8 +90,8 @@
 					<p>Date: {{ result.snippet.publishedAt | date : 'short' }}</p>
 					<div class="outer-wrapper">
 						<div class="result-chan-wrapper">
-							<p class="result-chan-descrip">Channel: {{ result.snippet.channelTitle }}</p>
-							<input class="btn btn-default" type="button" value="Filter" ng-click="search.searchAndChanFilter(result.snippet.channelTitle)">
+							<span>Channel: </span>
+							<button data-toggle="tooltip" title="Search for videos from this channel" ng-click="search.setChannelAndNavigate(result.snippet.channelId)" class="btn btn-default btn-set-channel">{{ result.snippet.channelTitle }}</button>
 						</div>
 					</div>
 					<div class="playlist-button-wrapper">

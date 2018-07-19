@@ -268,14 +268,18 @@
 	}
 
 	function ytSetChannelAndNavigate($state, ytCurrentChannel, ytSearchParams) {
-		return (videoId) => {
+		return (channelId) => {
+			// console.log('channelId',channelId);
 			let params = ytSearchParams.get();
-			ytCurrentChannel(videoId).getChannel()
+			ytCurrentChannel(channelId).getChannel()
 				.then((response) => {
+					// console.log('response',response);
 					let channel = response.data.items[0];
 					params.channelId = channel.id;
 					params.image = channel.snippet.thumbnails.default.url;
 					ytSearchParams.set(params);
+					// console.log('$state',$state);
+					// console.log('$state search?',$state.is('search'));
 					$state.go('search');
 				});
 		}

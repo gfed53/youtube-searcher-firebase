@@ -4,9 +4,9 @@
 	angular
 	.module('myApp')
 
-	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$interval', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytVideoItems', 'ytVideoItemsFB', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', 'ytInitAPIs', 'ytFirebase', 'ytFocus', SearchCtrl]);
+	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$interval', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytVideoItems', 'ytVideoItemsFB', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', 'ytInitAPIs', 'ytFirebase', 'ytSetChannelAndNavigate', 'ytFocus', SearchCtrl]);
 
-	function SearchCtrl($scope, $location, $timeout, $interval, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytSearchHistoryFB, ytVideoItems, ytVideoItemsFB, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler, ytInitAPIs, ytFirebase, ytFocus){
+	function SearchCtrl($scope, $location, $timeout, $interval, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytSearchHistoryFB, ytVideoItems, ytVideoItemsFB, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler, ytInitAPIs, ytFirebase, ytSetChannelAndNavigate, ytFocus){
 
 		let vm = this;
 		
@@ -26,7 +26,11 @@
 		vm.viewVideo = false;
 		vm.filterActive = false;
 		vm.clearSelection = clearSelection;
+
 		vm.searchAndChanFilter = searchAndChanFilter;
+		vm.setChannelAndNavigate = ytSetChannelAndNavigate;
+
+
 		vm.saveSearch = saveSearch;
 		vm.addToPlaylist = addToPlaylist;
 		vm.videoIsSaved = videoIsSaved;
@@ -117,6 +121,9 @@
 				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
 				vm.params.lang = vm.langs[0];
 				vm.results = response.data.items;
+
+				console.log('vm.results first',vm.results[0]);
+
 				vm.params.nextPageToken = response.data.nextPageToken;
 				vm.params.prevPageToken = response.data.prevPageToken;
 				vm.status.channelsCollapsed = true;
