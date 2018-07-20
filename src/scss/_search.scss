@@ -158,6 +158,30 @@
 
 .channel-filter {
 	margin: 1em 0;
+	&__btn {
+		border: 1px solid $border-grey;
+		position: relative;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		padding: 0;
+
+		&__badge {
+			transition: 200ms ease-in-out all;
+			position: absolute;
+			top: -8px;
+			right: -13px;
+			padding: 4px 5px;
+			background-color: white;
+			border: 1px solid $border-grey;
+			color: black;
+		}
+
+		&:hover &__badge {
+			transform: scale(1.2);
+		}
+	}
+
+	
 	img {
 		width: 5em;
 	}

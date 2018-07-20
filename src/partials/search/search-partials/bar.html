@@ -77,8 +77,14 @@
 				</div>
 			</div>
 			<div class="channel-filter" ng-if="search.params.image">
-				<img src="{{search.params.image}}"></img>
-				<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear">
+				<button class="channel-filter__btn" ng-click="search.chanClear()">
+					<img src="{{search.params.image}}"></img>
+					<span class="badge channel-filter__btn__badge">
+						<span class="glyphicon glyphicon-remove"></span>
+					</span>
+				</button>
+				<!-- <img src="{{search.params.image}}"></img>
+				<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear"> -->
 			</div>
 			<div id="save-search-wrapper">
 				<input class="btn btn-primary" id="btn-save-search" ng-click="search.saveSearch(search.params)" type="button" value="Save Search">

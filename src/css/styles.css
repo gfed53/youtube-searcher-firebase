@@ -390,6 +390,23 @@ body #page-header #header-wrapper #credit {
 
 .channel-filter {
   margin: 1em 0; }
+  .channel-filter__btn {
+    border: 1px solid #E7E7E7;
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 0; }
+    .channel-filter__btn__badge {
+      transition: 200ms ease-in-out all;
+      position: absolute;
+      top: -8px;
+      right: -13px;
+      padding: 4px 5px;
+      background-color: white;
+      border: 1px solid #E7E7E7;
+      color: black; }
+    .channel-filter__btn:hover .channel-filter__btn__badge {
+      transform: scale(1.2); }
   .channel-filter img {
     width: 5em; }
 
