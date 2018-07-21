@@ -31,7 +31,7 @@
 
 //Modals
 
-//Fix for navbar shift issue
+// Fix for navbar shift issue
 .modal-open {
 	overflow-y: scroll;
 	padding-right: 0 !important;
@@ -45,7 +45,13 @@
 	text-align: center;
 }
 
-//Search-saved-modal
+.modal-body {
+	&__label {
+		margin-right: 0.25em;
+	}
+}
+
+// Search-saved-modal
 .modal-body-saved-search {
 	text-align: center;
 }
@@ -62,7 +68,7 @@
 	margin: 1em;
 }
 
-//Storage Settings Modal
+// Storage Settings Modal
 
 .text-settings-modal {
 	display: inline-block;

@@ -11,22 +11,22 @@
 		<h3>Search By...</h3>
 		<div class="params-container">
 			<div class="cluster">
-				<div class="sub-cluster row">
-					<div class="col-md-4">
+				<div class="sub-cluster">
+					<div>
 						<label for="type"> Type: </label>
 					</div>
-					<div class="col-md-8">
+					<div>
 						<select class="form-control" id="safe-search" name="searchType" ng-model="search.params.searchType">
 							<option value="video">Video</option>
 							<option value="channel">Channel</option>
 						</select>
 					</div>
 				</div>
-				<div class="sub-cluster row">
-					<div class="col-md-4">
+				<div class="sub-cluster">
+					<div>
 						<label for="order"> Order: </label>
 					</div>
-					<div class="col-md-8">
+					<div>
 						<select class="form-control" name="order" ng-model="search.params.order">
 							<option value="relevance">Relevance</option>
 							<option value="date">Date</option>
@@ -38,31 +38,31 @@
 				</div>
 			</div>
 			<div class="cluster">
-				<div class="sub-cluster row">
-					<div class="col-md-2">
+				<div class="sub-cluster">
+					<div>
 						<label for="date-after"> From: </label>	
 					</div>
-					<div class="col-md-10">
+					<div>
 						<input class="form-control" ng-model="search.params.after" ng-if="search.isDateTypeComp" name="date-after" type="date">
 						<input class="form-control" ng-model="search.params.after" ng-if="!search.isDateTypeComp" name="date-after" type="text" placeholder="(m)m/(d)d/(yy)yy">
 					</div>
 				</div>
-				<div class="sub-cluster row">
-					<div class="col-md-2">
+				<div class="sub-cluster">
+					<div>
 						<label for="date-before"> To: </label>
 					</div>
-					<div class="col-md-10">
+					<div>
 						<input class="form-control" ng-model="search.params.before" ng-if="search.isDateTypeComp" name="date-before" type="date">
 						<input class="form-control" ng-model="search.params.before" ng-if="!search.isDateTypeComp" name="date-before" type="text" placeholder="(m)m/(d)d/(yy)yy">
 					</div>
 				</div>
 			</div>
 			<div id="translate-wrapper" class="cluster">
-				<div class="sub-cluster row">
-					<div class="col-md-4">
+				<div class="sub-cluster">
+					<div>
 						<label for="translate">Translate: </label>
 					</div>
-					<div class="col-md-8">
+					<div>
 						<select name="translate"  class="form-control" id="translate-select" ng-model="search.params.lang" ng-options="item.label for item in search.langs"></select>
 					</div>
 				</div>
@@ -83,8 +83,6 @@
 						<span class="glyphicon glyphicon-remove"></span>
 					</span>
 				</button>
-				<!-- <img src="{{search.params.image}}"></img>
-				<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear"> -->
 			</div>
 			<div id="save-search-wrapper">
 				<input class="btn btn-primary" id="btn-save-search" ng-click="search.saveSearch(search.params)" type="button" value="Save Search">
