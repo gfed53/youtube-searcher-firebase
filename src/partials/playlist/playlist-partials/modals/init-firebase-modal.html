@@ -15,8 +15,8 @@
         <p ng-if="initFirebaseModal.pwError">Error: Password doesn't match id! You can find all of your saved data (including passwords for any of your accounts) at https://console.firebase.google.com/project/INSERT-YOUR-DATABASE-NAME-HERE/database/data.</p>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="submit">OK</button>
         <button class="btn btn-warning" type="button" ng-click="initFirebaseModal.cancel()">Cancel</button>
+        <button class="btn btn-primary" type="submit">OK</button>
     </div>
 </form>
 
@@ -27,8 +27,8 @@
         <p>You are currently logged in as <span class="bold">{{ initFirebaseModal.credObj.username }}</span>.</p>
 	</div>
 	<div class="modal-footer">
-        <button autofocus class="btn btn-primary" type="submit">Log Out</button>
         <button class="btn btn-warning" type="button" ng-click="initFirebaseModal.cancel()">Cancel</button>
+        <button autofocus class="btn btn-primary" type="submit">Log Out</button>
     </div>
 </form>
 
