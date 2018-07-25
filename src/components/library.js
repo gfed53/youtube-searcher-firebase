@@ -994,8 +994,7 @@
 	}
 
 
-	//A style tweak for the outer border of the results div. This will ensure thick borders all around, but in between each result, only thin borders (ngRepeat conflict)
-
+	// A style tweak for the outer border of the results div. This will ensure thick borders all around, but in between each result, only thin borders (ngRepeat conflict)
 	function ytComputeCssClass(){
 		return (first, last) => {
 			let val;
@@ -1011,8 +1010,7 @@
 	}
 
 
-	//Used on the bottom scroll button to scroll to the top of the results div
-
+	// Used on the bottom scroll button to scroll to the top of the results div
 	function ytScrollTo($location, $anchorScroll){
 		return (scrollLocation) => {
 			let services = {
@@ -1023,14 +1021,36 @@
 			return services;
 
 			function scrollToElement(scrollLocation){
+				// $location.hash(null);
+				// console.log('scrollLocation',scrollLocation);
+				// console.log('$location',$location);
+				// console.log('$location.hash()',$location.hash());
 				$anchorScroll.yOffset = 70;
 				let element = document.getElementById(scrollLocation);
 				if(element){
-					$location.hash(scrollLocation);
-					$anchorScroll();
+
+					// if($location.hash() === scrollLocation){
+					// 	console.log('hasnt changed');
+					// 	$anchorScroll(scrollLocation);
+					// } else {
+					// 	console.log('has changed');
+					// 	// $location.hash(scrollLocation);
+					// 	$anchorScroll(scrollLocation);
+					// }
+
+					$anchorScroll(scrollLocation);
+
 				} else {
-					window.scroll(0, 0);
+					console.log('element doesnt exist');
+					window.scroll(0,0);
 				}
+
+				// Would this clean up URL path?
+				// console.log('$location.search()',$location.search());
+				// console.log('$location.hash() at end',$location.hash());
+				
+				// console.log('$location.hash() after set to null',$location.hash());
+				// $location.search(scrollLocation, null);
 			}
 
 			function checkScrollBtnStatus(){
@@ -1044,7 +1064,6 @@
 	}
 
 	// Displays the scroll button (in results section) depending on appropriate conditions
-
 	function ytCheckScrollBtnStatus($state){
 		
 		return () => {
@@ -1941,7 +1960,7 @@
       $timeout(function() {
         var element = $window.document.getElementById(id);
         if(element)
-          element.focus();
+          element.focus({preventScroll: true});
       });
     };
 	}

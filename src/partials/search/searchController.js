@@ -28,8 +28,9 @@
 		vm.clearSelection = clearSelection;
 
 		vm.searchAndChanFilter = searchAndChanFilter;
-		vm.setChannelAndNavigate = ytSetChannelAndNavigate;
 
+		// vm.setChannelAndNavigate = ytSetChannelAndNavigate;
+		vm.setChannelAndNavigate = setChannelAndNavigate;
 
 		vm.saveSearch = saveSearch;
 		vm.addToPlaylist = addToPlaylist;
@@ -110,7 +111,7 @@
 			vm.viewVideo = false;
 			ytSearchYouTube(params, pageToken, direction).search()
 			.then((response) => {
-				//Clear the search bar, but keep a reference to the last keyword searched.
+				// Clear the search bar, but keep a reference to the last keyword searched.
 				vm.params.keyword = (direction) ? vm.params.keyword : '';
 				vm.params.searchedKeyword = response.config.params.q;
 				ytSearchParams.updateCurrentPage(response.pageDirection);
@@ -118,11 +119,11 @@
 				vm.searchTypePrev = response.config.params.type;
 				ytSearchParams.setSTP(vm.searchTypePrev);
 
-				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
+				// Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
 				vm.params.lang = vm.langs[0];
 				vm.results = response.data.items;
 
-				console.log('vm.results first',vm.results[0]);
+				// console.log('vm.results first',vm.results[0]);
 
 				vm.params.nextPageToken = response.data.nextPageToken;
 				vm.params.prevPageToken = response.data.prevPageToken;
@@ -136,10 +137,12 @@
 				//Saving the results to our service
 				ytResults.setResults(vm.results);
 
-				// Autoscroll up
+				// Autoscroll
 				$timeout(() => {
-					vm.scrollTo('scroll-point');
-					vm.offSet = true;
+					vm.scrollTo('results-container');
+
+					// What does this actually do?
+					// vm.offSet = true;
 
 					// Focus on save search button
 					ytFocus('btn-save-search'); 
@@ -161,8 +164,8 @@
 				ytResults.setStatus(vm.status);
 				ytResults.setChanResults(vm.chanResults);
 				$timeout(() => {
-					vm.scrollTo('scroll-point');
-					vm.offSet = true;
+					vm.scrollTo('results-container');
+					// vm.offSet = true;
 
 					ytFocus('btn-save-search');
 				}, 1000);			
@@ -175,7 +178,7 @@
 			vm.params.channelId = id;
 			vm.filterActive = true;
 
-			//Automatically switch to video search
+			// Automatically switch to video search
 			vm.params.searchType = 'video';
 			vm.scrollTo('form-advanced-video-search');
 		}
@@ -203,6 +206,11 @@
 				vm.firstChanResult = response.data.items[0];
 				vm.chanFilter(vm.firstChanResult.id.channelId, vm.firstChanResult.snippet.thumbnails.default.url);		
 			});
+		}
+
+		function setChannelAndNavigate(channelId){
+			ytSetChannelAndNavigate(channelId);
+			$timeout(() => { vm.scrollTo('form-advanced-video-search'); }, 100);
 		}
 
 		function saveSearch(params){

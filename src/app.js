@@ -4,10 +4,13 @@
 	angular
 	.module('myApp', ['ui.router', 'ui.bootstrap', 'firebase', 'ngAnimate'])
 
-	.config(['$httpProvider', '$compileProvider', ($httpProvider, $compileProvider) => {
+	.config(['$anchorScrollProvider', '$httpProvider', '$compileProvider', ($anchorScrollProvider, $httpProvider, $compileProvider) => {
 		$httpProvider.defaults.useXDomain = true;
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 		$compileProvider.debugInfoEnabled(false);
+
+		// 
+		$anchorScrollProvider.disableAutoScrolling();
 	}])
 
 	.run(['$timeout', '$rootScope', 'ytInitAPIs', 'ytFirebase', 'ytVideoItemsFB', 'ytSearchHistoryFB', ($timeout, $rootScope, ytInitAPIs, ytFirebase, ytVideoItemsFB, ytSearchHistoryFB) => {
