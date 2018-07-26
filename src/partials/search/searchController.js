@@ -26,12 +26,8 @@
 		vm.viewVideo = false;
 		vm.filterActive = false;
 		vm.clearSelection = clearSelection;
-
 		vm.searchAndChanFilter = searchAndChanFilter;
-
-		// vm.setChannelAndNavigate = ytSetChannelAndNavigate;
 		vm.setChannelAndNavigate = setChannelAndNavigate;
-
 		vm.saveSearch = saveSearch;
 		vm.addToPlaylist = addToPlaylist;
 		vm.videoIsSaved = videoIsSaved;
@@ -41,10 +37,8 @@
 		vm.scrollBtn = false;
 		vm.isDateTypeComp = ytDateHandler().check();
 		
-
 		// Retrieving our saved variables, if any.
 		// 'type' refers to the search type, whether the user sees the basic or advanced search in the view.
-
 		vm.results = ytResults.getResults();
 		vm.chanResults = ytResults.getChanResults();
 		vm.langs = ytTranslate.langs;
@@ -57,12 +51,10 @@
 
 
 		// Keep a log of searched videos that were moved to playlist, so add button gets disabled once you add video.
-
 		vm.savedVideos = [];
 
 
 		// Default search settings
-
 		vm.params.searchType = (vm.params.searchType || 'video');
 
 		vm.videosReverse = ytSortOrder.videosReverse;
@@ -70,7 +62,6 @@
 
 
 		// User authentication
-
 		vm.userName = ytInitAPIs.apisObj.id;
 		vm.updateAPIInfo = ytInitAPIs.update;
 
@@ -122,9 +113,6 @@
 				// Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
 				vm.params.lang = vm.langs[0];
 				vm.results = response.data.items;
-
-				// console.log('vm.results first',vm.results[0]);
-
 				vm.params.nextPageToken = response.data.nextPageToken;
 				vm.params.prevPageToken = response.data.prevPageToken;
 				vm.status.channelsCollapsed = true;
@@ -140,10 +128,6 @@
 				// Autoscroll
 				$timeout(() => {
 					vm.scrollTo('results-container');
-
-					// What does this actually do?
-					// vm.offSet = true;
-
 					// Focus on save search button
 					ytFocus('btn-save-search'); 
 				}, 1000);
@@ -165,8 +149,6 @@
 				ytResults.setChanResults(vm.chanResults);
 				$timeout(() => {
 					vm.scrollTo('results-container');
-					// vm.offSet = true;
-
 					ytFocus('btn-save-search');
 				}, 1000);			
 			});
@@ -191,7 +173,7 @@
 		}
 
 		function clearSelection(){
-			//Clears location/locationRadius params
+			// Clears location/locationRadius params
 			vm.params.lat = undefined;
 			vm.params.lng = undefined;
 			vm.params.radius = undefined;

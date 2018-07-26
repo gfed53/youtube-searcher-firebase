@@ -33,6 +33,7 @@
     "gulp-strip-comments": "^2.4.5",
     "gulp-uglify": "^1.5.3",
     "gulp-usemin": "^0.3.22",
+    "hoek": "^4.2.1",
     "jshint": "^2.9.1",
     "run-sequence": "^2.1.0",
     "support-for": "^1.0.5"

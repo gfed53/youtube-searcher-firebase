@@ -29,33 +29,6 @@
 			<span class="glyphicon glyphicon-triangle-top my-arrow" ng-class="{flipped: search.videosReverse}"></span>
 		</button>
 	</div>
-	<!-- <div class="page-selector-container">
-		<form id="page-selector">
-			<div class="row page-selector-inner">
-				<div id="prev-page-section" class="col-xs-6">
-					<span>
-						<button 
-						class="btn-no-style btn-change-page"
-						id="prev-page"
-						ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')" ng-if="search.paramsPrev.prevPageToken"
-						>
-							<span class="glyphicon glyphicon-chevron-left btn-change-page-inner"></span>
-						</button>		
-					</span>
-				</div>
-				<div id="next-page-section" class="col-xs-6">
-					<span>
-						<button
-						class="btn-no-style btn-change-page"
-						id="next-page" 
-						ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')" ng-if="search.paramsPrev.nextPageToken">
-							<span class="glyphicon glyphicon-chevron-right btn-change-page-inner"></span>
-						</button>
-					</span>
-				</div>
-			</div>
-		</form>
-	</div> -->
 	<div class="row results-row">
 		<div class="result" ng-repeat="result in search.results | orderBy:'result.$$hashKey':search.videosReverse" ng-class="search.computeCssClass($first, $last)">
 		<!-- Larger Viewports -->

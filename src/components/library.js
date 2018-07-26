@@ -35,14 +35,14 @@
 	.service('ytSettings', ['$q', 'ytInitAPIs', 'ytFirebase', 'ytModalGenerator', ytSettings])
 	.service('ytFirebase', ['ytModalGenerator', 'ytInitAPIs', '$q', '$state', '$firebaseArray', '$firebaseObject', ytFirebase]);
 
-	//Used to follow security measures with YouTube video links in particular 
+	// Used to follow security measures with YouTube video links in particular 
 	function ytTrustSrc($sce){
 		return (src) => {
 			return $sce.trustAsResourceUrl(src);
 		};
 	}
 
-	//Searches the API for videos based on search params
+	// Searches the API for videos based on search params
 	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator, ytDateHandler, ytInitAPIs) {
 		return (params, pageToken, direction) => {
 			
@@ -51,7 +51,7 @@
 			let url = 'https://www.googleapis.com/youtube/v3/search';
 			let apisObj = ytInitAPIs.apisObj;
 
-			//Moment.js parsing
+			// Moment.js parsing
 			let parsedAfter = (params.after ? ytDateHandler().getDate(params.after, 'M/D/YYYY') : undefined),
 			parsedBefore = (params.before ? ytDateHandler().getDate(params.before, 'M/D/YYYY') : undefined);
 
@@ -99,7 +99,7 @@
 				});
 			}
 
-			//Checks to see if a language to which the query should be translated is selected
+			// Checks to see if a language to which the query should be translated is selected
 			function checkTrans(_keyword_, _lang_){
 				let deferred = $q.defer();
 				if(_lang_){
@@ -112,7 +112,7 @@
 				}
 				return deferred.promise;
 			}
-			//Translates query if necessary, then runs search
+			// Translates query if necessary, then runs search
 			function transAndResults(){
 				let deferred = $q.defer();
 				checkTrans(query, params.lang.value).then((response) => {
@@ -269,17 +269,13 @@
 
 	function ytSetChannelAndNavigate($state, ytCurrentChannel, ytSearchParams) {
 		return (channelId) => {
-			// console.log('channelId',channelId);
 			let params = ytSearchParams.get();
 			ytCurrentChannel(channelId).getChannel()
 				.then((response) => {
-					// console.log('response',response);
 					let channel = response.data.items[0];
 					params.channelId = channel.id;
 					params.image = channel.snippet.thumbnails.default.url;
 					ytSearchParams.set(params);
-					// console.log('$state',$state);
-					// console.log('$state search?',$state.is('search'));
 					$state.go('search');
 				});
 		}
@@ -450,13 +446,12 @@
 
 	}
 
-	//Firebase Version
+	// Firebase Version
 	function ytVideoItemsFB($q, $timeout, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase, ytVideoItems){
 
 		let videoIdObj = {videoId : null};
 		
 		var items = null;
-		//For clearing all items, we would prob grab an obj ref of savedVideos so we can use the $remove service to clear it completely
 
 		this.services = {
 			init: init,
@@ -493,10 +488,6 @@
 					content = result,
 					itemName = result.snippet.title+'-'+content.id.videoId+'-uytp',
 					deferred = $q.defer();
-
-			// let deferred = $q.defer(),
-			// 		dateAdded = Date.now(),
-			// 		content = result;
 			
 			delete content.$$hashKey;
 
@@ -823,7 +814,7 @@
 			.then((name) => {
 				params.name = name;
 				if(params.name === 'cancel'){
-					//Aborted
+					// Aborted
 				} else if(params.name){
 					params.nameShrt = params.name;
 					params.name = params.name+'-uyts';
@@ -859,7 +850,7 @@
 		}
 
 		function clearAll(){
-			//Clears all past searches
+			// Clears all past searches
 			let deferred = $q.defer();
 			let dangerTemp = ytModalGenerator().getTemp('dangerTemp');
 			ytModalGenerator().openModal(dangerTemp)
@@ -952,10 +943,8 @@
 			}
 		}
 
+		// Clears all past searches
 		function clearAll(){
-
-			//Clears all past searches
-
 			let deferred = $q.defer();
 			let dangerTemp = ytModalGenerator().getTemp('dangerTemp');
 			ytModalGenerator().openModal(dangerTemp)
@@ -1021,44 +1010,22 @@
 			return services;
 
 			function scrollToElement(scrollLocation){
-				// $location.hash(null);
-				// console.log('scrollLocation',scrollLocation);
-				// console.log('$location',$location);
-				// console.log('$location.hash()',$location.hash());
 				$anchorScroll.yOffset = 70;
 				let element = document.getElementById(scrollLocation);
 				if(element){
-
-					// if($location.hash() === scrollLocation){
-					// 	console.log('hasnt changed');
-					// 	$anchorScroll(scrollLocation);
-					// } else {
-					// 	console.log('has changed');
-					// 	// $location.hash(scrollLocation);
-					// 	$anchorScroll(scrollLocation);
-					// }
-
 					$anchorScroll(scrollLocation);
-
 				} else {
-					console.log('element doesnt exist');
 					window.scroll(0,0);
 				}
-
-				// Would this clean up URL path?
-				// console.log('$location.search()',$location.search());
-				// console.log('$location.hash() at end',$location.hash());
-				
-				// console.log('$location.hash() after set to null',$location.hash());
-				// $location.search(scrollLocation, null);
 			}
 
 			function checkScrollBtnStatus(){
-				if(window.scrollY > 100){
-					return true;
-				} else {
-					return false;
-				}
+				// if(window.scrollY > 100){
+				// 	return true;
+				// } else {
+				// 	return false;
+				// }
+				return window.scrollY > 100;
 			}	
 		};
 	}
@@ -1097,8 +1064,7 @@
 		};
 	}
 
-	//TODO: Refactor this to use ytCheckScrollY. Make ytCheckScrollY looser so it can be used in both situations
-
+	// TODO: Refactor this to use ytCheckScrollY. Make ytCheckScrollY looser so it can be used in both situations
 	function ytCheckScrollDir(){
 		return () => {
 			let services = {
@@ -1107,7 +1073,7 @@
 				checkB
 			};
 
-			//Match cb's that will be used in each situation. Navbar will be hidden if user scrolls down OR if page loads in middle of screen.
+			// Match cb's that will be used in each situation. Navbar will be hidden if user scrolls down OR if page loads in middle of screen.
 			function check(scrollDownCB, scrollUpCB){
 				let scroll = window.scrollY;
 				window.addEventListener('scroll', () => {
@@ -1140,8 +1106,7 @@
 	}
 
 
-	//Checks to see if user scrolled down from top, so navbar style can change appropriately
-
+	// Checks to see if user scrolled down from top, so navbar style can change appropriately
 	function ytCheckScrollY(){
 		return () => {
 			let services = {
@@ -1162,8 +1127,7 @@
 		};
 	}
 
-	//Initializes the map used in the search section
-
+	// Initializes the map used in the search section
 	function ytInitMap(){
 		return (callback) => {
 			let map = new google.maps.Map(document.getElementById('map'), {
@@ -1196,8 +1160,7 @@
 		};
 	}
 
-	//Handles all of the translation functionality used in the search section
-
+	// Handles all of the translation functionality used in the search section
 	function ytTranslate($http, $q, ytModalGenerator, ytInitAPIs){
 
 		let langs = [{
@@ -1286,7 +1249,7 @@
 		this.translateAll = translateAll;
 	}
 
-	//Handles the result sorting in the search section
+	// Handles the result sorting in the search section
 	function ytSortOrder(){
 		let sortObj = {
 			predicate: undefined,
@@ -1308,7 +1271,7 @@
 		}
 	}
 
-	//Keeps track of collapsed/expanded sections in saved/playlist section
+	// Keeps track of collapsed/expanded sections in saved/playlist section
 	function ytPlaylistView(){
 		this.obj = {
 			videosCollapsed: true,
@@ -1326,9 +1289,9 @@
 		}
 	}
 
-	//Handles the saved videos and searches sorting in the saved content section 
+	// Handles the saved videos and searches sorting in the saved content section 
 	function ytPlaylistSort(ytSettings){
-		//Grab object containing sort settings, either from localStorage, or default
+		// Grab object containing sort settings, either from localStorage, or default
 		let obj = ytSettings.getSortOpts();
 		this.videos = obj.videos;
 
@@ -1353,7 +1316,7 @@
 		}
 	}
 
-	//Handles the filtering functionality of the saved content in the saved content section
+	// Handles the filtering functionality of the saved content in the saved content section
 	function ytFilters(ytDateHandler){
 		return () => {
 			let services = {
@@ -1599,7 +1562,7 @@
 			}
 		}
 
-		//Construct url with saved Google Maps API key, then run loadScript()
+		// Construct url with saved Google Maps API key, then run loadScript()
 		function updateMaps(key){
 			let src = 'https://maps.googleapis.com/maps/api/js?key='+key;
 			loadScript(src)
@@ -1630,10 +1593,6 @@
 			t.src = 'https://maps.googleapis.com/maps/api/js?key='+key;
 		}
 	}
-
-	// function ytFirebaseReference(){
-	// 		return new firebase.database().ref();
-	// }
 	
 	// The API key for the Firebase database **itself** will be stored in the user's local storage. 
 	function ytFirebase(ytModalGenerator, ytInitAPIs, $q, $state, $firebaseArray, $firebaseObject){
@@ -1697,9 +1656,9 @@
 				};
 				firebase.initializeApp(config);
 
-				//Whether or not we're 'logged in', this lets us know that we're at least connected to FBase
+				// Whether or not we're 'logged in', this lets us know that we're at least connected to FBase
 				canUse = true;
-				//This would occur when we already have our firebase creds stored in our localStorage. This means the creds we have are legit - we are locked into a cluster with the correct password.
+				// This would occur when we already have our firebase creds stored in our localStorage. This means the creds we have are legit - we are locked into a cluster with the correct password.
 				if(_credObj){
 					grabCluster(_credObj);
 				}
@@ -1722,7 +1681,6 @@
 
 		function checkValid(obj,res,err){
 			if(currentObj.password){
-				//If password doesn't match..
 				if(currentObj.password !== obj.password){
 					err();
 				} else {
@@ -1736,7 +1694,7 @@
 				.then((ref)=>{
 					let newSegTemp = ytModalGenerator().getTemp('newSegTemp');
 
-					//Here we can prompt user that a new cluster has been made, using modal
+					// Here we can prompt user that a new cluster has been made, using modal
 					ytModalGenerator().openModal(newSegTemp)
 					.then(()=>{
 						res();
@@ -1754,8 +1712,8 @@
 			return $firebaseObject(ref);
 		}
 
-		//We will convert our lists (savedVideos, savedSearches) into arrays
-		//We may just use 'current' since that is our saved user object that we'll only be interacting with anyways
+		// We will convert our lists (savedVideos, savedSearches) into arrays
+		// We may just use 'current' since that is our saved user object that we'll only be interacting with anyways
 		function getRefArray(child) {
 			var refChild = current.child(child);
 			return $firebaseArray(refChild);

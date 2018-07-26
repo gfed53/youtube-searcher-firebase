@@ -1,7 +1,7 @@
 <div id="search">
 
 	<div ui-view="bar" id="bar"></div>
-	<!-- Because of apparent DOM conflicts, results-container doesn't append to the DOM when we'd like it to (after a search), so an easy fix is to use an empty div which already exists on controller instantiation. -->
+	<!-- We aren't using scroll-point at this time since results-container seems to work okay for an anchor. Keeping in case there is a potential need ITF -->
 	<div id="scroll-point"></div>
 	<div ui-view="results" id="results-container" ng-if="search.results.length > 0"></div>
 </div>

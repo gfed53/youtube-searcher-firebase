@@ -8,8 +8,6 @@
 		$httpProvider.defaults.useXDomain = true;
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 		$compileProvider.debugInfoEnabled(false);
-
-		// 
 		$anchorScrollProvider.disableAutoScrolling();
 	}])
 
