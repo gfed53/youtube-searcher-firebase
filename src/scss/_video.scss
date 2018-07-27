@@ -8,7 +8,9 @@
 		text-align: center;
 	}
 
-	.video-title, .remove-video-container, .video-info-row {
+	.video-title, 
+	.remove-video-container, 
+	.video-info-row {
 		margin: 1em;
 	}
 
@@ -52,7 +54,7 @@
 		}
 
 		.playlist-controls {
-			text-align: right;
+			text-align: center;
 		}
 	}
 }

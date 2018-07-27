@@ -613,7 +613,9 @@ body #page-header #header-wrapper #credit {
 #video .remove-video-container {
   text-align: center; }
 
-#video .video-title, #video .remove-video-container, #video .video-info-row {
+#video .video-title,
+#video .remove-video-container,
+#video .video-info-row {
   margin: 1em; }
 
 #video #item {
@@ -644,7 +646,7 @@ body #page-header #header-wrapper #credit {
   #video .remove-video-container {
     display: inline-block; }
   #video .playlist-controls {
-    text-align: right; } }
+    text-align: center; } }
 
 @media screen and (min-width: 1024px) {
   #video .view-area-header {
