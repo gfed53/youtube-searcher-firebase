@@ -495,7 +495,7 @@
 			content.name = content.snippet.title;
 			content.codeName = itemName;
 
-			//Check if video already exists!
+			// Check if video already exists!
 			if(ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName) === -1){
 					items.$add(content)
 					.then((ref) => {
@@ -504,7 +504,7 @@
 					});
 				} else {
 					let errorVideoExistsTemp = ytModalGenerator().getTemp('errorVideoExistsTemp');
-					//Call modal
+					// Call modal
 					ytModalGenerator().openModal(errorVideoExistsTemp)
 						.then(()=> {
 							deferred.reject();
@@ -514,10 +514,6 @@
 
 				return deferred.promise;
 		}
-
-		//Function to check if video already exists!
-		//Returns boolean, or use getIndexifObj...?
-
 
 		function clearItem(item, isWarnActive){
 			let warnTemp = ytModalGenerator().getTemp('warnTemp'),
@@ -775,7 +771,7 @@
 		}
 	}
 
-	//Used for saving past searches to the user's local storage (in the playlist/saved content section)
+	// Used for saving past searches to the user's local storage (in the playlist/saved content section)
 	function ytSearchHistory($q, ytModalGenerator, ytSearchParams, ytUtilities){
 		let pastSearches = [];
 		this.get = get;
@@ -812,10 +808,12 @@
 			let searchSavedTemp = ytModalGenerator().getTemp('searchSavedTemp');
 			ytModalGenerator().openModal(searchSavedTemp)
 			.then((name) => {
+				
 				params.name = name;
 				if(params.name === 'cancel'){
 					// Aborted
 				} else if(params.name){
+
 					params.nameShrt = params.name;
 					params.name = params.name+'-uyts';
 					params.date = Date.now();
@@ -869,7 +867,7 @@
 		}
 	}
 
-	//Firebase Version
+	// Firebase Version
 	function ytSearchHistoryFB($q, ytModalGenerator, ytSearchParams, ytUtilities, ytFirebase){
 		let pastSearches = null;
 		this.init = init;
@@ -905,7 +903,6 @@
 					}
 					params.after = (params.after ? params.after.getTime() : null);
 					params.before = (params.before ? params.before.getTime() : null);
-
 
 					params.nameShrt = params.name;
 					params.name = params.name+'-uyts';

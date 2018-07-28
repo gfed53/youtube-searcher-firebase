@@ -10,9 +10,7 @@
 
 		let vm = this;
 		
-
 		// Decide which services to use (firebase or localStorage)
-
 		let searchHistoryService = ytFirebase.services.isLoggedIn() ? ytSearchHistoryFB : ytSearchHistory;
 
 		let videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
@@ -20,7 +18,6 @@
 		vm.initMap = initMap;
 		vm.submit = submit;
 		vm.setVideoId = setVideoId;	
-		vm.chanSubmit = chanSubmit;
 		vm.chanFilter = chanFilter;
 		vm.chanClear = chanClear;
 		vm.viewVideo = false;
@@ -104,7 +101,11 @@
 			.then((response) => {
 				// Clear the search bar, but keep a reference to the last keyword searched.
 				vm.params.keyword = (direction) ? vm.params.keyword : '';
-				vm.params.searchedKeyword = response.config.params.q;
+
+				// We don't want to save the text query if it's a channel search. If we end up saving a subsequent search without passing in a keyword, we'd get the left over channel keyword saved.
+				vm.params.searchedKeyword = vm.params.searchType === 'video' ? response.config.params.q : '';
+				// vm.params.searchedKeyword = response.config.params.q;
+
 				ytSearchParams.updateCurrentPage(response.pageDirection);
 				vm.currentPage = ytSearchParams.getCurrentPage();
 				vm.searchTypePrev = response.config.params.type;
@@ -136,22 +137,6 @@
 
 		function setVideoId(videoId){
 			ytVideoItems.services.setVideoId(videoId);
-		}
-
-		function chanSubmit(channel){
-			vm.searchedChannel = channel;
-			ytChanSearch(channel).getResults()
-			.then((response) => {
-				vm.chanResults = response.data.items;
-				vm.status.channelsCollapsed = false;
-				vm.status.videosCollapsed = true;
-				ytResults.setStatus(vm.status);
-				ytResults.setChanResults(vm.chanResults);
-				$timeout(() => {
-					vm.scrollTo('results-container');
-					ytFocus('btn-save-search');
-				}, 1000);			
-			});
 		}
 
 		function chanFilter(id, image){

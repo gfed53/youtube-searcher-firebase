@@ -15,11 +15,11 @@
 
 		vm.isUsingFBase = ytFirebase.services.canUseFBase();
 
-		//Fetching content
+		// Fetching content
 		vm.items = videoItemsService.services.getItems();
 		vm.pastSearches = searchHistoryService.get();
 
-		//Methods
+		// Methods
 		vm.setVideoId = setVideoId;
 		vm.grab = grab;
 		vm.clearSearch = clearSearch;
