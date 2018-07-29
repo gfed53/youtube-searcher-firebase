@@ -177,6 +177,7 @@
 
 		function setChannelAndNavigate(channelId){
 			ytSetChannelAndNavigate(channelId);
+			vm.params.searchedKeyword = '';
 			$timeout(() => { vm.scrollTo('form-advanced-video-search'); }, 100);
 		}
 

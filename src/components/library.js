@@ -599,7 +599,7 @@
 
 	}
 
-	//Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
+	// Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
 	function ytSearchParams(ytTranslate){
 		let params = {
 			keyword: null,
@@ -627,7 +627,7 @@
 
 		let searchTypePrev = 'video';
 
-		//This is used for page traversal. We store the previous search params. That way, we can adjust/update the queries all we want, and grab new page tokens from the last search all we want.
+		// This is used for page traversal. We store the previous search params. That way, we can adjust/update the queries all we want, and grab new page tokens from the last search all we want.
 		let paramsPrev = {};
 
 		let original = Object.assign({}, params);
@@ -673,7 +673,7 @@
 		}
 
 		function setPrev(_params_, direction){
-			//This will not execute if it's page traversal..
+			// This will not execute if it's page traversal..
 			if(!direction){
 				for(let key in _params_){
 					paramsPrev[key] = _params_[key];
@@ -717,7 +717,7 @@
 		}
 	}
 
-	//Where video and channel results are stored (so while switching views/controllers, these will be kept)
+	// Where video and channel results are stored (so while switching views/controllers, these will be kept)
 	function ytResults(){
 		this.results = [];
 		this.chanResults = [];
@@ -736,7 +736,7 @@
 		this.setStatus = setStatus;
 		this.checkStatus = checkStatus;
 
-		//TODO just easier method to toggle button text (like <span>)
+		// TODO just easier method to toggle button text (like <span>)
 		function checkStatus(newVal, oldVal, buttonValue, showText, hideText){
 			if(newVal === true){
 				buttonValue = showText;
@@ -820,6 +820,7 @@
 					pastSearches.push(params);
 					localStorage.setItem(params.name, JSON.stringify(params));
 				} else {
+					// We call the function again because if the user doesn't provide a name for the saved search and then tries to confirm the save, we will just have the modal re-open prompting the user to try again
 					service.set(params, service);
 				}
 			});
@@ -894,7 +895,7 @@
 			.then((name) => {
 				params.name = name;
 				if(params.name === 'cancel'){
-					//Aborted
+					// Aborted
 				} else if(params.name){
 					for(var key in params){
 						if(params[key] === undefined){
@@ -912,6 +913,7 @@
 						ytFirebase.services.hotSave();
 					});
 				} else {
+					// We call the function again because if the user doesn't provide a name for the saved search and then tries to confirm the save, we will just have the modal re-open prompting the user to try again
 					service.set(params, service);
 				}
 			});
