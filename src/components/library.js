@@ -13,7 +13,7 @@
 	.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
 	.factory('ytCheckScrollDir', [ytCheckScrollDir])
-	.factory('ytCheckScrollY', [ytCheckScrollY])
+	// .factory('ytCheckScrollY', [ytCheckScrollY])
 	.factory('ytInitMap', [ytInitMap])
 	.factory('ytFilters', ['ytDateHandler', ytFilters])
 	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
@@ -1063,17 +1063,17 @@
 		};
 	}
 
-	// TODO: Refactor this to use ytCheckScrollY. Make ytCheckScrollY looser so it can be used in both situations
+	// For menu, handles state of scroll position 
 	function ytCheckScrollDir(){
 		return () => {
 			let services = {
-				init: init,
-				check: check,
-				checkB
+				init,
+				checkScrollDirection,
+				checkIfTop
 			};
 
 			// Match cb's that will be used in each situation. Navbar will be hidden if user scrolls down OR if page loads in middle of screen.
-			function check(scrollDownCB, scrollUpCB){
+			function checkScrollDirection(scrollDownCB, scrollUpCB){
 				let scroll = window.scrollY;
 				window.addEventListener('scroll', () => {
 					if(window.scrollY > scroll){
@@ -1085,33 +1085,11 @@
 				});
 			}
 
-			function checkB(){
-				return window.scrollY === 0;
-				
+			function checkIfTop(){
+				return window.scrollY === 0;		
 			}
 
-			function init(scrolledCB, atTopCB){
-				let scroll = window.scrollY;
-				if(scroll > 0){
-					scrolledCB();
-				} else {
-					atTopCB();
-				}
-				return scroll;
-			}
-
-			return services;
-		};
-	}
-
-
-	// Checks to see if user scrolled down from top, so navbar style can change appropriately
-	function ytCheckScrollY(){
-		return () => {
-			let services = {
-				init: init
-			};
-
+			// Add a scroll event listener, and fire a callback with a different condition depending on whether scroll position is at top or not.
 			function init(callback){
 				window.addEventListener('scroll', () => {
 					if(window.scrollY === 0){

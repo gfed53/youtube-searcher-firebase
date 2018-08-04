@@ -1,4 +1,4 @@
-<nav ng-class="{'nav-hidden': !menu.showNav, 'menu-fixed-no-scroll': (menu.noScroll && menu.collapsed)}" id="menu-fixed" class="navbar navbar-default navbar-fixed-top">
+<nav ng-class="{'nav-hidden': !menu.showNav, 'menu-fixed-no-scroll': (menu.noScroll && menu.atTop && menu.collapsed)}" id="menu-fixed" class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" id="navbar-btn" ng-click="menu.updateOnClick()" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
