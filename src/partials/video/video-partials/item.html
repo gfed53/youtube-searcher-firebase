@@ -1,26 +1,56 @@
-<p class="video-notify"><span class="emph">For Google Chrome users:</span> You can click and drag the bottom-right corner of the player to adjust the size if needed.</p>
-<h3 class="video-title">{{ video.item.snippet.title }}</h3>
+<p class="video-notify">
+    <span class="emph">For Google Chrome users:</span> You can click and drag
+    the bottom-right corner of the player to adjust the size if needed.
+</p>
+<h3 class="video-title">
+    {{ video.item.snippet.titleDecoded || video.item.snippet.title }}
+</h3>
 <my-video></my-video>
 
 <div class="content-container video-info-container">
-	<div class="row video-info-row">
-		<div class="col-sm-6 published-info" ng-class="{'col-sm-offset-3': !video.isSaved}">
-			<p>Published: <span class="emph">{{ video.item.snippet.publishedAt | date: mm/dd/yyyy }}</span></p>
-			<div class="video-info-label">
-				<button data-toggle="tooltip" title="Search for videos from this channel" ng-click="video.setChannelAndNavigate(video.item.snippet.channelId)" class="btn btn-default btn-set-channel">{{ video.item.snippet.channelTitle }}</button>
-			</div>
-		</div>
-		<div class="col-sm-6 playlist-controls" ng-if="video.isSaved">
-			<div class="remove-video-container">
-				<button class="btn btn-default" ng-click="video.clearItem(video.item)" ng-if="!video.cleared">Clear from watch list</button>
-				<button class="btn btn-default" disabled="disabled" ng-if="video.cleared">Cleared</button>
-			</div>
-		</div>
-	</div>
-	
-	<p class="video-desc">{{ video.item.snippet.description }}</p>
-	
-</div> <!-- video-info-container -->
+    <div class="row video-info-row">
+        <div
+            class="col-sm-6 published-info"
+            ng-class="{'col-sm-offset-3': !video.isSaved}"
+        >
+            <p>
+                Published:
+                <span class="emph"
+                    >{{ video.item.snippet.publishedAt | date: mm/dd/yyyy
+                    }}</span
+                >
+            </p>
+            <div class="video-info-label">
+                <button
+                    data-toggle="tooltip"
+                    title="Search for videos from this channel"
+                    ng-click="video.setChannelAndNavigate(video.item.snippet.channelId)"
+                    class="btn btn-default btn-set-channel"
+                >
+                    {{ video.item.snippet.channelTitle }}
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-6 playlist-controls" ng-if="video.isSaved">
+            <div class="remove-video-container">
+                <button
+                    class="btn btn-default"
+                    ng-click="video.clearItem(video.item)"
+                    ng-if="!video.cleared"
+                >
+                    Clear from watch list
+                </button>
+                <button
+                    class="btn btn-default"
+                    disabled="disabled"
+                    ng-if="video.cleared"
+                >
+                    Cleared
+                </button>
+            </div>
+        </div>
+    </div>
 
-
-
+    <p class="video-desc">{{ video.item.snippet.description }}</p>
+</div>
+<!-- video-info-container -->

@@ -164,7 +164,7 @@
 						<a ng-click="playlist.setVideoId(item.id.videoId || item.id)" ui-sref="video({videoId: (item.id.videoId || item.id)})"><img class="my-thumbnail" ng-src="{{ item.snippet.thumbnails.default.url}}" alt="image"></a>
 					</div>
 					<div class="col-sm-6 playlist-div">
-						<p ng-click="playlist.setVideoId(item.id.videoId || item.id)" class="emph video-link-p"><a ui-sref="video({videoId: (item.id.videoId || item.id)})" >{{ item.name || item.snippet.title || item.name }}</a></p>
+						<p ng-click="playlist.setVideoId(item.id.videoId || item.id)" class="emph video-link-p"><a ui-sref="video({videoId: (item.id.videoId || item.id)})" >{{ item.snippet.titleDecoded || item.name || item.snippet.title }}</a></p>
 						<p><span class="bold">BY:</span> <button data-toggle="tooltip" title="Search for videos from this channel" ng-click="playlist.setChannelAndNavigate(item.snippet.channelId)" class="btn btn-default btn-set-channel">{{ item.snippet.channelTitle }}</button></p><p><span class="bold">ADDED:</span> {{ item.dateAdded | date : short }}</p>
 						<p><span class="bold">PUBLISHED:</span> {{ item.datePublished || item.snippet.publishedAt | date : short }}</p>
 					</div>

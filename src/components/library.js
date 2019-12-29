@@ -20,6 +20,7 @@
 	.factory('ytDateHandler', [ytDateHandler])
 	.factory('ytUtilities', [ytUtilities])
 	.factory('ytFocus', ['$timeout', '$window', ytFocus])
+	.factory('ytDecodeHtml', [ytDecodeHtml])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
 	.service('ytResults', [ytResults])
@@ -1900,7 +1901,15 @@
     };
 	}
 
-
+	// helper function that converts any HTML entity 'literals' into w/e they're supposed
+	// to be.
+	function ytDecodeHtml() {
+		return function(html) {
+			var txt = document.createElement('textarea');
+			txt.innerHTML = html;
+			return txt.value;
+		}
+	}
 
 
 })();

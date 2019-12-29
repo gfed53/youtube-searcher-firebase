@@ -1,140 +1,280 @@
 <!-- Video Results -->
-<div ng-if="search.searchTypePrev === 'video'" id="video-results" class="results">
-	<h2 ng-if="search.paramsPrev.searchedKeyword">We found {{ search.results.length }} results for "{{ search.paramsPrev.searchedKeyword }}".</h2>
-	<h2 ng-if="!search.paramsPrev.searchedKeyword">We found {{ search.results.length }} results.</h2>
-	<div class="row pagination-container">
-		<div class="col-sm-6 page-label">
-			<h2>Page {{ search.currentPage }}</h2>
-		</div>
-		<div class="col-sm-6 btn-page-group-container" role="group" aria-label="pages">
-			<div class="btn-group btn-group-pagination" role="group" aria-label="pages">
-				<button 
-				class="btn btn-default btn-change-page"
-				id="prev-page"
-				ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')" ng-if="search.paramsPrev.prevPageToken">
-					<span class="glyphicon glyphicon-chevron-left"></span> Previous
-				</button>
-				<button
-					class="btn btn-default btn-change-page"
-					id="next-page" 
-					ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')" ng-if="search.paramsPrev.nextPageToken">
-					Next <span class="glyphicon glyphicon-chevron-right"></span>
-				</button>
-			</div>
-		</div>
-	</div>
-	<div class="search-order-arrow-container" ng-click="search.videosReverse = !search.videosReverse">
-		<span>Order: </span>
-		<button class="btn-no-style">
-			<span class="glyphicon glyphicon-triangle-top my-arrow" ng-class="{flipped: search.videosReverse}"></span>
-		</button>
-	</div>
-	<div class="row results-row">
-		<div class="result" ng-repeat="result in search.results | orderBy:'result.$$hashKey':search.videosReverse" ng-class="search.computeCssClass($first, $last)">
-		<!-- Larger Viewports -->
-			<div class="row inner-result result-desktop">
-				<div class="col-md-6 tit-descrip-container">
-					<h3 class="video-link"><a ng-click="search.setVideoId(result.id.videoId)" ui-sref="video({videoId: result.id.videoId} )">{{result.snippet.title}}</a></h3>
-					<p>{{ result.snippet.description }}</p>
-					<p>Date: {{ result.snippet.publishedAt | date : 'short' }}</p>
-					<div class="outer-wrapper">
-						<div class="result-chan-wrapper">
-							<span>Channel: </span>
-							<button data-toggle="tooltip" title="Search for videos from this channel" ng-click="search.setChannelAndNavigate(result.snippet.channelId)" class="btn btn-default btn-set-channel">{{ result.snippet.channelTitle }}</button>
-						</div>
-					</div>
-					<div class="playlist-button-wrapper">
-						<input ng-if="!search.videoIsSaved(result)" class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result)">
-						<input ng-if="search.videoIsSaved(result)"  class="btn btn-default disabled" type="button" value="Video Added" disabled="disabled">
-					</div>
-				</div>
-				<div class="col-md-6 results-img-container">
-					<a ng-click="search.setVideoId(result.id.videoId)" ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
-				</div>
-			</div>
-			<!-- Smaller Viewports -->
-			<div class="row inner-result result-mobile">
-				<h3 class="video-link"><a ng-click="search.setVideoId(result.id.videoId)" ui-sref="video({videoId: result.id.videoId} )">{{result.snippet.title}}</a></h3>
-				<div class="col-md-6 results-img-container">
-					<a ng-click="search.setVideoId(result.id.videoId)" ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
-				</div>
-				<div class="col-md-6 tit-descrip-container">
-					<p>{{ result.snippet.description }}</p>
-					<p>Date: {{ result.snippet.publishedAt | date : 'short' }}</p>
-					<div class="outer-wrapper">
-						<div class="result-chan-wrapper">
-							<span>Channel: </span>
-							<button data-toggle="tooltip" title="Search for videos from this channel" ng-click="search.setChannelAndNavigate(result.snippet.channelId)" class="btn btn-default btn-set-channel">{{ result.snippet.channelTitle }}</button>
-						</div>
-					</div>
-					<div class="playlist-button-wrapper">
-						<input ng-if="!search.videoIsSaved(result)" class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result)">
-						<input ng-if="search.videoIsSaved(result)"  class="btn btn-default disabled" type="button" value="Video Added" disabled="disabled">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div
+    ng-if="search.searchTypePrev === 'video'"
+    id="video-results"
+    class="results"
+>
+    <h2 ng-if="search.paramsPrev.searchedKeyword">
+        We found {{ search.results.length }} results for "{{
+        search.paramsPrev.searchedKeyword }}".
+    </h2>
+    <h2 ng-if="!search.paramsPrev.searchedKeyword">
+        We found {{ search.results.length }} results.
+    </h2>
+    <div class="row pagination-container">
+        <div class="col-sm-6 page-label">
+            <h2>Page {{ search.currentPage }}</h2>
+        </div>
+        <div
+            class="col-sm-6 btn-page-group-container"
+            role="group"
+            aria-label="pages"
+        >
+            <div
+                class="btn-group btn-group-pagination"
+                role="group"
+                aria-label="pages"
+            >
+                <button
+                    class="btn btn-default btn-change-page"
+                    id="prev-page"
+                    ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')"
+                    ng-if="search.paramsPrev.prevPageToken"
+                >
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    Previous
+                </button>
+                <button
+                    class="btn btn-default btn-change-page"
+                    id="next-page"
+                    ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')"
+                    ng-if="search.paramsPrev.nextPageToken"
+                >
+                    Next <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div
+        class="search-order-arrow-container"
+        ng-click="search.videosReverse = !search.videosReverse"
+    >
+        <span>Order: </span>
+        <button class="btn-no-style">
+            <span
+                class="glyphicon glyphicon-triangle-top my-arrow"
+                ng-class="{flipped: search.videosReverse}"
+            ></span>
+        </button>
+    </div>
+    <div class="row results-row">
+        <div
+            class="result"
+            ng-repeat="result in search.results | orderBy:'result.$$hashKey':search.videosReverse"
+            ng-class="search.computeCssClass($first, $last)"
+        >
+            <!-- Larger Viewports -->
+            <div class="row inner-result result-desktop">
+                <div class="col-md-6 tit-descrip-container">
+                    <h3 class="video-link">
+                        <a
+                            ng-click="search.setVideoId(result.id.videoId)"
+                            ui-sref="video({videoId: result.id.videoId} )"
+                            >{{result.snippet.titleDecoded ||
+                            result.snippet.title}}</a
+                        >
+                    </h3>
+                    <p>{{ result.snippet.description }}</p>
+                    <p>
+                        Date: {{ result.snippet.publishedAt | date : 'short' }}
+                    </p>
+                    <div class="outer-wrapper">
+                        <div class="result-chan-wrapper">
+                            <span>Channel: </span>
+                            <button
+                                data-toggle="tooltip"
+                                title="Search for videos from this channel"
+                                ng-click="search.setChannelAndNavigate(result.snippet.channelId)"
+                                class="btn btn-default btn-set-channel"
+                            >
+                                {{ result.snippet.channelTitle }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="playlist-button-wrapper">
+                        <input
+                            ng-if="!search.videoIsSaved(result)"
+                            class="btn btn-default"
+                            type="button"
+                            value="Add to Playlist"
+                            ng-click="search.addToPlaylist(result)"
+                        />
+                        <input
+                            ng-if="search.videoIsSaved(result)"
+                            class="btn btn-default disabled"
+                            type="button"
+                            value="Video Added"
+                            disabled="disabled"
+                        />
+                    </div>
+                </div>
+                <div class="col-md-6 results-img-container">
+                    <a
+                        ng-click="search.setVideoId(result.id.videoId)"
+                        ui-sref="video({videoId: result.id.videoId} )"
+                        ><img
+                            ng-src="{{result.snippet.thumbnails.default.url}}"
+                            alt="image"
+                    /></a>
+                </div>
+            </div>
+            <!-- Smaller Viewports -->
+            <div class="row inner-result result-mobile">
+                <h3 class="video-link">
+                    <a
+                        ng-click="search.setVideoId(result.id.videoId)"
+                        ui-sref="video({videoId: result.id.videoId} )"
+                        >{{result.snippet.titleDecoded ||
+                        result.snippet.title}}</a
+                    >
+                </h3>
+                <div class="col-md-6 results-img-container">
+                    <a
+                        ng-click="search.setVideoId(result.id.videoId)"
+                        ui-sref="video({videoId: result.id.videoId} )"
+                        ><img
+                            ng-src="{{result.snippet.thumbnails.default.url}}"
+                            alt="image"
+                    /></a>
+                </div>
+                <div class="col-md-6 tit-descrip-container">
+                    <p>{{ result.snippet.description }}</p>
+                    <p>
+                        Date: {{ result.snippet.publishedAt | date : 'short' }}
+                    </p>
+                    <div class="outer-wrapper">
+                        <div class="result-chan-wrapper">
+                            <span>Channel: </span>
+                            <button
+                                data-toggle="tooltip"
+                                title="Search for videos from this channel"
+                                ng-click="search.setChannelAndNavigate(result.snippet.channelId)"
+                                class="btn btn-default btn-set-channel"
+                            >
+                                {{ result.snippet.channelTitle }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="playlist-button-wrapper">
+                        <input
+                            ng-if="!search.videoIsSaved(result)"
+                            class="btn btn-default"
+                            type="button"
+                            value="Add to Playlist"
+                            ng-click="search.addToPlaylist(result)"
+                        />
+                        <input
+                            ng-if="search.videoIsSaved(result)"
+                            class="btn btn-default disabled"
+                            type="button"
+                            value="Video Added"
+                            disabled="disabled"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Channel Results -->
-<div ng-if="search.searchTypePrev === 'channel'" id="channel-results" class="results">
-	<h2>We found {{ search.results.length }} results.</h2>
-	<p class="result-dir">Select a channel by clicking on its image. The channel will then be added as a search filter.</p>
-	<div class="row results-row">
-		<div class="result" ng-repeat="result in search.results" ng-class="search.computeCssClass($first, $last)">
-			<div class="row inner-result result-desktop">
-				<div class="col-md-6 col-sm-6">
-					<h3>{{result.snippet.channelTitle}}</h3>
-					<p>{{result.snippet.description}}</p>
-				</div>
-				<div class="col-md-6 results-img-container">
-					<button class="btn-no-style btn-channel-filter" ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)">
-						<img class="img-channel-filter" ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
-					</button>
-				</div>
-			</div>
-			<div class="row inner-result result-mobile">
-				<h3>{{result.snippet.channelTitle}}</h3>
-				<div class="col-md-6 results-img-container">
-					<button class="btn-no-style btn-channel-filter" ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)">
-						<img class="img-channel-filter" ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
-					</button>
-				</div>
-				<div class="col-md-6">
-					<p>{{result.snippet.description}}</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<div
+    ng-if="search.searchTypePrev === 'channel'"
+    id="channel-results"
+    class="results"
+>
+    <h2>We found {{ search.results.length }} results.</h2>
+    <p class="result-dir">
+        Select a channel by clicking on its image. The channel will then be
+        added as a search filter.
+    </p>
+    <div class="row results-row">
+        <div
+            class="result"
+            ng-repeat="result in search.results"
+            ng-class="search.computeCssClass($first, $last)"
+        >
+            <div class="row inner-result result-desktop">
+                <div class="col-md-6 col-sm-6">
+                    <h3>{{result.snippet.channelTitle}}</h3>
+                    <p>{{result.snippet.description}}</p>
+                </div>
+                <div class="col-md-6 results-img-container">
+                    <button
+                        class="btn-no-style btn-channel-filter"
+                        ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)"
+                    >
+                        <img
+                            class="img-channel-filter"
+                            ng-src="{{result.snippet.thumbnails.default.url}}"
+                            alt="image"
+                        />
+                    </button>
+                </div>
+            </div>
+            <div class="row inner-result result-mobile">
+                <h3>{{result.snippet.channelTitle}}</h3>
+                <div class="col-md-6 results-img-container">
+                    <button
+                        class="btn-no-style btn-channel-filter"
+                        ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)"
+                    >
+                        <img
+                            class="img-channel-filter"
+                            ng-src="{{result.snippet.thumbnails.default.url}}"
+                            alt="image"
+                        />
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <p>{{result.snippet.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="row pagination-container">
-		<div class="col-sm-6 page-label">
-		</div>
-		<div class="col-sm-6 btn-page-group-container" role="group" aria-label="pages">
-			<div class="btn-group btn-group-pagination" role="group" aria-label="pages">
-				<button 
-				class="btn btn-default btn-change-page"
-				id="prev-page"
-				ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')" ng-if="search.paramsPrev.prevPageToken">
-					<span class="glyphicon glyphicon-chevron-left"></span> Previous
-				</button>
-				<button
-					class="btn btn-default btn-change-page"
-					id="next-page" 
-					ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')" ng-if="search.paramsPrev.nextPageToken">
-					Next <span class="glyphicon glyphicon-chevron-right"></span>
-				</button>
-			</div>
-		</div>
-	</div>
+    <div class="col-sm-6 page-label"></div>
+    <div
+        class="col-sm-6 btn-page-group-container"
+        role="group"
+        aria-label="pages"
+    >
+        <div
+            class="btn-group btn-group-pagination"
+            role="group"
+            aria-label="pages"
+        >
+            <button
+                class="btn btn-default btn-change-page"
+                id="prev-page"
+                ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')"
+                ng-if="search.paramsPrev.prevPageToken"
+            >
+                <span class="glyphicon glyphicon-chevron-left"></span> Previous
+            </button>
+            <button
+                class="btn btn-default btn-change-page"
+                id="next-page"
+                ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')"
+                ng-if="search.paramsPrev.nextPageToken"
+            >
+                Next <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
+        </div>
+    </div>
+</div>
 <div class="scroll-top--container">
-	<div class="scroll-top--container--bar">
-		<div class="row">
-			<div class="scroll-top-wrapper col-xs-12">
-				<span class="scroll-top-inner">
-					<i ng-click="search.scrollTo('scroll-point')" class="fa fa-2x fa-arrow-up scroll-top" ng-if="search.scrollBtn"></i>
-				</span>
-			</div>
-		</div>
-	</div>
+    <div class="scroll-top--container--bar">
+        <div class="row">
+            <div class="scroll-top-wrapper col-xs-12">
+                <span class="scroll-top-inner">
+                    <i
+                        ng-click="search.scrollTo('scroll-point')"
+                        class="fa fa-2x fa-arrow-up scroll-top"
+                        ng-if="search.scrollBtn"
+                    ></i>
+                </span>
+            </div>
+        </div>
+    </div>
 </div>
