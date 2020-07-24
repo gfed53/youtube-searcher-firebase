@@ -1,7 +1,10 @@
 <div id="playlist">
-
-	<!-- Saved Videos Section -->
-	<div class="playlist-section-options">
+    <!-- Saved Videos Section -->
+    <div>
+        <button ng-click="playlist.fbaseAuthenticate()">Authenticate</button>
+        <div id="firebaseui-auth-container"></div>
+    </div>
+    <!-- <div class="playlist-section-options">
 		<p ng-if="playlist.isUsingFBase && playlist.segName">Hello <span class="emph">{{ playlist.segName }}</span>!</p>
 		<p ng-if="!playlist.segName">Using <span class="emph">Local Storage</span></p>
 		<div class="btn-group" role="group" aria-label="...">
@@ -11,316 +14,687 @@
 			</button>
 			<button class="btn btn-default btn-storage" ng-click="playlist.handleStorageSettings()">Settings</button>
 		</div>
-	</div>
-	<div class="row playlist-section-header">
-		<div class="col-xs-8">
-			<h2 ng-click="playlist.videosTest()">Saved Videos</h2>
-		</div>
-		<div class="col-xs-4">
-			<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.videosCollapsed = !playlist.collapsed.videosCollapsed">
-			<span class="glyphicon glyphicon-triangle-bottom my-arrow" ng-if="playlist.collapsed.videosCollapsed"></span>
-			<span class="glyphicon glyphicon-triangle-top my-arrow" ng-if="!playlist.collapsed.videosCollapsed"></span>
-		</button>
-		</div>
-	</div>
-	<div class="content-container playlist-content-container" id="video-items-container" ng-if="playlist.items" uib-collapse="playlist.collapsed.videosCollapsed">
-		
-		<!-- Video Sorting  -->
+	</div> -->
+    <div class="row playlist-section-header">
+        <div class="col-xs-8">
+            <h2 ng-click="playlist.videosTest()">Saved Videos</h2>
+        </div>
+        <div class="col-xs-4">
+            <button
+                class="btn btn-default btn-play-toggle"
+                ng-click="playlist.collapsed.videosCollapsed = !playlist.collapsed.videosCollapsed"
+            >
+                <span
+                    class="glyphicon glyphicon-triangle-bottom my-arrow"
+                    ng-if="playlist.collapsed.videosCollapsed"
+                ></span>
+                <span
+                    class="glyphicon glyphicon-triangle-top my-arrow"
+                    ng-if="!playlist.collapsed.videosCollapsed"
+                ></span>
+            </button>
+        </div>
+    </div>
+    <div
+        class="content-container playlist-content-container"
+        id="video-items-container"
+        ng-if="playlist.items"
+        uib-collapse="playlist.collapsed.videosCollapsed"
+    >
+        <!-- Video Sorting  -->
 
-		<!-- For Larger Viewports -->
-	
-		<div class="sort-filter-group video-sort-buttons">
-			<h3 class="sort-buttons-header">Sort By:</h3>
-			<div class="btn-group" role="group" aria-label="...">
-				<button class="btn btn-default btn-sort-orig" ng-click="playlist.sortVideos('snippet.title')">
-					Name
-					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.title'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.title'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-				</button>
-				<button class="btn btn-default btn-sort-orig" ng-click="playlist.sortVideos('snippet.channelTitle')">
-					Channel
-					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.channelTitle'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.channelTitle'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-				</button>
-				<button class="btn btn-default btn-sort-orig" ng-click="playlist.sortVideos('dateAdded')">
-					Added
-					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'dateAdded'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'dateAdded'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-				</button>
-				<button class="btn btn-default btn-sort-orig" ng-click="playlist.sortVideos('snippet.publishedAt || datePublished')">
-					Published
-					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.publishedAt || datePublished'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.publishedAt || datePublished'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-				</button>
-			</div>
-		</div>
+        <!-- For Larger Viewports -->
 
-		<!-- For Smaller Viewports -->
+        <div class="sort-filter-group video-sort-buttons">
+            <h3 class="sort-buttons-header">Sort By:</h3>
+            <div class="btn-group" role="group" aria-label="...">
+                <button
+                    class="btn btn-default btn-sort-orig"
+                    ng-click="playlist.sortVideos('snippet.title')"
+                >
+                    Name
+                    <span
+                        ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.title'"
+                        class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                    ></span>
+                    <span
+                        ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.title'"
+                        class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                    ></span>
+                </button>
+                <button
+                    class="btn btn-default btn-sort-orig"
+                    ng-click="playlist.sortVideos('snippet.channelTitle')"
+                >
+                    Channel
+                    <span
+                        ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.channelTitle'"
+                        class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                    ></span>
+                    <span
+                        ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.channelTitle'"
+                        class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                    ></span>
+                </button>
+                <button
+                    class="btn btn-default btn-sort-orig"
+                    ng-click="playlist.sortVideos('dateAdded')"
+                >
+                    Added
+                    <span
+                        ng-if="!playlist.videosReverse && playlist.videosPredicate === 'dateAdded'"
+                        class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                    ></span>
+                    <span
+                        ng-if="playlist.videosReverse && playlist.videosPredicate === 'dateAdded'"
+                        class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                    ></span>
+                </button>
+                <button
+                    class="btn btn-default btn-sort-orig"
+                    ng-click="playlist.sortVideos('snippet.publishedAt || datePublished')"
+                >
+                    Published
+                    <span
+                        ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.publishedAt || datePublished'"
+                        class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                    ></span>
+                    <span
+                        ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.publishedAt || datePublished'"
+                        class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                    ></span>
+                </button>
+            </div>
+        </div>
 
-		<div class="sort-filter-group sort-buttons-mobile">
-			<div class="row">
-				<div class="col-xs-8">
-					<h3 class="sort-buttons-header sort-buttons-header">Sort By:</h3>
-				</div>
-				<div class="col-xs-4">
-					<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.videosSortCollapsed = !playlist.collapsed.videosSortCollapsed">
-						<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.videosSortCollapsed"></span>
-						<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.videosSortCollapsed"></span>
-					</button>
-				</div>
-			</div>
-			<div class="buttons-mobile-container" uib-collapse="playlist.collapsed.videosSortCollapsed">
-				<div class="btn-group" role="group" aria-label="...">
-					<div class="sort-mobile-sub">
-						<button class="btn btn-default btn-block" ng-click="playlist.sortVideos('snippet.title')">
-							Video
-							<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.title'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-							<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.title'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-						</button>
-						<button class="btn btn-default btn-block" ng-click="playlist.sortVideos('snippet.channelTitle')">
-							Channel
-							<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.channelTitle'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-							<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.channelTitle'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-						</button>
-					</div>
-					<div class="sort-mobile-sub">
-						<button class="btn btn-default btn-block" ng-click="playlist.sortVideos('dateAdded')">
-							Added
-							<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'dateAdded'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-							<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'dateAdded'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-						</button>
-						<button class="btn btn-default btn-block" ng-click="playlist.sortVideos('snippet.publishedAt || datePublished')">
-							Published
-							<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.publishedAt || datePublished'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-							<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.publishedAt || datePublished'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
+        <!-- For Smaller Viewports -->
 
-		<!-- Video Filtering -->
+        <div class="sort-filter-group sort-buttons-mobile">
+            <div class="row">
+                <div class="col-xs-8">
+                    <h3 class="sort-buttons-header sort-buttons-header">
+                        Sort By:
+                    </h3>
+                </div>
+                <div class="col-xs-4">
+                    <button
+                        class="btn btn-default btn-play-toggle"
+                        ng-click="playlist.collapsed.videosSortCollapsed = !playlist.collapsed.videosSortCollapsed"
+                    >
+                        <span
+                            class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                            ng-if="playlist.collapsed.videosSortCollapsed"
+                        ></span>
+                        <span
+                            class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                            ng-if="!playlist.collapsed.videosSortCollapsed"
+                        ></span>
+                    </button>
+                </div>
+            </div>
+            <div
+                class="buttons-mobile-container"
+                uib-collapse="playlist.collapsed.videosSortCollapsed"
+            >
+                <div class="btn-group" role="group" aria-label="...">
+                    <div class="sort-mobile-sub">
+                        <button
+                            class="btn btn-default btn-block"
+                            ng-click="playlist.sortVideos('snippet.title')"
+                        >
+                            Video
+                            <span
+                                ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.title'"
+                                class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                            ></span>
+                            <span
+                                ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.title'"
+                                class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                            ></span>
+                        </button>
+                        <button
+                            class="btn btn-default btn-block"
+                            ng-click="playlist.sortVideos('snippet.channelTitle')"
+                        >
+                            Channel
+                            <span
+                                ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.channelTitle'"
+                                class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                            ></span>
+                            <span
+                                ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.channelTitle'"
+                                class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                            ></span>
+                        </button>
+                    </div>
+                    <div class="sort-mobile-sub">
+                        <button
+                            class="btn btn-default btn-block"
+                            ng-click="playlist.sortVideos('dateAdded')"
+                        >
+                            Added
+                            <span
+                                ng-if="!playlist.videosReverse && playlist.videosPredicate === 'dateAdded'"
+                                class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                            ></span>
+                            <span
+                                ng-if="playlist.videosReverse && playlist.videosPredicate === 'dateAdded'"
+                                class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                            ></span>
+                        </button>
+                        <button
+                            class="btn btn-default btn-block"
+                            ng-click="playlist.sortVideos('snippet.publishedAt || datePublished')"
+                        >
+                            Published
+                            <span
+                                ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.publishedAt || datePublished'"
+                                class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                            ></span>
+                            <span
+                                ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.publishedAt || datePublished'"
+                                class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                            ></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<!-- For Larger Viewports -->
+        <!-- Video Filtering -->
 
-		<div class="sort-filter-group video-filter-buttons filter-inputs">
-			<h3 class="filter-buttons-header">Filter By:</h3>
-			<div class="filter-input-group filter-input-group-keyword">
-				<label class="filt-label" for="">Keyword:</label>
-				<input type="text" class="form-control" ng-model="playlist.videoFilter.keyword" placeholder="keyword..">
-			</div>
-			<div class="filter-input-group">
-				<label class="filt-label" for="">Added After:</label>
-				<input class="form-control" ng-model="playlist.videoFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
-				<input class="form-control" ng-model="playlist.videoFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
-			</div>
-			<div class="filter-input-group">
-				<label class="filt-label" for="">Added Before:</label>
-				<input class="form-control" ng-model="playlist.videoFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
-				<input class="form-control" ng-model="playlist.videoFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
-			</div>
-		</div>
+        <!-- For Larger Viewports -->
 
-		<!-- For Smaller Viewports -->
+        <div class="sort-filter-group video-filter-buttons filter-inputs">
+            <h3 class="filter-buttons-header">Filter By:</h3>
+            <div class="filter-input-group filter-input-group-keyword">
+                <label class="filt-label" for="">Keyword:</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    ng-model="playlist.videoFilter.keyword"
+                    placeholder="keyword.."
+                />
+            </div>
+            <div class="filter-input-group">
+                <label class="filt-label" for="">Added After:</label>
+                <input
+                    class="form-control"
+                    ng-model="playlist.videoFilter.addedAfter"
+                    ng-if="playlist.isDateTypeComp"
+                    type="date"
+                />
+                <input
+                    class="form-control"
+                    ng-model="playlist.videoFilter.addedAfter"
+                    ng-if="!playlist.isDateTypeComp"
+                    type="text"
+                    placeholder="(m)m/(d)d/(yy)yy"
+                />
+            </div>
+            <div class="filter-input-group">
+                <label class="filt-label" for="">Added Before:</label>
+                <input
+                    class="form-control"
+                    ng-model="playlist.videoFilter.addedBefore"
+                    ng-if="playlist.isDateTypeComp"
+                    type="date"
+                />
+                <input
+                    class="form-control"
+                    ng-model="playlist.videoFilter.addedBefore"
+                    ng-if="!playlist.isDateTypeComp"
+                    type="text"
+                    placeholder="(m)m/(d)d/(yy)yy"
+                />
+            </div>
+        </div>
 
-		<div class="sort-filter-group filter-buttons-mobile">
-			<div class="row">
-				<div class="col-xs-8">
-					<h3 class="sort-filter-header filter-buttons-header">Filter By:</h3>
-				</div>
-				<div class="col-xs-4">
-					<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.videosFilterCollapsed = !playlist.collapsed.videosFilterCollapsed">
-					<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.videosFilterCollapsed"></span>
-					<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.videosFilterCollapsed"></span>
-				</button>
-				</div>
-			</div>
-			<div class="buttons-mobile-container" uib-collapse="playlist.collapsed.videosFilterCollapsed">
-				<div class="filter-input-group filter-input-group-keyword">
-					<label class="filt-label">Keyword:</label>
-					<input type="text" class="form-control" ng-model="playlist.videoFilter.keyword" placeholder="keyword..">
-				</div>
-				<div class="filter-input-group">
-					<label class="filt-label" for="">Added After:</label>
-					<input class="form-control" ng-model="playlist.videoFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
-					<input class="form-control" ng-model="playlist.videoFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
-				</div>
-				<div class="filter-input-group">
-					<label class="filt-label" for="">Added Before:</label>
-					<input class="form-control" ng-model="playlist.videoFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
-					<input class="form-control" ng-model="playlist.videoFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
-				</div>
-			</div>
-		</div>
+        <!-- For Smaller Viewports -->
 
-		<!--  -->
-		
-		<!-- Videos Collection (Small and Large Views) -->
+        <div class="sort-filter-group filter-buttons-mobile">
+            <div class="row">
+                <div class="col-xs-8">
+                    <h3 class="sort-filter-header filter-buttons-header">
+                        Filter By:
+                    </h3>
+                </div>
+                <div class="col-xs-4">
+                    <button
+                        class="btn btn-default btn-play-toggle"
+                        ng-click="playlist.collapsed.videosFilterCollapsed = !playlist.collapsed.videosFilterCollapsed"
+                    >
+                        <span
+                            class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                            ng-if="playlist.collapsed.videosFilterCollapsed"
+                        ></span>
+                        <span
+                            class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                            ng-if="!playlist.collapsed.videosFilterCollapsed"
+                        ></span>
+                    </button>
+                </div>
+            </div>
+            <div
+                class="buttons-mobile-container"
+                uib-collapse="playlist.collapsed.videosFilterCollapsed"
+            >
+                <div class="filter-input-group filter-input-group-keyword">
+                    <label class="filt-label">Keyword:</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        ng-model="playlist.videoFilter.keyword"
+                        placeholder="keyword.."
+                    />
+                </div>
+                <div class="filter-input-group">
+                    <label class="filt-label" for="">Added After:</label>
+                    <input
+                        class="form-control"
+                        ng-model="playlist.videoFilter.addedAfter"
+                        ng-if="playlist.isDateTypeComp"
+                        type="date"
+                    />
+                    <input
+                        class="form-control"
+                        ng-model="playlist.videoFilter.addedAfter"
+                        ng-if="!playlist.isDateTypeComp"
+                        type="text"
+                        placeholder="(m)m/(d)d/(yy)yy"
+                    />
+                </div>
+                <div class="filter-input-group">
+                    <label class="filt-label" for="">Added Before:</label>
+                    <input
+                        class="form-control"
+                        ng-model="playlist.videoFilter.addedBefore"
+                        ng-if="playlist.isDateTypeComp"
+                        type="date"
+                    />
+                    <input
+                        class="form-control"
+                        ng-model="playlist.videoFilter.addedBefore"
+                        ng-if="!playlist.isDateTypeComp"
+                        type="text"
+                        placeholder="(m)m/(d)d/(yy)yy"
+                    />
+                </div>
+            </div>
+        </div>
 
-		<div class="saved-content-container playlist-content-container">
-			<div ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos track by $index" class="saved-content-inner">
-				<div class="row">
-					<div class="col-sm-4 playlist-div">
-						<a ng-click="playlist.setVideoId(item.id.videoId || item.id)" ui-sref="video({videoId: (item.id.videoId || item.id)})"><img class="my-thumbnail" ng-src="{{ item.snippet.thumbnails.default.url}}" alt="image"></a>
-					</div>
-					<div class="col-sm-6 playlist-div">
-						<p ng-click="playlist.setVideoId(item.id.videoId || item.id)" class="emph video-link-p"><a ui-sref="video({videoId: (item.id.videoId || item.id)})" >{{ item.snippet.titleDecoded || item.name || item.snippet.title }}</a></p>
-						<p><span class="bold">BY:</span> <button data-toggle="tooltip" title="Search for videos from this channel" ng-click="playlist.setChannelAndNavigate(item.snippet.channelId)" class="btn btn-default btn-set-channel">{{ item.snippet.channelTitle }}</button></p><p><span class="bold">ADDED:</span> {{ item.dateAdded | date : short }}</p>
-						<p><span class="bold">PUBLISHED:</span> {{ item.datePublished || item.snippet.publishedAt | date : short }}</p>
-					</div>
-					<div class="col-sm-2 playlist-div playlist-btn-group">
-						<button class="btn btn-warning" ng-click="playlist.clearItem(item)">Remove</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div ng-if="playlist.items.length" class="clear-items-container">
-			<button ng-click="playlist.clearAllVideos()" class="btn btn-danger btn-playlist-clear">Clear Videos</button>
-		</div>
-		<p class="emph alert-no-content" ng-if="!playlist.items.length">No saved videos present. See the "About" page for more info on how to save videos.</p>
-	</div>
-	
+        <!--  -->
 
-	<!-- Saved Searches Section -->
+        <!-- Videos Collection (Small and Large Views) -->
 
-	<div class="row playlist-section-header">
-		<div class="col-xs-8">
-			<h2 ng-click="playlist.searchesTest()">Saved Searches</h2>
-		</div>
-		<div class="col-xs-4">
-			<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchesCollapsed = !playlist.collapsed.searchesCollapsed">
-			<span class="glyphicon glyphicon-triangle-bottom my-arrow" ng-if="playlist.collapsed.searchesCollapsed"></span>
-			<span class="glyphicon glyphicon-triangle-top my-arrow" ng-if="!playlist.collapsed.searchesCollapsed"></span>
-		</button>
-		</div>
-	</div>
-	<div class="content-container playlist-content-container" id="past-search-container" ng-if="playlist.pastSearches" uib-collapse="playlist.collapsed.searchesCollapsed">
-		
-		<!-- Searches Sorting -->
+        <div class="saved-content-container playlist-content-container">
+            <div
+                ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos track by $index"
+                class="saved-content-inner"
+            >
+                <div class="row">
+                    <div class="col-sm-4 playlist-div">
+                        <a
+                            ng-click="playlist.setVideoId(item.id.videoId || item.id)"
+                            ui-sref="video({videoId: (item.id.videoId || item.id)})"
+                            ><img
+                                class="my-thumbnail"
+                                ng-src="{{ item.snippet.thumbnails.default.url}}"
+                                alt="image"
+                        /></a>
+                    </div>
+                    <div class="col-sm-6 playlist-div">
+                        <p
+                            ng-click="playlist.setVideoId(item.id.videoId || item.id)"
+                            class="emph video-link-p"
+                        >
+                            <a
+                                ui-sref="video({videoId: (item.id.videoId || item.id)})"
+                                >{{ item.snippet.titleDecoded || item.name ||
+                                item.snippet.title }}</a
+                            >
+                        </p>
+                        <p>
+                            <span class="bold">BY:</span>
+                            <button
+                                data-toggle="tooltip"
+                                title="Search for videos from this channel"
+                                ng-click="playlist.setChannelAndNavigate(item.snippet.channelId)"
+                                class="btn btn-default btn-set-channel"
+                            >
+                                {{ item.snippet.channelTitle }}
+                            </button>
+                        </p>
+                        <p>
+                            <span class="bold">ADDED:</span> {{ item.dateAdded |
+                            date : short }}
+                        </p>
+                        <p>
+                            <span class="bold">PUBLISHED:</span> {{
+                            item.datePublished || item.snippet.publishedAt |
+                            date : short }}
+                        </p>
+                    </div>
+                    <div class="col-sm-2 playlist-div playlist-btn-group">
+                        <button
+                            class="btn btn-warning"
+                            ng-click="playlist.clearItem(item)"
+                        >
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="playlist.items.length" class="clear-items-container">
+            <button
+                ng-click="playlist.clearAllVideos()"
+                class="btn btn-danger btn-playlist-clear"
+            >
+                Clear Videos
+            </button>
+        </div>
+        <p class="emph alert-no-content" ng-if="!playlist.items.length">
+            No saved videos present. See the "About" page for more info on how
+            to save videos.
+        </p>
+    </div>
 
-		<!-- For Larger Viewports -->
+    <!-- Saved Searches Section -->
 
-		<div class="sort-filter-group search-sort-buttons">
-			<h3 class="sort-buttons-header">Sort By:</h3>
-			<div class="btn-group btn-group-srt" role="group" aria-label="...">
-				<button class="btn btn-default" ng-click="playlist.sortSearches('name')">
-					Name
-					<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'name'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-					<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'name'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-				</button>
-				<button class="btn btn-default" ng-click="playlist.sortSearches('date')">
-					Added
-					<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-					<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-				</button>
-			</div>
-		</div>
+    <div class="row playlist-section-header">
+        <div class="col-xs-8">
+            <h2 ng-click="playlist.searchesTest()">Saved Searches</h2>
+        </div>
+        <div class="col-xs-4">
+            <button
+                class="btn btn-default btn-play-toggle"
+                ng-click="playlist.collapsed.searchesCollapsed = !playlist.collapsed.searchesCollapsed"
+            >
+                <span
+                    class="glyphicon glyphicon-triangle-bottom my-arrow"
+                    ng-if="playlist.collapsed.searchesCollapsed"
+                ></span>
+                <span
+                    class="glyphicon glyphicon-triangle-top my-arrow"
+                    ng-if="!playlist.collapsed.searchesCollapsed"
+                ></span>
+            </button>
+        </div>
+    </div>
+    <div
+        class="content-container playlist-content-container"
+        id="past-search-container"
+        ng-if="playlist.pastSearches"
+        uib-collapse="playlist.collapsed.searchesCollapsed"
+    >
+        <!-- Searches Sorting -->
 
-		<!-- For Smaller Viewports -->
+        <!-- For Larger Viewports -->
 
-		<div class="sort-filter-group sort-buttons-mobile">
-			<div class="row">
-				<div class="col-xs-8">
-					<h3 class="sort-filter-header">Sort By:</h3>
-				</div>
-				<div class="col-xs-4">
-					<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchesSortCollapsed = !playlist.collapsed.searchesSortCollapsed">
-					<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.searchesSortCollapsed"></span>
-					<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.searchesSortCollapsed"></span>
-				</button>
-				</div>
-			</div>
-			<div class="buttons-mobile-container" uib-collapse="playlist.collapsed.searchesSortCollapsed">
-				<div class="btn-group btn-group-srt" role="group" aria-label="...">
-					<button class="btn btn-default btn-block" ng-click="playlist.sortSearches('name')">
-						Name
-						<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'name'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-						<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'name'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-					</button>
-					<button class="btn btn-default btn-block" ng-click="playlist.sortSearches('date')">
-						Added
-						<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
-						<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
-					</button>
-				</div>
-			</div>
-		</div>
+        <div class="sort-filter-group search-sort-buttons">
+            <h3 class="sort-buttons-header">Sort By:</h3>
+            <div class="btn-group btn-group-srt" role="group" aria-label="...">
+                <button
+                    class="btn btn-default"
+                    ng-click="playlist.sortSearches('name')"
+                >
+                    Name
+                    <span
+                        ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'name'"
+                        class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                    ></span>
+                    <span
+                        ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'name'"
+                        class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                    ></span>
+                </button>
+                <button
+                    class="btn btn-default"
+                    ng-click="playlist.sortSearches('date')"
+                >
+                    Added
+                    <span
+                        ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'date'"
+                        class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                    ></span>
+                    <span
+                        ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'date'"
+                        class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                    ></span>
+                </button>
+            </div>
+        </div>
 
-		<!--  Searches Filtering -->
+        <!-- For Smaller Viewports -->
 
-		<!-- For Larger Viewports -->
+        <div class="sort-filter-group sort-buttons-mobile">
+            <div class="row">
+                <div class="col-xs-8">
+                    <h3 class="sort-filter-header">Sort By:</h3>
+                </div>
+                <div class="col-xs-4">
+                    <button
+                        class="btn btn-default btn-play-toggle"
+                        ng-click="playlist.collapsed.searchesSortCollapsed = !playlist.collapsed.searchesSortCollapsed"
+                    >
+                        <span
+                            class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                            ng-if="playlist.collapsed.searchesSortCollapsed"
+                        ></span>
+                        <span
+                            class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                            ng-if="!playlist.collapsed.searchesSortCollapsed"
+                        ></span>
+                    </button>
+                </div>
+            </div>
+            <div
+                class="buttons-mobile-container"
+                uib-collapse="playlist.collapsed.searchesSortCollapsed"
+            >
+                <div
+                    class="btn-group btn-group-srt"
+                    role="group"
+                    aria-label="..."
+                >
+                    <button
+                        class="btn btn-default btn-block"
+                        ng-click="playlist.sortSearches('name')"
+                    >
+                        Name
+                        <span
+                            ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'name'"
+                            class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                        ></span>
+                        <span
+                            ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'name'"
+                            class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                        ></span>
+                    </button>
+                    <button
+                        class="btn btn-default btn-block"
+                        ng-click="playlist.sortSearches('date')"
+                    >
+                        Added
+                        <span
+                            ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'date'"
+                            class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                        ></span>
+                        <span
+                            ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'date'"
+                            class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                        ></span>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-		<div class="sort-filter-group search-filter-buttons filter-inputs">
-			<h3 class="filter-buttons-header">Filter By:</h3>
-			<div class="filter-input-group filter-input-group-keyword">
-				<label class="filt-label" for="">Keyword:</label>
-				<input type="text" class="form-control" ng-model="playlist.searchFilter.keyword" placeholder="keyword..">
-			</div>
-			<div class="filter-input-group">
-				<label class="filt-label" for="">Added After:</label>
-				<input class="form-control" ng-model="playlist.searchFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
-				<input class="form-control" ng-model="playlist.searchFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
-			</div>
-			<div class="filter-input-group">
-				<label class="filt-label" for="">Added Before:</label>
-				<input class="form-control" ng-model="playlist.searchFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
-				<input class="form-control" ng-model="playlist.searchFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
-			</div>
-		</div>
+        <!--  Searches Filtering -->
 
-		<!-- For Smaller Viewports -->
-		
-		<div class="sort-filter-group filter-buttons-mobile">
-			<div class="row">
-				<div class="col-xs-8">
-					<h3 class="sort-filter-header filter-buttons-header">Filter By:</h3>
-				</div>
-				<div class="col-xs-4">
-					<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchFilterCollapsed = !playlist.collapsed.searchFilterCollapsed">
-					<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.searchFilterCollapsed"></span>
-					<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.searchFilterCollapsed"></span>
-				</button>
-				</div>
-			</div>
-			<div class="buttons-mobile-container" uib-collapse="playlist.collapsed.searchFilterCollapsed">
-				<div class="filter-input-group filter-input-group-keyword">
-					<label class="filt-label" for="">Keyword:</label>
-					<input type="text" class="form-control" ng-model="playlist.searchFilter.keyword" placeholder="keyword..">
-				</div>
-				<div class="filter-input-group">
-					<label class="filt-label" for="">Added After:</label>
-					<input class="form-control" ng-model="playlist.searchFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
-					<input class="form-control" ng-model="playlist.searchFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
-				</div>
-				<div class="filter-input-group">
-					<label class="filt-label" for="">Added Before:</label>
-					<input class="form-control" ng-model="playlist.searchFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
-					<input class="form-control" ng-model="playlist.searchFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text" placeholder="(m)m/(d)d/(yy)yy">
-				</div>
-			</div>
-		</div>
+        <!-- For Larger Viewports -->
 
-		<!-- Searches Collection -->
+        <div class="sort-filter-group search-filter-buttons filter-inputs">
+            <h3 class="filter-buttons-header">Filter By:</h3>
+            <div class="filter-input-group filter-input-group-keyword">
+                <label class="filt-label" for="">Keyword:</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    ng-model="playlist.searchFilter.keyword"
+                    placeholder="keyword.."
+                />
+            </div>
+            <div class="filter-input-group">
+                <label class="filt-label" for="">Added After:</label>
+                <input
+                    class="form-control"
+                    ng-model="playlist.searchFilter.addedAfter"
+                    ng-if="playlist.isDateTypeComp"
+                    type="date"
+                />
+                <input
+                    class="form-control"
+                    ng-model="playlist.searchFilter.addedAfter"
+                    ng-if="!playlist.isDateTypeComp"
+                    type="text"
+                    placeholder="(m)m/(d)d/(yy)yy"
+                />
+            </div>
+            <div class="filter-input-group">
+                <label class="filt-label" for="">Added Before:</label>
+                <input
+                    class="form-control"
+                    ng-model="playlist.searchFilter.addedBefore"
+                    ng-if="playlist.isDateTypeComp"
+                    type="date"
+                />
+                <input
+                    class="form-control"
+                    ng-model="playlist.searchFilter.addedBefore"
+                    ng-if="!playlist.isDateTypeComp"
+                    type="text"
+                    placeholder="(m)m/(d)d/(yy)yy"
+                />
+            </div>
+        </div>
 
-		<div class="saved-content-container playlist-content-container">
-			<div ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches track by search.name" class="saved-content-inner">
-				<p class="emph">{{ search.nameShrt || search.name }}</p>
-				<div class="row">
-					<div class="col-sm-6">
-						<p><span class="bold">CREATED:</span> {{ search.date | date : short }}</p>
-					</div>
-					<div class="col-sm-6 playlist-btn-group">
-						<button ng-click="playlist.grab(search)" class="btn btn-success">Grab!</button>
-						<button ng-click="playlist.clearSearch(search)" class="btn btn-warning">Remove</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div ng-if="playlist.items.length" class="clear-items-container">
-			<button ng-click="playlist.clearAllSearches()" class="btn btn-danger btn-playlist-clear">Clear Searches</button>
-		</div>
-		<p class="emph alert-no-content" ng-if="!playlist.pastSearches.length">No saved searches present. See the "About" page for more info on how to save searches.</p>
-	</div>
+        <!-- For Smaller Viewports -->
+
+        <div class="sort-filter-group filter-buttons-mobile">
+            <div class="row">
+                <div class="col-xs-8">
+                    <h3 class="sort-filter-header filter-buttons-header">
+                        Filter By:
+                    </h3>
+                </div>
+                <div class="col-xs-4">
+                    <button
+                        class="btn btn-default btn-play-toggle"
+                        ng-click="playlist.collapsed.searchFilterCollapsed = !playlist.collapsed.searchFilterCollapsed"
+                    >
+                        <span
+                            class="glyphicon glyphicon-triangle-bottom my-arrow-sm"
+                            ng-if="playlist.collapsed.searchFilterCollapsed"
+                        ></span>
+                        <span
+                            class="glyphicon glyphicon-triangle-top my-arrow-sm"
+                            ng-if="!playlist.collapsed.searchFilterCollapsed"
+                        ></span>
+                    </button>
+                </div>
+            </div>
+            <div
+                class="buttons-mobile-container"
+                uib-collapse="playlist.collapsed.searchFilterCollapsed"
+            >
+                <div class="filter-input-group filter-input-group-keyword">
+                    <label class="filt-label" for="">Keyword:</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        ng-model="playlist.searchFilter.keyword"
+                        placeholder="keyword.."
+                    />
+                </div>
+                <div class="filter-input-group">
+                    <label class="filt-label" for="">Added After:</label>
+                    <input
+                        class="form-control"
+                        ng-model="playlist.searchFilter.addedAfter"
+                        ng-if="playlist.isDateTypeComp"
+                        type="date"
+                    />
+                    <input
+                        class="form-control"
+                        ng-model="playlist.searchFilter.addedAfter"
+                        ng-if="!playlist.isDateTypeComp"
+                        type="text"
+                        placeholder="(m)m/(d)d/(yy)yy"
+                    />
+                </div>
+                <div class="filter-input-group">
+                    <label class="filt-label" for="">Added Before:</label>
+                    <input
+                        class="form-control"
+                        ng-model="playlist.searchFilter.addedBefore"
+                        ng-if="playlist.isDateTypeComp"
+                        type="date"
+                    />
+                    <input
+                        class="form-control"
+                        ng-model="playlist.searchFilter.addedBefore"
+                        ng-if="!playlist.isDateTypeComp"
+                        type="text"
+                        placeholder="(m)m/(d)d/(yy)yy"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <!-- Searches Collection -->
+
+        <div class="saved-content-container playlist-content-container">
+            <div
+                ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches track by search.name"
+                class="saved-content-inner"
+            >
+                <p class="emph">{{ search.nameShrt || search.name }}</p>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>
+                            <span class="bold">CREATED:</span> {{ search.date |
+                            date : short }}
+                        </p>
+                    </div>
+                    <div class="col-sm-6 playlist-btn-group">
+                        <button
+                            ng-click="playlist.grab(search)"
+                            class="btn btn-success"
+                        >
+                            Grab!
+                        </button>
+                        <button
+                            ng-click="playlist.clearSearch(search)"
+                            class="btn btn-warning"
+                        >
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="playlist.items.length" class="clear-items-container">
+            <button
+                ng-click="playlist.clearAllSearches()"
+                class="btn btn-danger btn-playlist-clear"
+            >
+                Clear Searches
+            </button>
+        </div>
+        <p class="emph alert-no-content" ng-if="!playlist.pastSearches.length">
+            No saved searches present. See the "About" page for more info on how
+            to save searches.
+        </p>
+    </div>
 </div>
-
-

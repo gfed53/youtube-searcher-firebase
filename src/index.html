@@ -1,53 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>The Swiss Army YouTube Searcher</title>
-	<link href="//fonts.googleapis.com/css?family=Open+Sans:400,600|Courgette|Oswald" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css">
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<!-- build:css ./_assets/combined.css -->
-	<link rel="stylesheet" href="./lib/ui-bootstrap-csp.css">
-	<link rel="stylesheet" href="./css/styles.css">
-	<!-- endbuild -->
-</head>
-<body class="body-fixed-nav">
-	<div id="container-main" class="container-fluid">
-		<div id="page-header" ui-view="header"></div>
-		<div id="animate-view-container">
-			<div class="animate-view" id="content" ui-view="content"></div>
-		</div>
-	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-animate.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-	<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-	<!-- build:js ./_assets/combined.js -->
-	<script src="app.js"></script>
-	<script src="./components/routes.js"></script>
-	<script src="./components/library.js"></script>
-	<script src="./components/directives/myVideo.js"></script>
-	<script src="./partials/general/modals/alertModalController.js"></script>
-	<script src="./partials/search/searchController.js"></script>
-	<script src="./partials/search/search-partials/modals/searchSavedModalController.js"></script>
-	<script src="./partials/search/search-partials/modals/errorModalController.js"></script>
-	<script src="./partials/video/video-partials/itemController.js"></script>
-	<script src="./partials/playlist/playlistController.js"></script>
-	<script src="./partials/playlist/playlist-partials/modals/dangerModalController.js"></script>
-	<script src="./partials/playlist/playlist-partials/modals/itemRemovedModalController.js"></script>
-	<script src="./partials/playlist/playlist-partials/modals/initFirebaseModalController.js"></script>
-	<script src="./partials/playlist/playlist-partials/modals/storageSettingsModalController.js"></script>
-	<script src="./partials/header/headerController.js"></script>
-	<script src="./partials/header/header-partials/menuController.js"></script>
-	<!-- endbuild -->
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Swiss Army YouTube Searcher</title>
+        <link
+            href="//fonts.googleapis.com/css?family=Open+Sans:400,600|Courgette|Oswald"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            rel="stylesheet"
+            href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css"
+        />
+        <!-- Latest compiled and minified CSS -->
+        <link
+            rel="stylesheet"
+            href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+            integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+            crossorigin="anonymous"
+        />
+        <!-- FirebaseUI -->
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
+        />
+        <!-- build:css ./_assets/combined.css -->
+        <link rel="stylesheet" href="./lib/ui-bootstrap-csp.css" />
+        <link rel="stylesheet" href="./css/styles.css" />
+        <!-- endbuild -->
+    </head>
+    <body class="body-fixed-nav">
+        <div id="container-main" class="container-fluid">
+            <div id="page-header" ui-view="header"></div>
+            <div id="animate-view-container">
+                <div class="animate-view" id="content" ui-view="content"></div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-animate.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+
+        <!-- <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script> -->
+        <!-- <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script> -->
+
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+
+        <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+        <!-- <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script> -->
+
+        <!-- Add Firebase products that you want to use -->
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+        <!-- <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script> -->
+
+        <!-- FirebaseUI -->
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+
+        <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+        <!-- build:js ./_assets/combined.js -->
+        <script src="app.js"></script>
+        <script src="./components/routes.js"></script>
+        <script src="./components/library.js"></script>
+        <script src="./components/directives/myVideo.js"></script>
+        <script src="./partials/general/modals/alertModalController.js"></script>
+        <script src="./partials/search/searchController.js"></script>
+        <script src="./partials/search/search-partials/modals/searchSavedModalController.js"></script>
+        <script src="./partials/search/search-partials/modals/errorModalController.js"></script>
+        <script src="./partials/video/video-partials/itemController.js"></script>
+        <script src="./partials/playlist/playlistController.js"></script>
+        <script src="./partials/playlist/playlist-partials/modals/dangerModalController.js"></script>
+        <script src="./partials/playlist/playlist-partials/modals/itemRemovedModalController.js"></script>
+        <script src="./partials/playlist/playlist-partials/modals/initFirebaseModalController.js"></script>
+        <script src="./partials/playlist/playlist-partials/modals/storageSettingsModalController.js"></script>
+        <script src="./partials/header/headerController.js"></script>
+        <script src="./partials/header/header-partials/menuController.js"></script>
+        <!-- endbuild -->
+    </body>
 </html>

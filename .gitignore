@@ -2,3 +2,5 @@ node_modules
 build
 
 worklog.txt
+
+config.js
