@@ -1903,19 +1903,30 @@
 
         function initAuthUI() {
             // Initialize the FirebaseUI Widget using Firebase.
-            authUI = new firebaseui.auth.AuthUI(firebase.auth());
-            console.log("authUI", authUI);
+            authObj = firebase.auth();
+            authUI = new firebaseui.auth.AuthUI(authObj);
+            // console.log("authUI", authUI);
 
             // Add the email provider ID to the list of FirebaseUI signInOptions.
-            authUI.start("#firebaseui-auth-container", {
-                signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
-                // Other config options...
-            });
+            // authUI.start("#firebaseui-auth-container", {
+            //     signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
+            //     // Other config options...
+            // });
         }
 
         function authenticate() {
             // authObj = $firebaseAuth();
-            console.log("firebase", firebase);
+            // console.log("firebase", firebase);
+            console.log("authObj", authObj);
+
+            authObj
+                .createUserWithEmailAndPassword(
+                    "gfederico7153@gmail.com",
+                    "Test1234!"
+                )
+                .then((res) => {
+                    console.log("user created? res", res);
+                });
 
             // google
             // authObj
@@ -1950,6 +1961,8 @@
                     ".firebaseio.com/",
                 storageBucket: ytInitAPIs.apisObj.fBaseDB + ".appspot.com",
             };
+
+            console.log("config", config);
             firebase.initializeApp(config);
 
             // Whether or not we're 'logged in', this lets us know that we're at least connected to FBase

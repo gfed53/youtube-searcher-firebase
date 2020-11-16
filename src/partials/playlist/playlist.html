@@ -2,19 +2,24 @@
     <!-- Saved Videos Section -->
     <div>
         <button ng-click="playlist.fbaseAuthenticate()">Authenticate</button>
-        <div id="firebaseui-auth-container"></div>
+        <!-- <div id="firebaseui-auth-container"></div> -->
     </div>
-    <!-- <div class="playlist-section-options">
-		<p ng-if="playlist.isUsingFBase && playlist.segName">Hello <span class="emph">{{ playlist.segName }}</span>!</p>
-		<p ng-if="!playlist.segName">Using <span class="emph">Local Storage</span></p>
-		<div class="btn-group" role="group" aria-label="...">
-			<button class="btn btn-default btn-storage" ng-if="playlist.isUsingFBase" ng-click="playlist.fbaseSave()">
+    <div class="playlist-section-options">
+        <!-- <p ng-if="playlist.isUsingFBase && playlist.segName">Hello <span class="emph">{{ playlist.segName }}</span>!</p>
+		<p ng-if="!playlist.segName">Using <span class="emph">Local Storage</span></p> -->
+        <div class="btn-group" role="group" aria-label="...">
+            <!-- <button class="btn btn-default btn-storage" ng-if="playlist.isUsingFBase" ng-click="playlist.fbaseSave()">
 				<span ng-if="!playlist.segName">Login / Create Account</span>
 				<span ng-if="playlist.segName">Log Out</span>
-			</button>
-			<button class="btn btn-default btn-storage" ng-click="playlist.handleStorageSettings()">Settings</button>
-		</div>
-	</div> -->
+			</button> -->
+            <button
+                class="btn btn-default btn-storage"
+                ng-click="playlist.handleStorageSettings()"
+            >
+                Settings
+            </button>
+        </div>
+    </div>
     <div class="row playlist-section-header">
         <div class="col-xs-8">
             <h2 ng-click="playlist.videosTest()">Saved Videos</h2>
